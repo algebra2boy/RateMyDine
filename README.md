@@ -41,3 +41,6 @@ Website Logistics
     -Comment tiles with like/dislike buttons for other users to interact with
     -Small section above comments featuring the most viewed photos, top rated comments, etc.
 - MongoDB back end: Stores login information, dining hall ratings, food ratings, comments, comment ratings, images, etc.
+
+**License** </br>
+[MIT License] (https://opensource.org/license/mit/)
