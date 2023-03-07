@@ -35,6 +35,7 @@ Website Logistics
     -Text boxes to record input
   - Landing page: Strictly front end; redirects user to other pages (ex: checking reviews particularly Berkshire dining hall)
     -Clickable tiles centered on the main page that redirect user
+    - Search bar in the text box for users to select the dinning hall they want to rate
   - Dining hall pages: Loads images of user-generated pictures stored, comments, dining hall name and picture, etc.
     - Non-interactible dining hall image
     - Text box located at the bottom of the page, on top of a tile stack of comments, for users to upload comments and images of their food
