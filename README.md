@@ -15,10 +15,17 @@ The platform is going to be similar to RateMyProfessor and Yelp, we will show st
 
 **Data** </br>
 
+User Logistics
+- User login: stores user login info such as uuid, userName, userRole, password, email
+- Student: stores UMASS student data such as uuid, userName, userRole, password, email
+- Faculty: stores UMASSFaculty data such as uuid, userName, dinning hall they work at, years of work experience 
+
+
+Website Logistics
 - Likes: Student can like or dislike other reviews, shown by a whole number.
 - User comments: Student can write comments in the review about the food they ate.
 - Rating: Student can specify the satisfactory level on food quality, customer service, atmosphere and time to spend to find a seat or table.
-- Overall Review: Each dinning hall has a rating that is calculated using all the rating from students' post.
+- Overall Review: Each dinning hall has a rating that is calculated using all the ratings from students' posts.
 
 
 **Functionality** </br>
