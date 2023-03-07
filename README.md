@@ -37,5 +37,7 @@ Website Logistics
   - Dining hall pages: Loads images of user-generated pictures stored, comments, dining hall name and picture, etc.
     -Non-interactible dining hall image
     -Text box located at the bottom of the page, on top of a tile stack of comments, for users to upload comments and images of their food
+      -Button that prompts the user to upload images if they wish
+    -Comment tiles with like/dislike buttons for other users to interact with
     -Small section above comments featuring the most viewed photos, top rated comments, etc.
-- MangoDB back end: Stores login information, dining hall ratings, food ratings, comments, images, etc.
+- MongoDB back end: Stores login information, dining hall ratings, food ratings, comments, comment ratings, images, etc.
