@@ -43,4 +43,5 @@ Website Logistics
 - MongoDB back end: Stores login information, dining hall ratings, food ratings, comments, comment ratings, images, etc.
 
 **License** </br>
+
 [MIT License] (https://opensource.org/license/mit/)
