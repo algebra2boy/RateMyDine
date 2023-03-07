@@ -15,4 +15,10 @@ The platform is going to be similar to RateMyProfessor and Yelp, we will show st
 
 **Data** </br>
 
+- Likes: Student can like or dislike other reviews, shown by a whole number.
+- User comments: Student can write comments in the review about the food they ate.
+- Rating: Student can specify the satisfactory level on food quality, customer service, atmosphere and time to spend to find a seat or table.
+- Overall Review: Each dinning hall has a rating that is calculated using all the rating from students' post.
+
+
 **Functionality** </br>
