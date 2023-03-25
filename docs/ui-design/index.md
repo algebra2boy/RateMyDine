@@ -20,7 +20,15 @@ Qui commodi beatae. Quaerat saepe tempora nisi labore ducimus corporis adipisci 
 
 ### Story 1
 
-Omnis sed consequatur beatae laudantium voluptatem tenetur. Exercitationem omnis quisquam omnis. Tenetur vitae excepturi rerum quia corporis soluta qui iste necessitatibus. Aut quam autem cum et. Harum consequatur perspiciatis eum et temporibus nisi qui pariatur.
+Users will arrive at the home page. This is the page where user can get an overview of the ... They can login to their account or sign up using the buttons that appear in the upper right corner.
+
+![index Page](index.png)
+
+Clicking the login or sign up will redirect them to the login or signup page.
+
+![login/signup Page](auth.png)
+
+Then user will arrive at the dashboard page after authentication. This is where...
 
 ### Story 2
 
