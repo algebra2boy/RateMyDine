@@ -52,6 +52,7 @@
     background-position: center;
     background-size: cover;
     opacity: 80%;
+    margin-bottom: 5px;
 }
 .main-search-area > p {
     color:white;
@@ -62,4 +63,14 @@
     font-size: xx-large;
     color: black;
     background-color: #cfcfcf;
+}
+.main-search-area > input{
+    width: 500px;
+    height: 50px;
+    border-radius: 10px;
+    border-style: none;
+    position: absolute;
+    margin-left: 50%;
+    transform: translateX(-50%);
+    top: 45%;
 }
