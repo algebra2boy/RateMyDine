@@ -74,3 +74,6 @@
     transform: translateX(-50%);
     top: 45%;
 }
+.main-search-area > input::placeholder{
+    text-align: center;
+}
