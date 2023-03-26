@@ -52,6 +52,7 @@
     background-position: center;
     background-size: cover;
     opacity: 80%;
+    margin-bottom: 5px;
 }
 .main-search-area > p {
     color:white;
@@ -63,3 +64,31 @@
     color: black;
     background-color: #cfcfcf;
 }
+.main-search-area > input{
+    width: 500px;
+    height: 50px;
+    border-radius: 10px;
+    border-style: none;
+    position: absolute;
+    margin-left: 50%;
+    transform: translateX(-50%);
+    top: 45%;
+}
+.main-search-area > input::placeholder{
+    text-align: center;
+}
+
+.card-img-top {
+    width: 150px;
+    height: 250px;
+    margin-top: 10px;
+    margin-right: 20px;
+    padding: 10px 10px 10px 10px;
+}
+.card-group {
+    padding: 15px 15px 15px 15px;
+}
+
+/* #footer-logo {
+    /* position: absolute; 
+} */
