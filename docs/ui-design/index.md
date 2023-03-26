@@ -8,6 +8,8 @@
 
 ![Wireframe 3](Dashboard.png)
 
+![Wireframe 4](DiningProfile.png)
+
 ## Stories
 
 ### Story 1
@@ -34,6 +36,7 @@ This is the page that users will arrive at after they create an account or login
 
 
 
+![DiningProfile](DiningProfile.png)
 
 ## HTML & CSS Mockup
 
