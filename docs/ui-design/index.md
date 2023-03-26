@@ -2,19 +2,11 @@
 
 ## Wireframe
 
-Facilis quas ut iste nam et. Doloribus ut nostrum nobis ut ut eos quia vel soluta. Minus dolorem error neque voluptas ex.
+![Wireframe 1](Main.png)
 
-![Wireframe 1](wireframe-1.png)
+![Wireframe 2](Login.png)
 
-Consequuntur reiciendis illo non suscipit necessitatibus dolores doloribus sed atque. Quos rem excepturi ut eum et eaque facere et. Illo quos voluptatem ratione sint numquam dolor assumenda. Ea et et sapiente distinctio et aut aspernatur necessitatibus est.
- 
-Est velit debitis enim. Esse et et quos animi animi. Quibusdam et porro et praesentium maiores dolores facilis. Voluptas molestias sapiente aperiam culpa. Et doloribus maiores omnis quisquam dolores.
- 
-Esse est et ut rem et praesentium quibusdam eaque. Aut consectetur illum placeat repellendus nam. Exercitationem dolorem tempora.
-
-![Wireframe 2](wireframe-2.png)
-
-Qui commodi beatae. Quaerat saepe tempora nisi labore ducimus corporis adipisci repellat nihil. Dolores est sed ratione consequatur est magnam cupiditate. Repellendus molestias qui doloribus. Deserunt quidem temporibus. Sunt hic laudantium vitae natus est.
+![Wireframe 3](Dashboard.png)
 
 ## Stories
 
@@ -52,6 +44,6 @@ Ipsam architecto nulla ut dolor dolor sit mollitia deleniti minus. Velit quia is
 
 ## References
 
-- [Link 1](https://example.com)
+- [Link 1](https://www.ratemyprofessors.com/)
 - [Link 2](https://example.com)
 - [Link 3](https://example.com)
