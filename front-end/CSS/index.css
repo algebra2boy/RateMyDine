@@ -77,3 +77,14 @@
 .main-search-area > input::placeholder{
     text-align: center;
 }
+
+.card-img-top {
+    width: 150px;
+    height: 250px;
+    margin-top: 10px;
+    margin-right: 20px;
+    padding: 10px 10px 10px 10px;
+}
+.card-group {
+    padding: 15px 15px 15px 15px;
+}
