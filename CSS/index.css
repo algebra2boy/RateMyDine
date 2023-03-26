@@ -1,0 +1,10 @@
+.tile{
+    border-style: solid; 
+    border-color: black;
+    border-width: 2px; 
+    padding: auto;
+}
+.banner{
+    background-color: darkred; 
+    color: white;
+}
