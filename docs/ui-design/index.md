@@ -14,20 +14,20 @@
 
 Users will arrive at the home page. This is the page where user can get an overview of the popular dining locations on campus. They can see how many reviews each location has and also click on these info boxes to be redirected to the corresponding location's statistics/reviews, or even search for a location. They also have the ability to login to their account or sign up using the buttons that appear in the upper right corner. 
 
-![index Page](index.png)
+![Index Page](Main.png)
 
 
 ### Story 2
 
 This is the page that users will arrive at when they click the sign in button. The page will ask for the user to enter their email and password to authenticate to their account, will also be prompted to create an account if they do not already have one. If they click the sign up button, they will be presented with a page where the user enters their name, email, and password to create an account. Similiarly, they will also be presented with a redirection link to the login page if they already have an account. The logo on both the login and sign up pages also allows for the user to click and be redirected back to the homepage.
 
-![login/signup](auth.png)
+![Login/Signup](Login.png)
 
 ### Story 3
 
 This is the page that users will arrive at after they create an account or login. The page consists of the two most recent reviews that the user has reviewed, which can be edited or deleted with the edit/delete buttons associated with the review entry. The user will be able to go back to the main page with the home link or the logo, change profile settings with the Profile link, and go to the landing page of Your Reviews, all by clicking on their respective links. Users also have the ablity to add a new review through a dropdown form that takes in a dining location, some aspect ratings, and comments. Users also can change the appearance of the website with a light/dark mode toggle and log out using the Log Out button. (Tentative) - Users also have the option to append an image to the review if they so choose.
 
-![Review Page/Dashboard](dashboard.png)
+![Review Page/Dashboard](Dashboard.png)
 
 ## HTML & CSS Mockup
 
