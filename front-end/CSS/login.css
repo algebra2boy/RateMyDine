@@ -1,8 +1,5 @@
-.row {
-}
-
 .btn {
-    font-size: 1rem;
+    border-radius: 3px;
     text-align: center;
     background-color: #007FFF;
 }
