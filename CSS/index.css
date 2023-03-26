@@ -13,6 +13,7 @@
     justify-content: center;
     color: white;
     display: flex;
+    margin-bottom: 5px;
 }
 
 .banner > p {
@@ -20,9 +21,9 @@
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
-    height: 30px;
+    height: 45px;
     font-size: xx-large;
-    
+    font-weight: bold;
 }
 .img-fluid {
     height: auto;
@@ -32,4 +33,33 @@
     margin-left: 40px;
     margin-bottom: 20px;
     margin-right: auto;
+}
+.banner > a{
+    color: white;
+    text-decoration: none;
+    margin-right: 20px;
+}
+.banner > a:hover{
+    text-decoration: underline;
+    color: lightblue;
+}
+
+/* The below is for main search area */
+.main-search-area {
+    background-image: url("/Pictures/main_page_worcester.png");
+    height: 500px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    opacity: 80%;
+}
+.main-search-area > p {
+    color:white;
+    position: absolute;
+    margin-left: 50%;
+    transform: translateX(-50%);
+    top: 32%;
+    font-size: xx-large;
+    color: black;
+    background-color: #cfcfcf;
 }
