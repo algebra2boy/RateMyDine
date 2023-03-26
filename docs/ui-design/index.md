@@ -14,14 +14,14 @@
 
 Users will arrive at the home page. This is the page where user can get an overview of the popular dining locations on campus. They can see how many reviews each location has and also click on these info boxes to be redirected to the corresponding location's statistics/reviews, or even search for a location. They also have the ability to login to their account or sign up using the buttons that appear in the upper right corner. 
 
-![index Page](index.png)
+![index Page](Main.png)
 
 
 ### Story 2
 
 This is the page that users will arrive at when they click the sign in button. The page will ask for the user to enter their email and password to authenticate to their account, will also be prompted to create an account if they do not already have one. If they click the sign up button, they will be presented with a page where the user enters their name, email, and password to create an account. Similiarly, they will also be presented with a redirection link to the login page if they already have an account. The logo on both the login and sign up pages also allows for the user to click and be redirected back to the homepage.
 
-![login/signup](auth.png)
+![login/signup](Login.png)
 
 ### Story 3
 
