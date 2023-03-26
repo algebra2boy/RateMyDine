@@ -8,6 +8,8 @@
 
 ![Wireframe 3](Dashboard.png)
 
+![Wireframe 4](DiningProfile.png)
+
 ## Stories
 
 ### Story 1
@@ -28,6 +30,11 @@ This is the page that users will arrive at when they click the sign in button. T
 This is the page that users will arrive at after they create an account or login. The page consists of the two most recent reviews that the user has reviewed, which can be edited or deleted with the edit/delete buttons associated with the review entry. The user will be able to go back to the main page with the home link or the logo, change profile settings with the Profile link, and go to the landing page of Your Reviews, all by clicking on their respective links. Users also have the ablity to add a new review through a dropdown form that takes in a dining location, some aspect ratings, and comments. Users also can change the appearance of the website with a light/dark mode toggle and log out using the Log Out button. (Tentative) - Users also have the option to append an image to the review if they so choose.
 
 ![Review Page/Dashboard](Dashboard.png)
+
+### Story 4
+
+
+![DiningProfile](DiningProfile.png)
 
 ## HTML & CSS Mockup
 
