@@ -36,10 +36,6 @@ This is the page that users will arrive at after they create an account or login
 
 
 
-
-### Story 4
-
-
 ![DiningProfile](DiningProfile.png)
 
 ## HTML & CSS Mockup
