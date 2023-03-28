@@ -25,11 +25,19 @@ body {
     color: white;
 }
 
-#login-header>a>img {
-    width: 200px;
+#login-header > a >img {
+    width: 170px;
     height: 100px;
 }
 
 #signup_link {
     text-decoration: none;
+}
+
+/* overridding the form control */
+.form-control-lg {
+    min-height: calc(1.5em + 1rem + calc(var(--bs-border-width) * 1.0));
+    font-size: 1.10rem;
+    /* bring the text field boxes closer */
+    margin-top: -10px;
 }
