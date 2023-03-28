@@ -14,26 +14,28 @@ body {
     height: 40px;
 }
 
+.container {
+    margin-bottom: 50px;
+}
 
-#login-header {
+#signup-header {
     font-size: 36px;
     background-color: maroon;
 }
 
-#login-logo-title {
+#signup-logo-title {
     text-decoration: none;
     color: white;
 }
 
-#login-header > a >img {
+#signup-header > a > img {
     width: 170px;
     height: 100px;
 }
 
-#signup_link {
+#login_link {
     text-decoration: none;
 }
-
 /* overridding the form control */
 .form-control-lg {
     min-height: calc(1.5em + 1rem + calc(var(--bs-border-width) * 1.0));
