@@ -9,6 +9,7 @@ body {
     border-radius: 10px;
     text-align: center;
     color: white;
+    border: none;
     background-color: #007FFF;
     width: 120px;
     height: 40px;
@@ -16,6 +17,10 @@ body {
 
 .container {
     margin-bottom: 50px;
+}
+
+#card {
+    border: none;
 }
 
 #signup-header {
