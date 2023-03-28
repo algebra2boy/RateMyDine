@@ -26,8 +26,9 @@
     font-weight: bold;
 }
 .img-fluid {
-    width: 150px;
     height: auto;
+    width: 150px;
+    height: 150px;
     margin-top: 20px;
     margin-left: 40px;
     margin-bottom: 20px;
@@ -78,7 +79,7 @@
 }
 
 .card-img-top {
-    width: auto;
+    width: 150px;
     height: 250px;
     margin-top: 10px;
     margin-right: 20px;
