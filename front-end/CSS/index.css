@@ -40,7 +40,7 @@
 }
 .banner > a:hover{
     text-decoration: underline;
-    color: lightblue;
+    color: rgb(79, 148, 117);
 }
 
 /* The below is for main search area */
@@ -78,13 +78,7 @@
     text-align: center;
 }
 
-.card-img-top {
-    width: auto;
-    height: 250px;
-    /* Include these two following attributes would make the picture to not connect to the edge frames */
-    /* margin-top: 10px;
-    padding: 10px 10px 10px 10px; */
-}
+
 .card-group {
     padding: 10px 10px 10px 10px;
     margin-left: 2px;
@@ -95,4 +89,27 @@
 .card {
     /* margin: 5px 5px 5px 5px; */
     border: 1.5px solid;
+    background-size: 100%;
 }
+
+.card:hover {
+    transform: scale(1.1) rotate(0.8deg);
+    background-color: #E49393;
+    background-size: 130%;
+    background-position: center;
+    transition: 1s ease-out;
+    transition-timing-function: linear;
+}
+
+.card-img-top {
+    height: 250px;
+    width: 100%;
+    background-size: 100%;
+    background-position: center;
+    cursor: zoom-out;
+    /* Include these two following attributes would make the picture to not connect to the edge frames */
+    /* margin-top: 10px; */
+    /* padding: 10px 10px 10px 10px;  */
+}
+
+
