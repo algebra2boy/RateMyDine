@@ -1,12 +1,11 @@
 body {
     font-family: "Helvetica";
-    background-color: #ba5959;
+    background-image: url(/Pictures/umass_overview.jpg);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
     /* 850000 */
     /* bc6363 */
-}
-
-.form-group{
-    display: inline-block;
 }
 
 .continue {
@@ -45,6 +44,17 @@ body {
 #login_link {
     text-decoration: none;
 }
+
+#first_name {
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+
+#last_name {
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
 /* overridding the form control */
 .form-control-lg {
     min-height: calc(1.5em + 1rem + calc(var(--bs-border-width) * 1.0));

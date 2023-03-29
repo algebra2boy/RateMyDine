@@ -1,6 +1,9 @@
 body {
     font-family: "Helvetica";
-    background-color: #B9005B;
+    background-image: url(/Pictures/umass_overview.jpg);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
     /* 850000 */
     /* bc6363 */
 }
