@@ -5,6 +5,10 @@ body {
     /* bc6363 */
 }
 
+.form-group{
+    display: inline-block;
+}
+
 .continue {
     border-radius: 10px;
     text-align: center;
@@ -44,7 +48,11 @@ body {
 /* overridding the form control */
 .form-control-lg {
     min-height: calc(1.5em + 1rem + calc(var(--bs-border-width) * 1.0));
-    font-size: 1.10rem;
+    font-size: 1.00rem;
     /* bring the text field boxes closer */
     margin-top: -10px;
+}
+
+form-control::placeholder {
+    font-family: 'Courier New', Courier, monospace;
 }
