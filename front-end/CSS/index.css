@@ -40,7 +40,7 @@
 }
 .banner > a:hover{
     text-decoration: underline;
-    color: lightblue;
+    color: rgb(79, 148, 117);
 }
 
 /* The below is for main search area */
@@ -50,18 +50,19 @@
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
-    opacity: 80%;
+    opacity: 65%;
     margin-bottom: 5px;
 }
 .main-search-area > p {
-    color:white;
     position: absolute;
     margin-left: 50%;
     transform: translateX(-50%);
-    top: 32%;
+    top: 34%;
     font-size: xx-large;
-    color: black;
-    background-color: #cfcfcf;
+    color: white;
+    font-size: xx-large;
+    font-weight: 430;
+    text-shadow: 2px 4px 4px rgba(46,91,173,0.6);
 }
 .main-search-area > input{
     width: 500px;
@@ -77,17 +78,38 @@
     text-align: center;
 }
 
-.card-img-top {
-    width: auto;
-    height: 250px;
-    margin-top: 10px;
-    margin-right: 20px;
-    padding: 10px 10px 10px 10px;
-}
+
 .card-group {
-    padding: 15px 15px 15px 15px;
+    padding: 10px 10px 10px 10px;
+    margin-left: 2px;
+    margin-right: 2px;
 }
 
-/* #footer-logo {
-    /* position: absolute; 
-} */
+
+.card {
+    /* margin: 5px 5px 5px 5px; */
+    border: 1.5px solid;
+    background-size: 100%;
+}
+
+.card:hover {
+    transform: scale(1.1) rotate(0.8deg);
+    background-color: #E49393;
+    background-size: 130%;
+    background-position: center;
+    transition: 1s ease-out;
+    transition-timing-function: linear;
+}
+
+.card-img-top {
+    height: 250px;
+    width: 100%;
+    background-size: 100%;
+    background-position: center;
+    cursor: zoom-out;
+    /* Include these two following attributes would make the picture to not connect to the edge frames */
+    /* margin-top: 10px; */
+    /* padding: 10px 10px 10px 10px;  */
+}
+
+
