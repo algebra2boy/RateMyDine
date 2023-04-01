@@ -45,7 +45,7 @@
 
 /* The below is for main search area */
 .main-search-area {
-    background-image: url("/Pictures/main_page_worcester.png");
+    background-image: url("../../Pictures/main_page_worcester.png");
     height: 500px;
     background-repeat: no-repeat;
     background-position: center;
@@ -71,6 +71,7 @@
     border-style: none;
     position: absolute;
     margin-left: 50%;
+    text-align: center;
     transform: translateX(-50%);
     top: 45%;
 }
