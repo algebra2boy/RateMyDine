@@ -71,6 +71,7 @@
     border-style: none;
     position: absolute;
     margin-left: 50%;
+    text-align: center;
     transform: translateX(-50%);
     top: 45%;
 }
