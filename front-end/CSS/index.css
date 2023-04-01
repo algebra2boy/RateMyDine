@@ -90,6 +90,8 @@
     /* margin: 5px 5px 5px 5px; */
     border: 1.5px solid;
     background-size: 100%;
+    height: auto;
+    width: 380px;
 }
 
 .card:hover {
@@ -97,7 +99,7 @@
     background-color: #E49393;
     background-size: 130%;
     background-position: center;
-    transition: 1s ease-out;
+    transition: 0.5s ease-out;
     transition-timing-function: linear;
 }
 
@@ -106,7 +108,7 @@
     width: 100%;
     background-size: 100%;
     background-position: center;
-    cursor: zoom-out;
+    cursor: -webkit-zoom-in;
     /* Include these two following attributes would make the picture to not connect to the edge frames */
     /* margin-top: 10px; */
     /* padding: 10px 10px 10px 10px;  */
