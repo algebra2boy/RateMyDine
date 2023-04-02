@@ -28,15 +28,16 @@ This is the page that users will arrive at when they click the sign in button. T
 
 ### Story 3
 
-This is the page that users will arrive at after they create an account or login. The page consists of the two most recent reviews that the user has reviewed, which can be edited or deleted with the edit/delete buttons associated with the review entry. The user will be able to go back to the main page with the home link or the logo, change profile settings with the Profile link, and go to the landing page of Your Reviews, all by clicking on their respective links. Users also have the ablity to add a new review through a dropdown form that takes in a dining location, some aspect ratings, and comments. Users also can change the appearance of the website with a light/dark mode toggle and log out using the Log Out button. (Tentative) - Users also have the option to append an image to the review if they so choose.
+This is the page that users will arrive at after they create an account or login. The page consists of the two most recent reviews that the user has reviewed, which can be edited or deleted with the edit/delete buttons associated with the review entry. The user will be able to go back to the main page with the home link or the logo, tentative functionality with the Profile button, and go to the landing page of Your Reviews, all by clicking on their respective links. Users also have the ablity to add a new review through a dropdown form that takes in a dining location, some aspect ratings, and comments. Users also can change the appearance of the website with a light/dark mode toggle and log out using the Log Out button. (Tentative) - Users also have the option to append an image to the review if they so choose.
 
-![Dashboard]()
+![Dashboard](Dashboard-Labels.png)
 
 ## Story 4
 
+This is the page that users will arrive at when they click on any of the dining hall "tiles" on the main page. It displays the hours that the dining hall is open, their contact information, their physical address, and the current most recent review of that dining hall. In order to return back to the main page, the user needs to click on the "RateMyDine" text at the top of the page. The user can also view more reviews and comments about the dining hall by clicking on the "see more" button just below the most recent comment.
 
 
-![DiningProfile](DiningProfile.png)
+![DiningProfile](DiningProfile-Labels.png)
 
 ## HTML & CSS Mockup
 
