@@ -41,18 +41,12 @@ This is the page that users will arrive at when they click on any of the dining 
 
 ## HTML & CSS Mockup
 
-Reiciendis velit dolorum voluptas earum. Rerum nobis accusantium laudantium minima incidunt. Magnam aut minus minus. Cumque unde voluptatibus soluta molestias perspiciatis aperiam accusantium laborum quo.
+![HTML & CSS Mockup 1](mockup-main.png)
 
-![HTML & CSS Mockup 1](mockup-1.png)
+![HTML & CSS Mockup 2](mockup-login.png)
 
-Natus est molestias est et autem non in. Laudantium consequatur facilis perferendis. Saepe similique sapiente rem ut. Laudantium natus voluptas delectus molestiae ab omnis quidem. Maxime cumque porro ea deleniti incidunt nihil cupiditate sunt. Nihil eaque porro nemo veritatis.
-
-![HTML & CSS Mockup 2](mockup-2.png)
-
-Ipsam architecto nulla ut dolor dolor sit mollitia deleniti minus. Velit quia iste.
+![HTML & CSS Mockup 3](mockup-signup.png)
 
 ## References
 
 - [Link 1](https://www.ratemyprofessors.com/)
-- [Link 2](https://example.com)
-- [Link 3](https://example.com)
