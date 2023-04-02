@@ -50,3 +50,5 @@ This is the page that users will arrive at when they click on any of the dining 
 ## References
 
 - [Link 1](https://www.ratemyprofessors.com/)
+- [Link 2](https://www.ratemydorm.com/)
+- [Link 3](https://www.yelp.com/)
