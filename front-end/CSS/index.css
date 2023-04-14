@@ -83,7 +83,7 @@
     text-shadow: 2px 4px 4px rgba(46, 91, 173, 0.6);
 }
 
-.main-search-area>input {
+.search-engine>input {
     width: 500px;
     height: 50px;
     border-radius: 10px;
@@ -95,13 +95,13 @@
     top: 45%;
 }
 
-.main-search-area>input::placeholder {
+.search-engine>input::placeholder {
     text-align: center;
 }
 
 
 .card-group {
-    padding: 10px 10px 10px 10px;
+    padding: 5px 5px 5px 10px;
     margin-left: 2px;
     margin-right: 2px;
 }
@@ -112,8 +112,9 @@
     border: 1.5px solid;
     background-size: 100%;
     height: auto;
-    width: 380px;
+    width: auto;
     background-color: rgb(252, 252, 252);
+    cursor: -webkit-zoom-in;
 }
 
 .card:hover {
@@ -127,11 +128,10 @@
 }
 
 .card-img-top {
-    height: 250px;
+    height: auto * 0.8;
     width: 100%;
     background-size: 100%;
     background-position: center;
-    cursor: -webkit-zoom-in;
     /* Include these two following attributes would make the picture to not connect to the edge frames */
     /* margin-top: 10px; */
     /* padding: 10px 10px 10px 10px;  */
