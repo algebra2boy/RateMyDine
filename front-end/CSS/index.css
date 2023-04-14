@@ -5,7 +5,7 @@
     padding: auto;
 }
 .banner{
-    background-color: darkred; 
+    background-color: maroon; 
     color: white;
     font-size: x-large;
     font-family: Helvetica;
@@ -40,7 +40,6 @@
 }
 .banner > a:hover{
     text-decoration: underline;
-    color: rgb(79, 148, 117);
 }
 
 /* The below is for main search area */
@@ -93,12 +92,14 @@
     background-size: 100%;
     height: auto;
     width: 380px;
+    background-color: rgb(252,252,252);
 }
 
 .card:hover {
-    transform: scale(1.1) rotate(0.8deg);
-    background-color: #E49393;
-    background-size: 130%;
+    transform: scale(1.08) rotate(0.8deg);
+    background-color: rgb(142, 35, 35);
+    color: white;
+    background-size: 100%;
     background-position: center;
     transition: 0.5s ease-out;
     transition-timing-function: linear;
