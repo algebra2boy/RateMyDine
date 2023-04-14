@@ -1,11 +1,18 @@
-.tile{
-    border-style: solid; 
+#title {
+    font-family: comic sans ms, cursive;
+    font-weight: 200;
+    font-size: xx-large;
+}
+
+.tile {
+    border-style: solid;
     border-color: black;
-    border-width: 2px; 
+    border-width: 2px;
     padding: auto;
 }
-.banner{
-    background-color: maroon; 
+
+.banner {
+    background-color: maroon;
     color: white;
     font-size: x-large;
     font-family: Helvetica;
@@ -16,7 +23,7 @@
     margin-bottom: 5px;
 }
 
-.banner > p {
+.banner>p {
     flex: 0 1 auto;
     position: absolute;
     left: 50%;
@@ -25,6 +32,7 @@
     font-size: xx-large;
     font-weight: bold;
 }
+
 .img-fluid {
     height: auto;
     width: 150px;
@@ -33,13 +41,23 @@
     margin-bottom: 20px;
     margin-right: auto;
 }
-.banner > a{
+
+.banner>a {
     color: white;
     text-decoration: none;
     margin-right: 20px;
+    overflow: hidden;
+    transition: box-shadow .3s;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
-.banner > a:hover{
+
+.banner>a:hover {
     text-decoration: underline;
+    -webkit-transform: scale(1.2);
+    -ms-transform: scale(1.2);
+    transform: scale(1.2);
+    color: aquamarine;
+    box-shadow: 0 0 11px rgba(33, 33, 33, .2);
 }
 
 /* The below is for main search area */
@@ -49,10 +67,11 @@
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
-    opacity: 65%;
+    opacity: 95%;
     margin-bottom: 5px;
 }
-.main-search-area > p {
+
+.main-search-area>p {
     position: absolute;
     margin-left: 50%;
     transform: translateX(-50%);
@@ -61,9 +80,10 @@
     color: white;
     font-size: xx-large;
     font-weight: 430;
-    text-shadow: 2px 4px 4px rgba(46,91,173,0.6);
+    text-shadow: 2px 4px 4px rgba(46, 91, 173, 0.6);
 }
-.main-search-area > input{
+
+.main-search-area>input {
     width: 500px;
     height: 50px;
     border-radius: 10px;
@@ -74,7 +94,8 @@
     transform: translateX(-50%);
     top: 45%;
 }
-.main-search-area > input::placeholder{
+
+.main-search-area>input::placeholder {
     text-align: center;
 }
 
@@ -92,7 +113,7 @@
     background-size: 100%;
     height: auto;
     width: 380px;
-    background-color: rgb(252,252,252);
+    background-color: rgb(252, 252, 252);
 }
 
 .card:hover {
@@ -115,5 +136,3 @@
     /* margin-top: 10px; */
     /* padding: 10px 10px 10px 10px;  */
 }
-
-
