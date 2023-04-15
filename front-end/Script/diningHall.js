@@ -1,10 +1,10 @@
 const DiningHallList = [
     "Worcester",
     "Franklin",
+    "Bluewall",
+    "Hampshire",
     "Berkshire",
     "Babyberk",
-    "Hampshire",
-    "Blue wall",
     "Sweet and more",
     "Greeno",
 ]
