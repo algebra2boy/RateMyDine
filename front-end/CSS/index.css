@@ -83,11 +83,8 @@
     text-shadow: 2px 4px 4px rgba(46, 91, 173, 0.6);
 }
 
-.search-engine>input {
-    width: 500px;
-    height: 50px;
-    border-radius: 10px;
-    border-style: none;
+.search-area {
+    width: 30em;
     position: absolute;
     margin-left: 50%;
     text-align: center;
@@ -95,9 +92,62 @@
     top: 45%;
 }
 
-.search-engine>input::placeholder {
-    text-align: center;
+/* search input */
+.search-area .search-input {
+    position: relative;
+    background-color: white;
+    width: 100%;
+    border-radius: 10px;
+    box-shadow: 0px 1px 5px 3px rgba(0, 0, 0, 0.12);
 }
+
+/* customize the input inside the search bar */
+.search-input input {
+    height: 55px;
+    width: 100%;
+    outline: none;
+    border: none;
+    border-radius: 5px;
+    padding: 0 60px 0 20px;
+    font-size: 20px;
+    background: F0F0F0;
+    font-family: sans-serif;
+}
+
+/* position the magnifying glass */
+.search-input .icon {
+    height: 55px;
+    width: 55px;
+    line-height: 55px;
+    /* the glass should be isolated from the text field and
+    should be positioned on top right  */
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-size: 20px;
+    color: maroon;
+    cursor: pointer;
+}
+
+.search-input .drop-down-box {
+    max-height: 280px;
+    overflow-y: auto;
+    /* padding: 10px 8px; */
+}
+
+.drop-down-box li {
+    /* get rid of the bullet point */
+    list-style: none;
+    padding: 8px 12px;
+    width: 100%;
+    cursor: pointer;
+    border-radius: 5px;
+    display: none;
+}
+
+.drop-down-box li:hover {
+    background: rgb(224, 220, 220);
+} 
 
 
 .card-group {
