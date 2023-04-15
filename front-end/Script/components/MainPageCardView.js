@@ -25,7 +25,7 @@ function renderGenerateCardView(name) {
     // construct the name of the dining hall, horzontal line and card text
     const h5 = document.createElement("h5"), hr = document.createElement("hr"), cardText = document.createElement("p");
     h5.classList.add("card-title");
-    h5.innerHTML = name;
+    h5.innerHTML = name[0].toUpperCase() + name.substring(1, name.length);
     cardText.classList.add("card-text");
     cardText.innerHTML = "100 reviews";
 
