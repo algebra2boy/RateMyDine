@@ -75,7 +75,7 @@
     position: absolute;
     margin-left: 50%;
     transform: translateX(-50%);
-    top: 34%;
+    top: 25%;
     font-size: xx-large;
     color: white;
     font-size: xx-large;
@@ -87,9 +87,9 @@
     width: 30em;
     position: absolute;
     margin-left: 50%;
-    text-align: center;
     transform: translateX(-50%);
-    top: 45%;
+    top: 33%;
+    font-family: sans-serif;
 }
 
 /* search input */
@@ -111,7 +111,6 @@
     padding: 0 60px 0 20px;
     font-size: 20px;
     background: F0F0F0;
-    font-family: sans-serif;
 }
 
 /* position the magnifying glass */
@@ -138,11 +137,12 @@
 .drop-down-box li {
     /* get rid of the bullet point */
     list-style: none;
-    padding: 8px 12px;
+    padding: 10px 12px;
     width: 100%;
     cursor: pointer;
     border-radius: 5px;
-    display: none;
+    font-size: 20px;
+    /* display: none; */
 }
 
 .drop-down-box li:hover {
