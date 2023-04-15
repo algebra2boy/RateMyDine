@@ -171,7 +171,7 @@
 }
 
 .card:hover {
-    transform: scale(1.054) rotate(0.8deg);
+    transform: scale(1.054);
     background-color: rgb(142, 35, 35);
     color: white;
     background-size: 100%;
