@@ -20,6 +20,9 @@
   <!-- header and footer -->
   <script src="front-end/Script/components/Header.js" defer></script>
   <script src="front-end/Script/components/Footer.js" defer></script>
+  <!-- render main page card items -->
+  <script type="module" src="front-end/Script/components/MainPageCardView.js" defer></script>
+
 
 
 </head>
@@ -40,11 +43,17 @@
     </div>
   </div>
 
+  <!-- boostrap documentation -->
+  <div class = "container px-4 px-lg-5 mt-5">
+    <!-- each row can only fit 3 cards -->
+    <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-3 justify-content-center" id = "card-group">
+      <!-- this is where the card view being rendered -->
+    </div>
+  </div>
 
+  <!-- <div class="row row-cols-1 row-cols-md-3 card-group">
 
-  <div class="row row-cols-1 row-cols-md-3 card-group">
-
-    <div class="col">
+    <div class="col mb-5">
       <div class="card h-100 w-80">
         <img src="Pictures/worcester_dining.jpeg" class="card-img-top" alt="worcester">
         <div class="card-body">
@@ -55,7 +64,7 @@
       </div>
     </div>
 
-    <div class="col">
+    <div class="col mb-5">
       <div class="card h-100 w-80">
         <img src="Pictures/franklin.jpeg" class="card-img-top" alt="franklin">
         <div class="card-body">
@@ -66,7 +75,7 @@
       </div>
     </div>
 
-    <div class="col">
+    <div class="col mb-5">
       <div class="card h-100 w-80">
         <img src="Pictures/blue_wall.jpg" class="card-img-top" alt="blue_wall">
         <div class="card-body">
@@ -76,10 +85,10 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
 
 
-  <div class="row row-cols-1 row-cols-md-3 card-group">
+  <!-- <div class="row row-cols-1 row-cols-md-3 card-group">
 
     <div class="col">
       <div class="card h-100 w-80">
@@ -113,7 +122,7 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
 
   <footer-component></footer-component>
 
