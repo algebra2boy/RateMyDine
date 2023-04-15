@@ -20,7 +20,7 @@
     justify-content: center;
     color: white;
     display: flex;
-    margin-bottom: 5px;
+    margin-bottom: 0.5px; 
 }
 
 .banner>p {
@@ -31,14 +31,15 @@
     height: 45px;
     font-size: xx-large;
     font-weight: bold;
+    margin-top: 20px;
 }
 
 .img-fluid {
     height: auto;
-    width: 150px;
-    margin-top: 20px;
+    width: 110px;
+    margin-top: 5px;
     margin-left: 40px;
-    margin-bottom: 20px;
+    margin-bottom: 5px;
     margin-right: auto;
 }
 
