@@ -11,6 +11,7 @@ function generateSuggestions() {
     const searchBarValue = searchBar.value;
     
     if (searchBarValue.length === 0) {
+        generateList(DiningHallList);
         return;
     }
 
@@ -27,7 +28,17 @@ function generateSuggestions() {
         return false;
     });
 
-    // generate a list of li elesment to display on the screen
+    // generate a list of li element to display on the screen
+    generateList(potential_dinningHall);
+}
+
+/**
+ * This function generates a <li> </li> html element for the drop down box
+ * @param potential_dinningHall {array}
+ * Append the li as a child to the drop down box 
+ */
+
+function generateList(potential_dinningHall) {
     for (let item = 0; item < potential_dinningHall.length; ++item) {
         let prediction = document.createElement("li");
         prediction.innerHTML = potential_dinningHall[item];
@@ -37,3 +48,4 @@ function generateSuggestions() {
 
 // add event listener to the search bar
 searchBar.addEventListener("keyup", generateSuggestions);
+searchBar.addEventListener("click", generateSuggestions);

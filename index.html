@@ -14,25 +14,24 @@
         https://stackoverflow.com/questions/25006883/css-my-body-tag-is-not-working-->
   <link href="front-end/CSS/index.css" rel="stylesheet">
   <script type="module" src="front-end/Script/searchBar.js" defer></script>
+  <script type="module" src="front-end/Script/time.js" defer></script>
+  <!-- Facicon -->
+  <link rel="icon" type="image/png" href="/Pictures/favicon.png">
+  <!-- header and footer -->
+  <script src="front-end/Script/components/Header.js" defer></script>
+  <script src="front-end/Script/components/Footer.js" defer></script>
+
+
 </head>
 
 <body>
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-lg-12 banner">
-        <img src="Pictures/logo.png" class="img-fluid" alt="RMD Logo">
-        <p id="title">RateMyDine</p>
-        <a href="front-end/HTML/login.html">Log in</a>&nbsp;
-        <a href="front-end/HTML/signup.html">Sign up</a>
-      </div>
-    </div>
-  </div>
+  <header-component></header-component>
 
   <div class="main-search-area">
     <p>Enter your favorite Dining Hall at UMass Amherst!</p>
     <div class="search-area">
       <div class="search-input">
-        <input type="text" id="search-box" placeholder="Your Dining Hall.." />
+        <input type="text" id="search-box" placeholder="Your Dinning Hall.." />
         <div class="drop-down-box" id="dropdown">
           <!-- this is where li is being generated -->
         </div>
@@ -116,25 +115,8 @@
     </div>
   </div>
 
-  <footer>
+  <footer-component></footer-component>
 
-    <div class="container-fluid text-center text-lg-start" style="background-color: maroon">
-      <div class="footer">
-        <center>
-          <img src="Pictures/logo.png" id="footer-logo" alt="logo" class="img-fluid">
-        </center>
-      </div>
-    </div>
-
-
-    <!-- Copyright -->
-    <div>
-      <div class="container-fluid text-center text-white p-3" style="background-color: maroon">
-        © 2023-2024 RateMyDine All rights reserved.
-      </div>
-    </div>
-
-  </footer>
 </body>
 
 </html>

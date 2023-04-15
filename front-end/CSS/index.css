@@ -91,7 +91,7 @@
     position: relative;
     margin-left: 50%;
     transform: translateX(-50%);
-    top: 33%;
+    top: 30%;
     font-family: sans-serif;
 }
 
@@ -129,10 +129,11 @@
     font-size: 20px;
     color: maroon;
     cursor: pointer;
+    text-align: center;
 }
 
 .search-input .drop-down-box {
-    max-height: 280px;
+    max-height: 150px;
     overflow-y: auto;
     /* padding: 10px 8px; */
 }
@@ -140,16 +141,15 @@
 .drop-down-box li {
     /* get rid of the bullet point */
     list-style: none;
-    padding: 10px 12px;
+    padding: 8px 10px;
     width: 100%;
     cursor: pointer;
     border-radius: 5px;
     font-size: 20px;
-    /* display: none; */
 }
 
 .drop-down-box li:hover {
-    background: rgb(224, 220, 220);
+    background: #EDC6B1;
 } 
 
 
@@ -171,7 +171,7 @@
 }
 
 .card:hover {
-    transform: scale(1.054) rotate(0.8deg);
+    transform: scale(1.054);
     background-color: rgb(142, 35, 35);
     color: white;
     background-size: 100%;
