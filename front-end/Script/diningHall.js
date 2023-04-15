@@ -4,7 +4,9 @@ const DiningHallList = [
     "Berkshire",
     "Babyberk",
     "Hampshire",
-    "BlueWall"
+    "Blue wall",
+    "Sweet and more",
+    "Greeno",
 ]
 
 export { DiningHallList };
