@@ -9,9 +9,17 @@ app.use(express.static("."));
 
 // main page
 app.get('/', (req, res) => {
-    console.log("HELLO");
     // index html is found two levels above
     res.sendFile(path.join(__dirname, "../../","index.html"));
+})
+
+// sign up
+app.get('/signup', (req, res) => {
+    res.sendFile(path.join(__dirname, "../../front-end/HTML/","signup.html"));
+})
+
+app.get('/login', (req, res) => {
+    res.sendFile(path.join(__dirname, "../../front-end/HTML/","login.html"));
 })
 
 app.listen(port, () => {
