@@ -1,0 +1,26 @@
+.review {
+    display: flex;
+    border: 2px solid black;
+    border-radius: 15px;
+    height: 300px;
+    width: 750px;
+    margin: auto;
+}
+
+.vl {
+    border-left: 2px solid black;
+    height: 300px;  
+  }
+
+.review>h3{
+    width: 150px;
+    height: 40px;
+    margin-top: .1em;
+    margin-left: 2em;
+}
+
+.review>p{
+    width: 250px;
+    height: 200px;
+    margin-top: .2em;
+}
