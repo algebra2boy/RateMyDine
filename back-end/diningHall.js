@@ -4,8 +4,8 @@ const DiningHallList = [
     "Bluewall",
     "Hampshire",
     "Berkshire",
-    "Babyberk",
-    "Sweet and more",
+    "babyBerk",
+    "Sweets and More",
     "Greeno",
 ]
 

@@ -8,7 +8,7 @@ function renderGenerateCardView(name) {
     ColumnView.classList.add("mb-5");
     
     // constructCard the column 
-    const CardView   = document.createElement("div");
+    const CardView = document.createElement("div");
     CardView.classList.add("card");
     CardView.classList.add("h-100");
 
@@ -16,7 +16,7 @@ function renderGenerateCardView(name) {
     const cardImage = document.createElement("img");
     cardImage.classList.add("card-img-top");
     cardImage.setAttribute("alt", name);
-    cardImage.setAttribute("src", `Pictures/${name}.jpeg`);
+    cardImage.setAttribute("src", `Pictures/${name.toLowerCase()}.jpeg`);
 
     // construct the cardBody 
     const cardBody = document.createElement("div");
@@ -25,7 +25,7 @@ function renderGenerateCardView(name) {
     // construct the name of the dining hall, horzontal line and card text
     const h5 = document.createElement("h5"), hr = document.createElement("hr"), cardText = document.createElement("p");
     h5.classList.add("card-title");
-    h5.innerHTML = name[0].toUpperCase() + name.substring(1, name.length);
+    h5.innerHTML = name;
     cardText.classList.add("card-text");
     cardText.innerHTML = "100 reviews";
 
@@ -43,7 +43,7 @@ function renderGenerateCardView(name) {
 
 function renderCardListView() {
     for (let index = 0; index < 6; ++index) {
-        const diningHallName = DiningHallList[index].toLowerCase();
+        const diningHallName = DiningHallList[index];
         renderGenerateCardView(diningHallName);
     }
 }
