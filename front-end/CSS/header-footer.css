@@ -1,16 +1,3 @@
-#title {
-    font-family: comic sans ms, cursive;
-    font-weight: 200;
-    font-size: xx-large;
-}
-
-.tile {
-    border-style: solid;
-    border-color: black;
-    border-width: 2px;
-    padding: auto;
-}
-
 .banner {
     background-color: maroon;
     color: white;

@@ -1,0 +1,47 @@
+.dining-hall-container {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.dining-hall-container>img {
+    height: 200px;
+    width: 300px;
+    margin: 50px 80px 50px 50px;
+    border: 2px solid rgb(45, 41, 41);
+}
+
+.dining-hall-description {
+    position: relative;
+}
+
+/* #dining-name {
+    position: relative;
+    top: 50%;
+} */
+.review {
+    display: flex;
+    border: 2px solid black;
+    border-radius: 15px;
+    height: 300px;
+    width: 750px;
+    margin: auto;
+    box-shadow: 0 15px 2px -2px gray;
+}
+
+.vl {
+    border-left: 2px solid black;
+    height: 298px;  
+  }
+
+.review>h3{
+    width: 150px;
+    height: 40px;
+    margin-top: .1em;
+    margin-left: 2em;
+}
+
+.review>p{
+    width: 250px;
+    height: 200px;
+    margin-top: .2em;
+}
