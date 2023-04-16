@@ -2,12 +2,15 @@
   "name": "326-project-repo-team-21",
   "version": "1.0.0",
   "description": "## RateMyDine",
-  "main": "index.js",
+  "main": "back-end/Routers/server.js",
+  "live": "nodemon server.js",
   "directories": {
     "doc": "docs"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server",
+    "dev": "nodemon server"
   },
   "repository": {
     "type": "git",
@@ -21,6 +24,7 @@
   },
   "homepage": "https://github.com/umass-cs-326-s23/326-project-repo-team-21#readme",
   "dependencies": {
-    "express": "^4.18.2"
+    "express": "^4.18.2",
+    "nodemon": "^2.0.22"
   }
 }
