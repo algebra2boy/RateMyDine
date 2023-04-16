@@ -5,11 +5,12 @@
     height: 300px;
     width: 750px;
     margin: auto;
+    box-shadow: 0 15px 2px -2px gray;
 }
 
 .vl {
     border-left: 2px solid black;
-    height: 300px;  
+    height: 298px;  
   }
 
 .review>h3{
