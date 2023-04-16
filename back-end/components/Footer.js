@@ -10,7 +10,7 @@ class Footer extends HTMLElement {
             <div class="container-fluid text-center text-lg-start" style="background-color: maroon">
               <div class="footer">
                 <center>
-                  <img src="Pictures/logo.png" id="footer-logo" alt="logo" class="img-fluid">
+                  <img src="/Pictures/logo.png" id="footer-logo" alt="logo" class="img-fluid">
                 </center>
               </div>
             </div>
