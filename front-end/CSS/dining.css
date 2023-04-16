@@ -1,0 +1,20 @@
+.dining-hall-container {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.dining-hall-container>img {
+    height: 200px;
+    width: 300px;
+    margin: 50px 80px 50px 50px;
+    border: 2px solid rgb(45, 41, 41);
+}
+
+.dining-hall-description {
+    position: relative;
+}
+
+/* #dining-name {
+    position: relative;
+    top: 50%;
+} */
