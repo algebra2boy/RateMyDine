@@ -33,19 +33,18 @@
                 <b>Create a RMD account</b>
             </label> <br /><br />
             
-            <div class="input-group">
-                <input type="text" class="form-control form-control-lg" placeholder="First name" id = "first_name" /> <br />
-                <input type="text" class="form-control form-control-lg" placeholder="Last name" id = "last_name"  /> <br />
-            </div>
-            <br>
-
-            <input type="text" class="form-control form-control-lg" placeholder="Username" id = "user_name" /><br />
-
-            <input type="email" class="form-control form-control-lg" placeholder="Email Address" id = "email"/><br />
-            <input type="password" class="form-control form-control-lg" placeholder="Password" id = "password"/><br />
-
-            <input type="password" class="form-control form-control-lg" placeholder="Confirm Password" id = "confirmed password"/><br />
-            <input type="button" class="continue" value="Continue"> <br />
+            <form action="/signup" method = 'POST'>
+              <div class="input-group">
+                  <input type="text" class="form-control form-control-lg" placeholder="First name" id = "first_name" name = "first_name"/> <br />
+                  <input type="text" class="form-control form-control-lg" placeholder="Last name" id = "last_name"  name = "last_name"/> <br />
+              </div>
+              <br>
+                <input type="text" class="form-control form-control-lg" placeholder="Username" id = "user_name" name = "user_name"/><br />
+                <input type="email" class="form-control form-control-lg" placeholder="Email Address" id = "email" name = "email"/><br />
+                <input type="password" class="form-control form-control-lg" placeholder="Password" id = "password" name = "password"/><br />
+                <input type="password" class="form-control form-control-lg" placeholder="Confirm Password" id = "confirmed password" name ="confirmed_password"/><br />
+                <button type = "submit" class = "btn btn-primary">Continue</button>
+            </form>
           </div>
           <!-- end of center area -->
 
