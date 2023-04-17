@@ -29,6 +29,13 @@ router.get('/login', (req, res) => {
     res.sendFile(path.join(__dirname, "/front-end/HTML/","login.html"));
 })
 
+// login endpoint when submit a form
+router.post('/login', (req, res) => {
+    const payload = req.body;
+    const email_address = payload.email_address, password = payload.password;
+    res.send({"Mes": "Welcome", "body": req.body});
+})
+
 export default router;
 
 
