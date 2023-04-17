@@ -14,9 +14,11 @@
     font-size: xx-large;
     text-align: center;
 }
+
 .dining-hall-description{
     max-width: 100%;
 }
+
 .review {
     display: flex;
     border: 2px solid black;
@@ -29,20 +31,22 @@
 
 .vl {
     border-left: 2px solid black;
-    height: 298px;  
+    height: 298px;
+    margin-left: 0%;
   }
 
-.review>h3{
-    width: 150px;
-    height: 40px;
-    margin-top: .1em;
-    margin-left: 2em;
+.review>p{
+    width: 300px;
+    height: 225px;
+    margin-left: -135px;
+    margin-top: 50px;
 }
 
-.review>p{
-    width: 250px;
-    height: 200px;
-    margin-top: .2em;
+#time {
+    height: 25px;
+    width: 125px;
+    margin-top: 275px;
+    margin-left: -125px;
 }
 #meta-data{
     padding-top: 50px;
