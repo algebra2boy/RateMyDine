@@ -33,20 +33,28 @@
                 <b>Create a RMD account</b>
             </label> <br /><br />
             
-            <form action="/signup" method = 'POST'>
+            <form action="/signup" method = 'POST' id = "signup-form">
               <div class="input-group">
-                  <input type="text" class="form-control form-control-lg" placeholder="First name" id = "first_name" name = "first_name"/> <br />
-                  <input type="text" class="form-control form-control-lg" placeholder="Last name" id = "last_name"  name = "last_name"/> <br />
+                  <input type="text" class="form-control form-control-lg" placeholder="First name" id = "first_name" name="firstName"/> <br />
+                  <input type="text" class="form-control form-control-lg" placeholder="Last name" id = "last_name"  name="lastName"/> <br />
               </div>
               <br>
-                <input type="text" class="form-control form-control-lg" placeholder="Username" id = "user_name" name = "user_name"/><br />
-                <input type="email" class="form-control form-control-lg" placeholder="Email Address" id = "email" name = "email"/><br />
-                <input type="password" class="form-control form-control-lg" placeholder="Password" id = "password" name = "password"/><br />
-                <input type="password" class="form-control form-control-lg" placeholder="Confirm Password" id = "confirmed password" name ="confirmed_password"/><br />
+                <input type="text" class="form-control form-control-lg" placeholder="Username" id = "user_name" name="userName"/><br />
+                <input type="email" class="form-control form-control-lg" placeholder="Email Address" id = "email" name="email"/><br />
+                <input type="password" class="form-control form-control-lg" placeholder="Password" id = "password" name="password"/><br />
                 <button type = "submit" class = "btn btn-primary">Continue</button>
             </form>
           </div>
           <!-- end of center area -->
+
+          <!-- alert that we can add later -->
+          <!-- <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <strong>Warning!</strong> Please follow these rules:
+            <li>1. </li>
+            <li>1. </li>
+            <li>1. </li>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div> -->
 
           <!-- footer area -->
           <div class="card-footer text-muted text-center">
