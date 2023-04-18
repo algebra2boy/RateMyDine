@@ -10,7 +10,7 @@
     integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
   <link href="/front-end/CSS/signup.css" rel="stylesheet">
   <link rel="icon" type="image/png" href="/Pictures/favicon.png">
-  <script src = "../../back-end/client.js" defer></script>
+  <script src="../../back-end/client.js" defer></script>
 </head>
 
 <body>
@@ -31,31 +31,35 @@
           <!-- center area -->
           <div class="card-body text-center">
             <label id="login">
-                <b>Create a RMD account</b>
+              <b>Create a RMD account</b>
             </label> <br /><br />
-            
-            <form action="/signup" method = 'POST' id = "signup-form">
+
+            <form action="/signup" method='POST' id="signup-form">
               <div class="input-group">
-                  <input type="text" class="form-control form-control-lg" placeholder="First name" id = "firstName" name="firstName"/> <br />
-                  <input type="text" class="form-control form-control-lg" placeholder="Last name" id = "lastName"  name="lastName"/> <br />
+                <input type="text" class="form-control form-control-lg" placeholder="First name" id="firstName"
+                  name="firstName" /> <br />
+                <input type="text" class="form-control form-control-lg" placeholder="Last name" id="lastName"
+                  name="lastName" /> <br />
               </div>
               <br>
-                <input type="text" class="form-control form-control-lg" placeholder="Username" id = "userName" name="userName"/><br />
-                <input type="email" class="form-control form-control-lg" placeholder="Email Address" id = "email" name="email"/><br />
-                <input type="password" class="form-control form-control-lg" placeholder="Password" id = "password" name="password"/><br />
-                <button type = "submit" class = "btn btn-primary">Continue</button>
+              <input type="text" class="form-control form-control-lg" placeholder="Username" id="userName"
+                name="userName" /><br />
+              <input type="email" class="form-control form-control-lg" placeholder="Email Address" id="SignUpEmail"
+                name="SignUpEmail" /><br />
+              <input type="password" class="form-control form-control-lg" placeholder="Password" id="signUpPassword"
+                name="signUpPassword" /><br />
+              <button type="submit" class="btn btn-primary">Continue</button>
             </form>
           </div>
           <!-- end of center area -->
 
-          <!-- alert that we can add later -->
-          <!-- <div class="alert alert-warning alert-dismissible fade show" role="alert">
+          <!-- alert to remind the user -->
+          <div class="alert alert-warning alert-dismissible fade show" role="alert" id="signup-alert">
             <strong>Warning!</strong> Please follow these rules:
-            <li>1. </li>
-            <li>1. </li>
-            <li>1. </li>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-          </div> -->
+            <ol id="signup-warning" type="1">
+              <!-- generate a list of warning -->
+            </ol>
+          </div>
 
           <!-- footer area -->
           <div class="card-footer text-muted text-center">

@@ -25,7 +25,10 @@ router.post('/signup', ValidateSignupSchema, (req, res) => {
     // user is not following the rules
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-        res.json({ "message": errors.array() });
+        res.status(500).json({
+            message: errors,
+            status: "failure"
+        });
         return;
     }
     console.log(req.body);
