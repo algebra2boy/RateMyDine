@@ -11,6 +11,7 @@
   <link rel="icon" type="image/png" href="../../Pictures/favicon.png">
   <link rel="stylesheet" href="../CSS/header-footer.css">
   <link href="../CSS/dining.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
   <script type="module" src="../../back-end/date.js" defer></script>
   <!-- header and footer -->
   <script src="../../back-end/components/Header.js" defer></script>
@@ -36,13 +37,13 @@
           <div class="col-5" id="hours">
             <p>Hours:</p>
             <table id="thours">
-              <tr><th>Sunday</th><td>7AM-9PM</td></tr>
-              <tr><th>Monday</th><td>7AM-9PM</td></tr>
-              <tr><th>Tuesday</th><td>7AM-9PM</td></tr>
-              <tr><th>Wednesday</th><td>7AM-9PM</td></tr>
-              <tr><th>Thursday</th><td>7AM-9PM</td></tr>
-              <tr><th>Friday</th><td>7AM-9PM</td></tr>
-              <tr><th>Saturday</th><td>7AM-9PM</td></tr>
+              <tr><th>Sunday</th><td class = "time-hour">7AM-9PM</td></tr>
+              <tr><th>Monday</th><td lass = "time-hour">7AM-9PM</td></tr>
+              <tr><th>Tuesday</th><td lass = "time-hour">7AM-9PM</td></tr>
+              <tr><th>Wednesday</th><td lass = "time-hour">7AM-9PM</td></tr>
+              <tr><th>Thursday</th><td lass = "time-hour">7AM-9PM</td></tr>
+              <tr><th>Friday</th><td lass = "time-hour">7AM-9PM</td></tr>
+              <tr><th>Saturday</th><td lass = "time-hour">7AM-9PM</td></tr>
             </table>
           </div>
         </div>
@@ -50,12 +51,41 @@
       </div>
     </div>
 
-    <div class="review">
-      <h3>Hampshire</h3>
-      <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Tellus at urna condimentum mattis pellentesque id nibh tortor id. Dictum non consectetur a erat nam at lectus urna duis.</p>
-      <label id="time">Date: </label>
-      <div class="vl">
-        
+    <div class="review-container center">
+      <div class="square-container">
+        <div class="row">
+          <div class="column">Hampshire</div>
+          <div class="column">5/5 Stars</div>
+          <div class="column stars">
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+          </div>
+        </div>
+        <div class="row">
+          <div class="column big-column">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Labore reprehenderit ex rerum harum laboriosam illum repellat molestias ullam eum libero quam neque, sunt inventore. Fugit quisquam a maxime autem odit.</div>
+        </div>
+        <div class="row">
+          <div class="column">Column 1</div>
+        </div>
+      </div>
+      <div class="square-container">
+        <table>
+          <tr>
+            <td>A</td>
+            <td>B</td>
+          </tr>
+          <tr>
+            <td>C</td>
+            <td>D</td>
+          </tr>
+          <tr>
+            <td>E</td>
+            <td>F</td>
+          </tr>
+        </table>
       </div>
     </div>
     <br></br>
