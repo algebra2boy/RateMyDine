@@ -10,6 +10,7 @@
     integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
   <link href="/front-end/CSS/signup.css" rel="stylesheet">
   <link rel="icon" type="image/png" href="/Pictures/favicon.png">
+  <script src = "../../back-end/client.js" defer></script>
 </head>
 
 <body>
@@ -35,11 +36,11 @@
             
             <form action="/signup" method = 'POST' id = "signup-form">
               <div class="input-group">
-                  <input type="text" class="form-control form-control-lg" placeholder="First name" id = "first_name" name="firstName"/> <br />
-                  <input type="text" class="form-control form-control-lg" placeholder="Last name" id = "last_name"  name="lastName"/> <br />
+                  <input type="text" class="form-control form-control-lg" placeholder="First name" id = "firstName" name="firstName"/> <br />
+                  <input type="text" class="form-control form-control-lg" placeholder="Last name" id = "lastName"  name="lastName"/> <br />
               </div>
               <br>
-                <input type="text" class="form-control form-control-lg" placeholder="Username" id = "user_name" name="userName"/><br />
+                <input type="text" class="form-control form-control-lg" placeholder="Username" id = "userName" name="userName"/><br />
                 <input type="email" class="form-control form-control-lg" placeholder="Email Address" id = "email" name="email"/><br />
                 <input type="password" class="form-control form-control-lg" placeholder="Password" id = "password" name="password"/><br />
                 <button type = "submit" class = "btn btn-primary">Continue</button>
