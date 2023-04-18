@@ -7,7 +7,8 @@ const router = express.Router();
 
 const __dirname = path.resolve();
 
-const users = [];
+// TODO: implement pounchDB and initialize the DB here
+
 
 // main page
 router.get('/', (req, res) => {
@@ -21,15 +22,21 @@ router.get('/signup', (req, res) => {
 
 // signup for submitting a form
 router.post('/signup', ValidateSignupSchema, (req, res) => {
+    console.log(req.body);
     // user is not following the rules
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-        res.status(500).json({
+        res.json({
             message: errors,
             status: "failure"
         });
         return;
     }
+    // TODO: implement the sign up feature when the user input are correct
+    // Check if the user is already exists in the DB. If not, then create an row; otherwise, display error teling users that account existed
+    res.json({
+        status: "success"
+    });
     console.log(req.body);
     // res.send({ "Mes": "HELLO", "body": req.body });
 });
