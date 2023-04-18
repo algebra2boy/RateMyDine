@@ -1,4 +1,5 @@
-import Routers from "../server/Routers/routers.js";
+import authRouter from "./Routers/authRouters.js";
+import reviewRouter from "./Routers/reviewRouters.js";
 import express from "express";
 import logger from "morgan";
 const app = express();
@@ -18,7 +19,9 @@ app.use(logger("dev"));
 // documentation: https://stackoverflow.com/questions/25471856/express-throws-error-as-body-parser-deprecated-undefined-extended
 app.use(express.urlencoded({ extended: true }));
 
-app.use(Routers);
+// where we activate the routers
+app.use(authRouter);
+app.use(reviewRouter);
 
 
 app.listen(port, () => {

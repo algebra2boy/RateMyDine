@@ -13,6 +13,15 @@ Content-Type: application/json
     "password": "RateMyDine"
 }
 
+### 
+POST http://localhost:3000/login
+Content-Type: application/json
+
+{
+    "LoginEmail" : "yongye0997@gmail.com",
+    "LoinInPassword": "RateMyDine"
+}
+###
 POST http://localhost:3000/signup
 Content-Type: application/json
 
@@ -21,3 +30,6 @@ Content-Type: application/json
     "email" : "jeff@gmail.com",
     "password": "RateMyDine"
 }
+
+###
+GET http://localhost:3000/review/300
