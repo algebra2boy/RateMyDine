@@ -1,27 +1,30 @@
 const signup_form = document.getElementById("signup-form");
-const signUpfirstName = document.getElementById("firstName");
-const signUplastName = document.getElementById("lastName");
+const signUpFirstName = document.getElementById("firstName");
+const signUpLastName = document.getElementById("lastName");
 const userName = document.getElementById("userName");
-const email = document.getElementById("SignUpEmail");
-const password = document.getElementById("signUpPassword");
+const signUpEmail = document.getElementById("SignUpEmail");
+const signUpPassword = document.getElementById("signUpPassword");
 
 const signUpWarningList = document.getElementById("signup-warning");
-const signUpArea = document.getElementById("signup-alert");
+const signUpAlertArea = document.getElementById("signup-alert");
 
 function generateAlertSection(responseJSON) {
-    const errors = responseJSON["message"]["errors"];
-    for (let number = 0; number < errors.length; ++number) {
+    const errorsArray = responseJSON["message"]["errors"];
+    // clean up the previous alert
+    signUpWarningList.innerHTML = "";
+    // make a list for each error
+    errorsArray.forEach(error => {
         const warning_list = document.createElement("li");
-        warning_list.innerHTML = errors[number]["msg"];
-        console.log(warning_list);
+        warning_list.innerHTML = errorsArray[number]["msg"];
         signUpWarningList.appendChild(warning_list);
-    }
-    signUpArea.style.display = "block";
+    });
+    // make the alert appear on the screen
+    signUpAlertArea.style.display = "block";
 }
 
 
 async function signupFormSubmit(event) {
-    // prevent it refreshes the scren
+    // prevent it refreshes the screen
     event.preventDefault()
     const response = await fetch("http://localhost:3000/signup", {
         headers: {
@@ -29,11 +32,11 @@ async function signupFormSubmit(event) {
         },
         method: "POST",
         body: JSON.stringify({
-            firstName: signUpfirstName.value,
-            lastName: signUplastName.value,
+            firstName: signUpFirstName.value,
+            lastName: signUpLastName.value,
             userName: userName.value,
-            email: email.value,
-            password: password.value
+            email: signUpEmail.value,
+            password: signUpPassword.value
         }),
     })
         .then(response => response.json())
