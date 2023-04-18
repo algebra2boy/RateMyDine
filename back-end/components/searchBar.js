@@ -1,5 +1,5 @@
 // This contains a list of UMass Dinning Hall
-import { DiningHallList } from "./diningHall.js";
+import { DiningHallList } from "../MockData/diningHall.js";
 
 const searchBar = document.getElementById("search-box");
 const dropDownBox = document.getElementById("dropdown");

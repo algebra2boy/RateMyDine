@@ -26,7 +26,7 @@ function generateAlertSection(responseJSON) {
 
 async function signupFormSubmit(event) {
     // prevent it auto refreshes the screen
-    event.preventDefault()
+    event.preventDefault();
     const options = {
         headers: {
             "Content-Type": "application/json",
@@ -39,7 +39,7 @@ async function signupFormSubmit(event) {
             SignUpEmail: signUpEmail.value,
             signUpPassword: signUpPassword.value
         }),
-    }
+    };
     const response = await fetch("http://localhost:3000/signup", options)
         .then(response => response.json())
         // https://stackoverflow.com/questions/39021870/fetch-returns-promise-instead-of-actual-data-even-after-using-then

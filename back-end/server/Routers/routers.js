@@ -1,18 +1,18 @@
 import express from "express"; // allow us to construct endpoints
-import path from "path"; // to find the current path of the this file
+import path from "path"; // to find the current path of this project
 import bcrypt from "bcrypt"; // help us hash passwords (for later)
 import { validationResult } from "express-validator";
-import { ValidateSignupSchema, ValidateLoginSchema } from "../schema/authentication-schema.js"; // used to validate user's input on the login and sign up page
+import { ValidateSignupSchema, ValidateLoginSchema } from "../../schema/authentication-schema.js"; // used to validate user's input on the login and sign up page
 const router = express.Router();
 
 const __dirname = path.resolve();
 
 // TODO: implement pounchDB and initialize the DB here
 
-
+console.log(__dirname);
 // main page
 router.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, "../", "index.html"));
+    res.sendFile(path.join(__dirname, "", "index.html"));
 })
 
 // signup endpoint

@@ -2,7 +2,7 @@
   "name": "326-project-repo-team-21",
   "version": "1.0.0",
   "description": "## RateMyDine",
-  "main": "back-end/server.js",
+  "main": "back-end/server/server.js",
   "live": "nodemon server.js",
   "type": "module",
   "directories": {
