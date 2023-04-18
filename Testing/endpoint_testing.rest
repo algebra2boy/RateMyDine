@@ -12,3 +12,12 @@ Content-Type: application/json
     "email" : "yongye0997@gmail.com",
     "password": "RateMyDine"
 }
+
+POST http://localhost:3000/signup
+Content-Type: application/json
+
+{
+    "firstName": "jeff",
+    "email" : "jeff@gmail.com",
+    "password": "RateMyDine"
+}
