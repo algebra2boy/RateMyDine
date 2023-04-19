@@ -10,6 +10,7 @@
     integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
   <link href="/front-end/CSS/signup.css" rel="stylesheet">
   <link rel="icon" type="image/png" href="/Pictures/favicon.png">
+  <script src="../../back-end/client.js" defer></script>
 </head>
 
 <body>
@@ -30,24 +31,35 @@
           <!-- center area -->
           <div class="card-body text-center">
             <label id="login">
-                <b>Create a RMD account</b>
+              <b>Create a RMD account</b>
             </label> <br /><br />
-            
-            <div class="input-group">
-                <input type="text" class="form-control form-control-lg" placeholder="First name" id = "first_name" /> <br />
-                <input type="text" class="form-control form-control-lg" placeholder="Last name" id = "last_name"  /> <br />
-            </div>
-            <br>
 
-            <input type="text" class="form-control form-control-lg" placeholder="Username" id = "user_name" /><br />
-
-            <input type="email" class="form-control form-control-lg" placeholder="Email Address" id = "email"/><br />
-            <input type="password" class="form-control form-control-lg" placeholder="Password" id = "password"/><br />
-
-            <input type="password" class="form-control form-control-lg" placeholder="Confirm Password" id = "confirmed password"/><br />
-            <input type="button" class="continue" value="Continue"> <br />
+            <form action="/signup" method='POST' id="signup-form">
+              <div class="input-group">
+                <input type="text" class="form-control form-control-lg" placeholder="First name" id="firstName"
+                  name="firstName" minlength="2" maxlength="20" required/> <br />
+                <input type="text" class="form-control form-control-lg" placeholder="Last name" id="lastName"
+                  name="lastName" minlength="2" maxlength="20" required /> <br />
+              </div>
+              <br>
+              <input type="text" class="form-control form-control-lg" placeholder="Username" id="userName"
+                name="userName" minlength="5" maxlength="20" required/><br />
+              <input type="email" class="form-control form-control-lg" placeholder="Email Address" id="SignUpEmail"
+                name="SignUpEmail" required/><br />
+              <input type="password" class="form-control form-control-lg" placeholder="Password" id="signUpPassword"
+                name="signUpPassword" minlength="8" required/><br />
+              <button type="submit" class="btn btn-primary">Continue</button>
+            </form>
           </div>
           <!-- end of center area -->
+
+          <!-- alert to remind the user -->
+          <div class="alert alert-warning alert-dismissible fade show" role="alert" id="signup-alert">
+            <strong>Warning!</strong> Please follow these rules:
+            <ol id="signup-warning" type="1">
+              <!-- generate a list of warning -->
+            </ol>
+          </div>
 
           <!-- footer area -->
           <div class="card-footer text-muted text-center">
