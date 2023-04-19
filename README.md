@@ -2,6 +2,12 @@
 
 ## RateMyDine
 
+**How to run the website** </br>
+```
+$ npm install
+$ npm run dev
+```
+
 **Team Overview** </br>
 | <center>Name</center> | <center>GitHub Username</center> |
 | --- | --- |

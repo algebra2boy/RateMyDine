@@ -19,7 +19,7 @@
         <div class="card" id="card">
           <!-- header area -->
           <div class="card-header text-center" id="login-header">
-            <a href="/index.html" id="login-logo-title">
+            <a href="/" id="login-logo-title">
               <img src="/Pictures/logo.png" alt="RateMyDine_Logo">
               <b>RateMyDine</b>
             </a>
@@ -30,9 +30,11 @@
           <!-- center area -->
           <div class="card-body text-center">
             <label id="login"><b>Login in to your account</b></label> <br /><br />
-            <input type="email" class="form-control form-control-lg" placeholder="Email Address" id = "first_name"/><br />
-            <input type="password" class="form-control form-control-lg" placeholder="Password" id = "password" /><br />
-            <input type="button" class="continue" value="Continue"> <br />
+            <form action="/login" method = 'POST'>
+              <input type="email" class="form-control form-control-lg" placeholder="Email Address" id="email_address" name="LoginEmail" /><br />
+              <input type="password" class="form-control form-control-lg" placeholder="Password" id="password" name="LoinInPassword" /><br />
+              <button type = "submit" class = "btn btn-primary">Continue</button>
+            </form>
           </div>
           <!-- end of center area -->
 
@@ -40,7 +42,7 @@
           <div class="card-footer text-muted text-center">
             <label>New to RateMyDine?
               <strong>
-                <a href="signup.html" id="signup_link">Sign up!</a>
+                <a href="/signup" id="signup_link">Sign up!</a>
               </strong>
             </label>
           </div>

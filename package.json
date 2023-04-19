@@ -2,8 +2,9 @@
   "name": "326-project-repo-team-21",
   "version": "1.0.0",
   "description": "## RateMyDine",
-  "main": "back-end/Routers/server.js",
+  "main": "back-end/server/server.js",
   "live": "nodemon server.js",
+  "type": "module",
   "directories": {
     "doc": "docs"
   },
@@ -24,7 +25,12 @@
   },
   "homepage": "https://github.com/umass-cs-326-s23/326-project-repo-team-21#readme",
   "dependencies": {
+    "bcrypt": "^5.1.0",
+    "body-parser": "^1.20.2",
     "express": "^4.18.2",
-    "nodemon": "^2.0.22"
+    "express-validator": "^7.0.1",
+    "morgan": "^1.10.0",
+    "nodemon": "^2.0.22",
+    "path": "^0.12.7"
   }
 }

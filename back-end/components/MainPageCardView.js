@@ -1,4 +1,4 @@
-import { DiningHallList } from "../diningHall.js";
+import { DiningHallList } from "../MockData/diningHall.js";
 const cardGroup = document.getElementById("card-group");
 
 function renderGenerateCardView(name) {
