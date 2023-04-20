@@ -1,0 +1,11 @@
+### 
+POST http://localhost:3000/signup
+Content-Type: application/json
+
+{
+    "firstName" : "Huggies",
+    "lastName": "Hughug",
+    "userName": "algebra2boy",
+    "SignUpEmail": "yongyetan@umass.edu",
+    "signUpPassword": "adamtranBest" 
+}
