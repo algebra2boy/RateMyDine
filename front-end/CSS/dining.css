@@ -86,6 +86,10 @@
     width: 120%;
 }
 
+.rank {
+    border-collapse: separate;
+    border-spacing: 1em;
+}
 /* table {
     border-collapse: collapse;
     width: 100%;
