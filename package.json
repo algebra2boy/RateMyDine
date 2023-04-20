@@ -10,8 +10,8 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server",
-    "dev": "nodemon server"
+    "start": "node back-end/server.js",
+    "dev": "nodemon back-end/server.js"
   },
   "repository": {
     "type": "git",
