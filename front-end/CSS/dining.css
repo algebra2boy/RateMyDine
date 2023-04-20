@@ -3,7 +3,7 @@
 }
 
 .dining-hall-container>#img-container>img {
-    max-width: 75%;
+    max-width: 70%;
     height: auto;
     margin: 50px 80px 50px 80px;
     border: 2px solid rgb(45, 41, 41);
@@ -90,6 +90,7 @@
     border-collapse: separate;
     border-spacing: 1em;
 }
+
 /* table {
     border-collapse: collapse;
     width: 100%;
