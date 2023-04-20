@@ -3,7 +3,7 @@
 }
 
 .dining-hall-container>#img-container>img {
-    max-width: 75%;
+    max-width: 70%;
     height: auto;
     margin: 50px 80px 50px 80px;
     border: 2px solid rgb(45, 41, 41);
@@ -48,7 +48,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 800px;
+    width: 1000px;
     height: 300px;
     position: relative;
 }
@@ -84,6 +84,11 @@
 .big-column {
     flex: 1;
     width: 120%;
+}
+
+.rank {
+    border-collapse: separate;
+    border-spacing: 1em;
 }
 
 /* table {

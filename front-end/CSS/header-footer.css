@@ -30,6 +30,13 @@
     margin-right: auto;
 }
 
+.footer-img-fluid {
+    height: auto;
+    width: 110px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 .banner>a {
     color: white;
     text-decoration: none;
