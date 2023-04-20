@@ -33,12 +33,11 @@ authRouter.post('/signup', ValidateSignupSchema, async (req, res) => {
         return;
     }
     // TODO: implement the sign up feature when the user input are correct
-    // Check if the user is already exists in the DB. If not, then create an row; otherwise, display error teling users that account existed
-    const { firstName, lastName, userName , SignUpEmail, signUpPassword} = req.body;
+    const { firstName, lastName, userName, SignUpEmail, signUpPassword } = req.body;
     try {
         const newRateMyDineUser = await userDB.post({
             firstName: firstName,
-            lastName : lastName,
+            lastName: lastName,
             userName: userName,
             email: SignUpEmail,
             password: signUpPassword
@@ -48,7 +47,8 @@ authRouter.post('/signup', ValidateSignupSchema, async (req, res) => {
             status: "success"
         });
     } catch (error) {
-        res.status(500).send({status: "failure"});
+        console.log("An error occurs when pouchDB tries to create an account for the user")
+        res.status(500).send({ status: "failure" });
     }
 });
 
@@ -59,7 +59,16 @@ authRouter.get('/login', (req, res) => {
 
 // login endpoint for submitting a form
 authRouter.post('/login', ValidateLoginSchema, (req, res) => {
-    const {LoginEmail, LoinInPassword} = req.body;
+
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        res.status(500).send({
+            message: errors,
+            status: "failure",
+        });
+        return;
+    }
+    const { LoginEmail, LoinInPassword } = req.body;
     res.send({ "Mes": "Welcome", LoginEmail: LoginEmail, LoinInPassword: LoinInPassword });
 })
 

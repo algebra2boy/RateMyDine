@@ -1,6 +1,7 @@
 test-code/
 test-code
-
+users/
+users
 # Logs
 logs
 *.log
