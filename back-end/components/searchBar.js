@@ -34,11 +34,6 @@ function generateSuggestions() {
     generateList(potential_dinningHall);
 }
 
-function testfunc(){
-    console.log("AYYYYY")
-    
-}
-
 /**
  * This function generates a <li> </li> html diningHall for the drop down box
  * @param potential_dinningHall {array}
@@ -49,10 +44,9 @@ async function generateList(potential_dinningHall) {
     for (let item = 0; item < potential_dinningHall.length; ++item) {
         const diningHallName = potential_dinningHall[item]["DiningName"];
         let prediction = document.createElement("li");
-        prediction.innerHTML = `<a href="/signup" style="text-decoration: None; color: black;">${diningHallName}</a>`;
+        prediction.addEventListener("click", () => window.location=`/${diningHallName}`);
+        prediction.innerHTML = diningHallName;
         dropDownBox.appendChild(prediction);
-
-        prediction.addEventListener("click", testfunc);
     }
 }
 
