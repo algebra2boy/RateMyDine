@@ -31,11 +31,13 @@ We will use fetch API to fetch all the food review from a particular dining hall
 reviewRouter.get("/review/:dininghall", (req, res) => {
     let dine = req.params.dininghall;
     dbUtils.getDoc(dine).then((doc) =>{
-        res.send(JSON.stringify(doc));
+        res.send(doc);
     })
    
 })
-
+reviewRouter.get("/review/:userID", (req,res) => {
+    
+});
 // create a new food review for a particular dining hall
 reviewRouter.post("/review", (req, res) => {
     let dine = req.body;
@@ -53,5 +55,9 @@ reviewRouter.post("/review/:dininghall/:reviewID", (req, res) => {
 reviewRouter.delete("/review/:dininghall/:reviewID", (req, res) => {
     
 })
+
+reviewRouter.get("/:diningHall", (req, res) => {
+    res.sendFile("./front-end/HTML/dining.html", {root: "./"});
+});
 
 export default reviewRouter;
