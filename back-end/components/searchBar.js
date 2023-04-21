@@ -1,8 +1,10 @@
-// This contains a list of UMass Dinning Hall
-import { DiningHallList } from "../MockData/diningHall.js";
-
+// UI diningHalls
 const searchBar = document.getElementById("search-box");
 const dropDownBox = document.getElementById("dropdown");
+
+// fetching the dining Hall from the json 
+const diningHallInfo = await fetch("http://localhost:3000/diningInfo");
+const diningHallInfoJSON = await diningHallInfo.json();
 
 // Considering the user's input, then generate a list of dinning hall suggestions
 function generateSuggestions() {
@@ -11,18 +13,18 @@ function generateSuggestions() {
     const searchBarValue = searchBar.value;
     
     if (searchBarValue.length === 0) {
-        generateList(DiningHallList);
+        generateList(diningHallInfoJSON);
         return;
     }
 
     // find matching items
-    const potential_dinningHall = DiningHallList.filter(element => {
+    const potential_dinningHall = diningHallInfoJSON.filter(diningHall => {
         const lowerCaseValue = searchBarValue.toLowerCase();
         // exact word
-        if (lowerCaseValue === element.toLowerCase()) {
+        if (lowerCaseValue === diningHall["DiningName"].toLowerCase()) {
             return true;
         // check word by word
-        } else if (lowerCaseValue.length >= 0 && element.length >= 0 && element.toLowerCase().substring(0, lowerCaseValue.length).includes(lowerCaseValue)) {
+        } else if (lowerCaseValue.length >= 0 && diningHall["DiningName"].length >= 0 && diningHall["DiningName"].toLowerCase().substring(0, lowerCaseValue.length).includes(lowerCaseValue)) {
             return true;
         }
         return false;
@@ -33,15 +35,16 @@ function generateSuggestions() {
 }
 
 /**
- * This function generates a <li> </li> html element for the drop down box
+ * This function generates a <li> </li> html diningHall for the drop down box
  * @param potential_dinningHall {array}
  * Append the li as a child to the drop down box 
  */
 
-function generateList(potential_dinningHall) {
+async function generateList(potential_dinningHall) {
     for (let item = 0; item < potential_dinningHall.length; ++item) {
+        const diningHallName = potential_dinningHall[item]["DiningName"];
         let prediction = document.createElement("li");
-        prediction.innerHTML = potential_dinningHall[item];
+        prediction.innerHTML = diningHallName;
         dropDownBox.appendChild(prediction);
     }
 }

@@ -1,7 +1,21 @@
 import express from "express";
+import { readFile } from 'fs/promises';
 
 
 const reviewRouter = express.Router();
+
+reviewRouter.get("/diningInfo", async (req, res) => {
+    const pathname = "back-end/MockData/diningHallInfo.json";
+    try {
+        const data = await readFile(pathname, 'utf8');
+        res.set('Content-Type', 'application/json');
+        res.status(200).send(data);
+    } catch (error) {
+        res.status(404).send({
+            "message": `{pathname} not found in the server`
+        });
+    }
+});
 
 /*
 We will use fetch API to fetch all the food review from a particular dining hall
@@ -12,6 +26,8 @@ We will use fetch API to fetch all the food review from a particular dining hall
     - if successful, then send a json message with a status code 200 (okay)
     - if not, send a json message with warning and a status code 404 (Not found)
 */
+
+// get all the food review from a particular dining hall
 reviewRouter.get("/review/:dininghall", (req, res) => {
     
 })

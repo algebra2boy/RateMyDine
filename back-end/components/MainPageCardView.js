@@ -1,7 +1,6 @@
-import { DiningHallList } from "../MockData/diningHall.js";
 const cardGroup = document.getElementById("card-group");
 
-function renderGenerateCardView(name) {
+function renderGenerateCardView(diningHallName) {
     // construct the column 
     const ColumnView = document.createElement("div");
     ColumnView.classList.add("col");
@@ -15,17 +14,17 @@ function renderGenerateCardView(name) {
     // construct the cardImage 
     const cardImage = document.createElement("img");
     cardImage.classList.add("card-img-top");
-    cardImage.setAttribute("alt", name);
-    cardImage.setAttribute("src", `Pictures/${name.toLowerCase()}.jpeg`);
+    cardImage.setAttribute("alt", diningHallName);
+    cardImage.setAttribute("src", `Pictures/${diningHallName.toLowerCase()}.jpeg`);
 
     // construct the cardBody 
     const cardBody = document.createElement("div");
     cardBody.classList.add("card-body");
     
-    // construct the name of the dining hall, horzontal line and card text
+    // construct the diningHallName of the dining hall, horzontal line and card text
     const h5 = document.createElement("h5"), hr = document.createElement("hr"), cardText = document.createElement("p");
     h5.classList.add("card-title");
-    h5.innerHTML = name;
+    h5.innerHTML = diningHallName;
     cardText.classList.add("card-text");
     cardText.innerHTML = "100 reviews";
 
@@ -41,10 +40,13 @@ function renderGenerateCardView(name) {
     cardGroup.appendChild(ColumnView);   
 }
 
-function renderCardListView() {
+async function renderCardListView() {
+    const diningHallInfo = await fetch("http://localhost:3000/diningInfo");
+    const diningHallInfoJSON = await diningHallInfo.json();
     for (let index = 0; index < 6; ++index) {
-        const diningHallName = DiningHallList[index];
-        renderGenerateCardView(diningHallName);
+        const diningHall = diningHallInfoJSON[index];
+        const diningHalldiningHallName = diningHall["DiningName"];
+        renderGenerateCardView(diningHalldiningHallName);
     }
 }
 
