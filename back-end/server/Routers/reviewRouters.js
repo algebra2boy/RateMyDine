@@ -1,7 +1,6 @@
 import express from "express";
 import { readFile } from 'fs/promises';
 
-
 const reviewRouter = express.Router();
 
 reviewRouter.get("/diningInfo", async (req, res) => {

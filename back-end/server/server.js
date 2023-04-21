@@ -8,6 +8,7 @@ const port = 3000;
 
 // TODO: implement pounchDB and initialize the DB here
 let userDB = new PouchDB("users");
+let reviewDB = new PouchDB("reviews");
 
 // a built-in middleware function in Express that serves static files and is based on serve-static.
 // must use this to load the css and pictures to the all the pages
@@ -32,4 +33,4 @@ app.listen(port, () => {
     console.log(`server started at ${port}`);
 });
 
-export { userDB };
+export { userDB, reviewDB };
