@@ -59,4 +59,5 @@ reviewRouter.delete("/review/:dininghall/:reviewID", (req, res) => {
 reviewRouter.get("/:diningHall", (req, res) => {
     res.sendFile("./front-end/HTML/dining.html", {root: "./"});
 });
+
 export default reviewRouter;
