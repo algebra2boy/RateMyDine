@@ -35,12 +35,10 @@ authRouter.post('/signup', ValidateSignupSchema, async (req, res) => {
     try {
         let userDocument = await userDB.get(req.body.SignUpEmail);
         // when the account exists, but try to create an account with the same email again
-        if (JSON.stringify(userDocument) !== "{}") {
-            res.status(403).send({
-                message: `User with id ${req.body.SignUpEmail} is already existed`,
-                status: "failure",
-            });
-        }
+        res.status(403).send({
+            message: `User with id ${req.body.SignUpEmail} is already existed`,
+            status: "failure",
+        });
     } catch (error) {
         // when the account does not exists, then create an account
         const { firstName, lastName, userName, SignUpEmail, signUpPassword } = req.body;
@@ -71,7 +69,7 @@ authRouter.get('/login', (req, res) => {
 })
 
 // login endpoint for submitting a form
-authRouter.post('/login', ValidateLoginSchema, (req, res) => {
+authRouter.post('/login', ValidateLoginSchema, async (req, res) => {
 
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -79,10 +77,29 @@ authRouter.post('/login', ValidateLoginSchema, (req, res) => {
             message: errors,
             status: "failure",
         });
-        return;
     }
     const { LoginEmail, LoinInPassword } = req.body;
-    res.send({ "Mes": "Welcome", LoginEmail: LoginEmail, LoinInPassword: LoinInPassword });
+
+    try {
+        // check if the user is in the DB 
+        let userDocument = await userDB.get(LoginEmail);
+        // exists with correct password
+        if (userDocument["password"] === LoinInPassword) {
+            res.status(200).send({
+                message: `User with ${LoginEmail} login in successfully`,
+                status: "success",
+            });
+        } else { // incorrect passwrod 
+            res.status(404).send({
+                message: `User with ${LoginEmail} login in unsuccessfully with incorrect password`,
+                status: "failure",
+            });
+        }
+
+    } catch (error) {
+        console.log("An error occurs when user tries to login")
+        res.status(500).send({ status: "failure" });
+    }
 })
 
 export default authRouter;

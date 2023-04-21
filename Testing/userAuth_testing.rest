@@ -11,6 +11,24 @@ Content-Type: application/json
 }
 
 ### 
+POST http://localhost:3000/login
+Content-Type: application/json
+
+{
+    "LoginEmail": "yongyetan@umass.edu",
+    "LoinInPassword": "adamtranBest" 
+}
+
+### 
+POST http://localhost:3000/login
+Content-Type: application/json
+
+{
+    "LoginEmail": "yongyetan@umass.edu",
+    "LoinInPassword": "ApplePieThebest" 
+}
+
+### 
 POST http://localhost:3000/signup
 Content-Type: application/json
 
