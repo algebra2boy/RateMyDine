@@ -1,5 +1,6 @@
 import express from "express";
 import { readFile } from 'fs/promises';
+import * as dbUtils from "../reviewDBUtils.js";
 
 const reviewRouter = express.Router();
 
@@ -16,12 +17,18 @@ reviewRouter.get("/diningInfo", async (req, res) => {
 
 // get all the food review from a particular dining hall
 reviewRouter.get("/review/:dininghall", (req, res) => {
-    res.json({"mes": "HELLO"})
+    let dine = req.params.dininghall;
+    dbUtils.getDoc(dine).then((doc) =>{
+        res.send(JSON.stringify(doc));
+    })
 })
 
 // create a new food review for a particular dining hall
-reviewRouter.post("/review/:dininghall", (req, res) => {
-
+reviewRouter.post("/review", (req, res) => {
+    let dine = req.body;
+    dbUtils.createDoc(dine).then((val) =>{
+        res.send(val);
+    })
 })
 
 // update an existing food review for a particular dining hall
