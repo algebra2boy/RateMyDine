@@ -1,0 +1,41 @@
+### 
+POST http://localhost:3000/signup
+Content-Type: application/json
+
+{
+    "firstName" : "Huggies",
+    "lastName": "Hughug",
+    "userName": "algebra2boy",
+    "SignUpEmail": "yongyetan@umass.edu",
+    "signUpPassword": "adamtranBest" 
+}
+
+### 
+POST http://localhost:3000/login
+Content-Type: application/json
+
+{
+    "LoginEmail": "yongyetan@umass.edu",
+    "LoinInPassword": "adamtranBest" 
+}
+
+### 
+POST http://localhost:3000/login
+Content-Type: application/json
+
+{
+    "LoginEmail": "yongyetan@umass.edu",
+    "LoinInPassword": "ApplePieThebest" 
+}
+
+### 
+POST http://localhost:3000/signup
+Content-Type: application/json
+
+{
+    "firstName" : "Jeff",
+    "lastName": "Li",
+    "userName": "zuki",
+    "SignUpEmail": "jichengli@umass.edu",
+    "signUpPassword": "sweetNMOre" 
+}

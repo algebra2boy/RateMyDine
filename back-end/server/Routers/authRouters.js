@@ -3,18 +3,17 @@ import path from "path"; // to find the current path of this project
 import bcrypt from "bcrypt"; // help us hash passwords (for later)
 import { validationResult } from "express-validator";
 import { ValidateSignupSchema, ValidateLoginSchema } from "../../schema/authentication-schema.js"; // used to validate user's input on the login and sign up page
+import { userDB } from "../server.js";
 const authRouter = express.Router();
 
 const __dirname = path.resolve();
-
-// TODO: implement pounchDB and initialize the DB here
 
 console.log(__dirname);
 
 // Express routing documentation: https://expressjs.com/en/guide/routing.html
 // the default endpoint to retrieve main page
 authRouter.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, "", "index.html"));
+    res.sendFile(path.join(__dirname, "index.html"));
 })
 
 // signup endpoint to retrieve sign up page
@@ -23,21 +22,45 @@ authRouter.get('/signup', (req, res) => {
 })
 
 // signup for submitting a form
-authRouter.post('/signup', ValidateSignupSchema, (req, res) => {
+authRouter.post('/signup', ValidateSignupSchema, async (req, res) => {
     // user is not following the rules
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-        res.json({
+        res.status(500).send({
             message: errors,
-            status: "failure"
+            status: "failure",
         });
-        return;
     }
-    // TODO: implement the sign up feature when the user input are correct
-    // Check if the user is already exists in the DB. If not, then create an row; otherwise, display error teling users that account existed
-    res.json({
-        status: "success"
-    });
+    // check if the user is already existed in the database 
+    try {
+        let userDocument = await userDB.get(req.body.SignUpEmail);
+        // when the account exists, but try to create an account with the same email again
+        res.status(403).send({
+            message: `User with id ${req.body.SignUpEmail} is already existed`,
+            status: "failure",
+        });
+    } catch (error) {
+        // when the account does not exists, then create an account
+        const { firstName, lastName, userName, SignUpEmail, signUpPassword } = req.body;
+        try {
+            const newRateMyDineUser = await userDB.put({
+                _id: SignUpEmail,
+                firstName: firstName,
+                lastName: lastName,
+                userName: userName,
+                email: SignUpEmail,
+                password: signUpPassword
+            });
+            console.log(newRateMyDineUser);
+            res.status(201).send({
+                message: `successfully created user with ID ${newRateMyDineUser.id}`,
+                status: "success"
+            });
+        } catch (error) {
+            console.log("An error occurs when pouchDB tries to create an account for the user")
+            res.status(500).send({ status: "failure" });
+        }
+    }
 });
 
 // login endpoint to retrieve login page
@@ -46,9 +69,37 @@ authRouter.get('/login', (req, res) => {
 })
 
 // login endpoint for submitting a form
-authRouter.post('/login', ValidateLoginSchema, (req, res) => {
-    const {LoginEmail, LoinInPassword} = req.body;
-    res.send({ "Mes": "Welcome", LoginEmail: LoginEmail, LoinInPassword: LoinInPassword });
+authRouter.post('/login', ValidateLoginSchema, async (req, res) => {
+
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        res.status(500).send({
+            message: errors,
+            status: "failure",
+        });
+    }
+    const { LoginEmail, LoinInPassword } = req.body;
+
+    try {
+        // check if the user is in the DB 
+        let userDocument = await userDB.get(LoginEmail);
+        // exists with correct password
+        if (userDocument["password"] === LoinInPassword) {
+            res.status(200).send({
+                message: `User with ${LoginEmail} login in successfully`,
+                status: "success",
+            });
+        } else { // incorrect passwrod 
+            res.status(404).send({
+                message: `User with ${LoginEmail} login in unsuccessfully with incorrect password`,
+                status: "failure",
+            });
+        }
+
+    } catch (error) {
+        console.log("An error occurs when user tries to login")
+        res.status(500).send({ status: "failure" });
+    }
 })
 
 export default authRouter;

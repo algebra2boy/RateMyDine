@@ -1,4 +1,3 @@
-import { DiningHallList } from "../MockData/diningHall.js"
 function currentTime() {
     let todayDate = new Date();
     let dayzone = "AM"
