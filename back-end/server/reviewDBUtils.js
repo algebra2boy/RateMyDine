@@ -1,11 +1,11 @@
 import { reviewDB } from "./server.js";
-
 async function createDoc(info){
     try{
         console.log(info);
+        console.log(JSON.parse(info.Reviews));
         let res = await reviewDB.put({
             _id: info.DiningName,
-            Reviews: info.Reviews,
+            Reviews: JSON.parse(info.Reviews),
         })
         return JSON.stringify(res);
     }
@@ -34,5 +34,7 @@ async function deleteDoc(info){
 
 export {
     createDoc,
-    getDoc
+    getDoc,
+    updateDoc,
+    deleteDoc
 }
