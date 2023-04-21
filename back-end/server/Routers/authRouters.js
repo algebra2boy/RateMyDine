@@ -30,25 +30,38 @@ authRouter.post('/signup', ValidateSignupSchema, async (req, res) => {
             message: errors,
             status: "failure",
         });
-        return;
     }
-    // TODO: implement the sign up feature when the user input are correct
-    const { firstName, lastName, userName, SignUpEmail, signUpPassword } = req.body;
+    // check if the user is already existed in the database 
     try {
-        const newRateMyDineUser = await userDB.post({
-            firstName: firstName,
-            lastName: lastName,
-            userName: userName,
-            email: SignUpEmail,
-            password: signUpPassword
-        });
-        res.status(201).send({
-            message: `successfully created user with ID ${newRateMyDineUser.id}`,
-            status: "success"
-        });
+        let userDocument = await userDB.get(req.body.SignUpEmail);
+        // when the account exists, but try to create an account with the same email again
+        if (JSON.stringify(userDocument) !== "{}") {
+            res.status(403).send({
+                message: `User with id ${req.body.SignUpEmail} is already existed`,
+                status: "failure",
+            });
+        }
     } catch (error) {
-        console.log("An error occurs when pouchDB tries to create an account for the user")
-        res.status(500).send({ status: "failure" });
+        // when the account does not exists, then create an account
+        const { firstName, lastName, userName, SignUpEmail, signUpPassword } = req.body;
+        try {
+            const newRateMyDineUser = await userDB.put({
+                _id: SignUpEmail,
+                firstName: firstName,
+                lastName: lastName,
+                userName: userName,
+                email: SignUpEmail,
+                password: signUpPassword
+            });
+            console.log(newRateMyDineUser);
+            res.status(201).send({
+                message: `successfully created user with ID ${newRateMyDineUser.id}`,
+                status: "success"
+            });
+        } catch (error) {
+            console.log("An error occurs when pouchDB tries to create an account for the user")
+            res.status(500).send({ status: "failure" });
+        }
     }
 });
 

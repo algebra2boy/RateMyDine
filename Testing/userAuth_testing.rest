@@ -9,3 +9,15 @@ Content-Type: application/json
     "SignUpEmail": "yongyetan@umass.edu",
     "signUpPassword": "adamtranBest" 
 }
+
+### 
+POST http://localhost:3000/signup
+Content-Type: application/json
+
+{
+    "firstName" : "Jeff",
+    "lastName": "Li",
+    "userName": "zuki",
+    "SignUpEmail": "jichengli@umass.edu",
+    "signUpPassword": "sweetNMOre" 
+}
