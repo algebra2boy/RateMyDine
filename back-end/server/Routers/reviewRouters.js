@@ -11,13 +11,25 @@ reviewRouter.get("/diningInfo", async (req, res) => {
         res.set('Content-Type', 'application/json');
         res.status(200).send(data);
     } catch (error) {
-        res.status(404).send();
+        res.status(404).send({
+            "message": `{pathname} not found in the server`
+        });
     }
 });
 
+/*
+We will use fetch API to fetch all the food review from a particular dining hall
+- Before this step, checking whether the user is login is important but we can hold off this for now
+    - if user is not login, a json message with a status code 401 (unauthenticated)
+1. we need to check if diningHall name is valid, hence blocking their calls when it is not valid
+2. we need to retrieve food review from this dining hall
+    - if successful, then send a json message with a status code 200 (okay)
+    - if not, send a json message with warning and a status code 404 (Not found)
+*/
+
 // get all the food review from a particular dining hall
 reviewRouter.get("/review/:dininghall", (req, res) => {
-    res.json({"mes": "HELLO"})
+    
 })
 
 // create a new food review for a particular dining hall
