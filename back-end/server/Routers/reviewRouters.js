@@ -1,7 +1,19 @@
 import express from "express";
+import { readFile } from 'fs/promises';
 
 
 const reviewRouter = express.Router();
+
+reviewRouter.get("/diningInfo", async (req, res) => {
+    const pathname = "back-end/MockData/diningHallInfo.json";
+    try {
+        const data = await readFile(pathname, 'utf8');
+        res.set('Content-Type', 'application/json');
+        res.status(200).send(data);
+    } catch (error) {
+        res.status(404).send();
+    }
+});
 
 // get all the food review from a particular dining hall
 reviewRouter.get("/review/:dininghall", (req, res) => {

@@ -2,6 +2,10 @@ test-code/
 test-code
 users/
 users
+
+users/
+users
+
 # Logs
 logs
 *.log
