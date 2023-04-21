@@ -28,7 +28,7 @@
                 "Healthiness": 1,
                 "SeatAvailability": 2,
                 "Taste": 4
-            },
+            }
         ]
     },
     {
@@ -59,9 +59,7 @@
                 "Healthiness": 1,
                 "SeatAvailability": 2,
                 "Taste": 4
-            },
+            }
         ]
-    },
-
-
+    }
 ]
