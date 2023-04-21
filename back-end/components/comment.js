@@ -11,12 +11,12 @@ class comment extends HTMLElement {
             display: inline-grid; 
             grid-template-columns: 1fr 1fr; 
             grid-template-rows: 1fr;
-            background-color: grey;
+            background-color: rgb(248, 248, 248);
             border-radius: 10px;
             height: 300px;
             width: 800px;
             justify-items: center;
-            padding: 10px;
+            padding: 30px;
         ">
 
             <div class="left-container" style="width: 450px;">
@@ -49,7 +49,7 @@ class comment extends HTMLElement {
                 </div>
 
                 <div class="row">
-                    <div style="text-align:right" class="column" id="time">Date: 4/21/2023</div>
+                    <div style="text-align:left" class="column" id="time">Date: 4/21/2023</div>
                 </div>
 
             </div>

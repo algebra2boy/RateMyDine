@@ -97,8 +97,13 @@
     border-spacing: 1em;
 }
 
-.active, .happy{
-    color: #FDF7C3;
+.active{
+    color: yellow;
+    text-shadow: 0 0 3px #000;
+}
+
+.happy{
+    color: black;
 }
 
 .dining-name {

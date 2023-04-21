@@ -11,8 +11,23 @@
 </head>
 
 <body>
-    <div class="comment-container">
+    <div class="comment-container" style="
+    display: grid;
+    width: 1000px;
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(auto-fill, 300px);
+    grid-row-gap: 5px;
+    justify-items: center;
+    ">
         <comment-component></comment-component>
+        <comment-component></comment-component>
+        <comment-component></comment-component>
+        <comment-component></comment-component>
+        <comment-component></comment-component>
+        <comment-component></comment-component>
+        <comment-component></comment-component>
+
+
     </div>
 </body>
 </html>
