@@ -37,7 +37,9 @@ function renderGenerateCardView(diningHallName) {
     CardView.appendChild(cardBody);
     
     ColumnView.appendChild(CardView);
-    cardGroup.appendChild(ColumnView);   
+    cardGroup.appendChild(ColumnView); 
+    
+    return ColumnView;
 }
 
 async function renderCardListView() {
@@ -45,8 +47,9 @@ async function renderCardListView() {
     const diningHallInfoJSON = await diningHallInfo.json();
     for (let index = 0; index < 6; ++index) {
         const diningHall = diningHallInfoJSON[index];
-        const diningHalldiningHallName = diningHall["DiningName"];
-        renderGenerateCardView(diningHalldiningHallName);
+        const diningHallName = diningHall["DiningName"];
+        const card = renderGenerateCardView(diningHallName);
+        card.addEventListener("click", () => window.location=`/${diningHallName}`);
     }
 }
 
