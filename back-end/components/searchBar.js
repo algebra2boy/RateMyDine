@@ -44,6 +44,7 @@ async function generateList(potential_dinningHall) {
     for (let item = 0; item < potential_dinningHall.length; ++item) {
         const diningHallName = potential_dinningHall[item]["DiningName"];
         let prediction = document.createElement("li");
+        prediction.addEventListener("click", () => window.location=`/${diningHallName}`);
         prediction.innerHTML = diningHallName;
         dropDownBox.appendChild(prediction);
     }
