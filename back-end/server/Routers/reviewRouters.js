@@ -1,19 +1,12 @@
 import express from "express";
-import { readFile } from 'fs/promises';
 import * as dbUtils from "../reviewDBUtils.js";
 import { diningInfo } from "../../MockData/diningHallInfo.js";
 
 const reviewRouter = express.Router();
 
 reviewRouter.get("/diningInfo", async (req, res) => {
-    try {
-        res.set('Content-Type', 'application/json');
-        res.status(200).send(JSON.stringify(diningInfo));
-    } catch (error) {
-        res.status(404).send({
-            "message": `{pathname} not found in the server`
-        });
-    }
+    res.set('Content-Type', 'application/json');
+    res.status(200).send(JSON.stringify(diningInfo));
 });
 
 /*
@@ -38,11 +31,10 @@ reviewRouter.get("/review/:userID", (req,res) => {
     
 });
 // create a new food review for a particular dining hall
-reviewRouter.post("/review", (req, res) => {
+reviewRouter.post("/review/:diningHall", async (req, res) => {
     let dine = req.body;
-    dbUtils.get(dine).then((val) =>{
-        res.send(val);
-    })
+    let hall = req.params.diningHall;
+    let doc = dbUtils.getDoc(hall);
 })
 
 // update an existing food review for a particular dining hall
