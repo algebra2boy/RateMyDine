@@ -26,7 +26,7 @@ function renderGenerateCardView(diningHall) {
     h5.classList.add("card-title");
     h5.innerHTML = diningHall.name;
     cardText.classList.add("card-text");
-    cardText.innerHTML = "100 reviews";
+    cardText.innerHTML = `${diningHall.reviewCount} reviews`;
 
     // order hierarchical level
     cardBody.appendChild(h5);
