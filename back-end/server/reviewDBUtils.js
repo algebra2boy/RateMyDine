@@ -1,4 +1,5 @@
 import { reviewDB } from "./server.js";
+import { diningReview } from "../MockData/reviews.js";
 async function createDoc(info){
     try{
         console.log(info);
@@ -31,6 +32,8 @@ async function updateDoc(info){
 async function deleteDoc(info){
     
 }
+
+
 
 export {
     createDoc,
