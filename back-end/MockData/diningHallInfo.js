@@ -1,4 +1,4 @@
-[
+const diningInfo = [
     {
         "DiningName": "Worcester",
         "DiningAddress": "669 North Pleasant Street, Amherst MA 01003",
@@ -42,3 +42,5 @@
         "DiningDescription": "Follow us on twitter @UMassBabyBerk to find our daily schedule or get real time location update on our app. Indulge in a 100% Grass Fed Beef babyBerk Burger, Steak Poutine, or one of our famous vegan Franklin Burgers. babyBerk brings Award Winning UMass dining to you!"
     }
 ]
+
+export {diningInfo}
