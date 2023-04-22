@@ -6,11 +6,9 @@ import { diningInfo } from "../../MockData/diningHallInfo.js";
 const reviewRouter = express.Router();
 
 reviewRouter.get("/diningInfo", async (req, res) => {
-    const pathname = "back-end/MockData/diningHallInfo.json";
     try {
-        const data = await readFile(pathname, 'utf8');
         res.set('Content-Type', 'application/json');
-        res.status(200).send(data);
+        res.status(200).send(JSON.stringify(diningInfo));
     } catch (error) {
         res.status(404).send({
             "message": `{pathname} not found in the server`
@@ -42,7 +40,7 @@ reviewRouter.get("/review/:userID", (req,res) => {
 // create a new food review for a particular dining hall
 reviewRouter.post("/review", (req, res) => {
     let dine = req.body;
-    dbUtils.createDoc(dine).then((val) =>{
+    dbUtils.get(dine).then((val) =>{
         res.send(val);
     })
 })

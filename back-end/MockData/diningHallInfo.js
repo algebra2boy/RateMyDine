@@ -43,4 +43,4 @@ const diningInfo = [
     }
 ]
 
-export {diningInfo}
+export {diningInfo};
