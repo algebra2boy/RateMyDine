@@ -104,12 +104,13 @@
 }
 
 .card:hover {
-    transform: scale(1.054);
+    transform: scale(1.18);
     background-color: rgb(142, 35, 35);
     color: white;
     background-size: 100%;
     background-position: center;
-    transition: 0.5s ease-out;
+    rotate: 2deg;
+    transition: 0.2s ease-out;
     transition-timing-function: linear;
 }
 
