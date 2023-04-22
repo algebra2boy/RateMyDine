@@ -1,6 +1,7 @@
 import express from "express";
 import { readFile } from 'fs/promises';
 import * as dbUtils from "../reviewDBUtils.js";
+import { diningInfo } from "../../MockData/diningHallInfo.js";
 
 const reviewRouter = express.Router();
 
@@ -60,14 +61,11 @@ reviewRouter.get("/:diningHall", (req, res) => {
     res.sendFile("./front-end/HTML/dining.html", {root: "./"});
 });
 
-reviewRouter.get("info/:diningHall", (req, res) => {
-    res.send(JSON.stringify({
-        "DiningName": "Worcester",
-        "DiningAddress": "669 North Pleasant Street, Amherst MA 01003",
-        "DiningPhoneNumber": "413-545-2143",
-        "NumberOfReviews": 0,
-        "DiningDescription": "The new Worcester Commons, opened Fall 2020, is a state of the art facility featuring a “Food Hall” design. Worcester’s globally inspired menu, 12 action stations, teaching kitchen, Grab'N Go, retail café and restaurant will operate from 7am to midnight seven days a week. Worcester Commons is located in the Northeast Residential Area and is handicapped accessible."
-    }));
+reviewRouter.get("/info/:diningHall", (req, res) => {
+    let hall = req.params.diningHall;
+    let list = diningInfo.filter((obj) => obj["DiningName"].toLowerCase() === hall.toLowerCase());
+    if(list.length === 0) res.status(404).send("Not Found");
+    else res.send(JSON.stringify(list[0]));
 });
 
 export default reviewRouter;
