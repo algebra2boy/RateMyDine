@@ -1,4 +1,4 @@
-import { Review } from "./classDefinitions";
+import { Review } from "./classDefinitions.js";
 
 const diningReview = [
     {

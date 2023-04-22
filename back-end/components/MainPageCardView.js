@@ -14,8 +14,8 @@ function renderGenerateCardView(diningHall) {
     // construct the cardImage 
     const cardImage = document.createElement("img");
     cardImage.classList.add("card-img-top");
-    cardImage.setAttribute("alt", diningHall["DiningName"]);
-    cardImage.setAttribute("src", `Pictures/${diningHallName.toLowerCase()}.jpeg`);
+    cardImage.setAttribute("alt", diningHall.name);
+    cardImage.setAttribute("src", `Pictures/${diningHall.name.toLowerCase()}.jpeg`);
 
     // construct the cardBody 
     const cardBody = document.createElement("div");
@@ -24,7 +24,7 @@ function renderGenerateCardView(diningHall) {
     // construct the diningHallName of the dining hall, horzontal line and card text
     const h5 = document.createElement("h5"), hr = document.createElement("hr"), cardText = document.createElement("p");
     h5.classList.add("card-title");
-    h5.innerHTML = diningHallName;
+    h5.innerHTML = diningHall.name;
     cardText.classList.add("card-text");
     cardText.innerHTML = "100 reviews";
 
@@ -48,7 +48,7 @@ async function renderCardListView() {
     for (let index = 0; index < diningHallInfoJSON.length; ++index) {
         const diningHall = diningHallInfoJSON[index];
         const card = renderGenerateCardView(diningHall);
-        card.addEventListener("click", () => window.location=`/${diningHall["DiningName"]}`);
+        card.addEventListener("click", () => window.location=`/${diningHall.name}`);
     }
 }
 
