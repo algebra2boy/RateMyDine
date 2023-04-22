@@ -1,6 +1,6 @@
 const cardGroup = document.getElementById("card-group");
 
-function renderGenerateCardView(diningHallName) {
+function renderGenerateCardView(diningHall) {
     // construct the column 
     const ColumnView = document.createElement("div");
     ColumnView.classList.add("col");
@@ -14,7 +14,7 @@ function renderGenerateCardView(diningHallName) {
     // construct the cardImage 
     const cardImage = document.createElement("img");
     cardImage.classList.add("card-img-top");
-    cardImage.setAttribute("alt", diningHallName);
+    cardImage.setAttribute("alt", diningHall["DiningName"]);
     cardImage.setAttribute("src", `Pictures/${diningHallName.toLowerCase()}.jpeg`);
 
     // construct the cardBody 
@@ -45,12 +45,12 @@ function renderGenerateCardView(diningHallName) {
 async function renderCardListView() {
     const diningHallInfo = await fetch("http://localhost:3000/diningInfo");
     const diningHallInfoJSON = await diningHallInfo.json();
-    for (let index = 0; index < 6; ++index) {
+    for (let index = 0; index < diningHallInfoJSON.length; ++index) {
         const diningHall = diningHallInfoJSON[index];
-        const diningHallName = diningHall["DiningName"];
-        const card = renderGenerateCardView(diningHallName);
-        card.addEventListener("click", () => window.location=`/${diningHallName}`);
+        const card = renderGenerateCardView(diningHall);
+        card.addEventListener("click", () => window.location=`/${diningHall["DiningName"]}`);
     }
 }
+
 
 renderCardListView();
