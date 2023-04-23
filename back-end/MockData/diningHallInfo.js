@@ -1,4 +1,4 @@
-import { DiningHall } from "./classDefinitions.js";
+import { DiningHall, Hours } from "./classDefinitions.js";
 
 const diningInfo = [
     new DiningHall("Worcester", "669 North Pleasent Street, Amherst MA 01003", "413-545-2143", 0, "The new Worcester Commons, opened Fall 2020, is a state of the art facility featuring a “Food Hall” design. Worcester’s globally inspired menu, 12 action stations, teaching kitchen, Grab'N Go, retail café and restaurant will operate from 7am to midnight seven days a week. Worcester Commons is located in the Northeast Residential Area and is handicapped accessible."),

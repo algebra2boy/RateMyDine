@@ -1,3 +1,4 @@
+//all fields for the Hours class are made of a tuple of 2 integers; represents time in 24hr format. Ex: (7, 21) => 7AM - 9PM
 class Hours {
     constructor(sun, mon, tues, wed, thurs, fri, sat){
         this.sunday = sun;
