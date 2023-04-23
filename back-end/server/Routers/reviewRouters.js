@@ -20,32 +20,38 @@ We will use fetch API to fetch all the food review from a particular dining hall
 */
 
 // get all the food review from a particular dining hall
-reviewRouter.get("/review/:dininghall", (req, res) => {
+reviewRouter.get("/review/:dininghall", async (req, res) => {
     let dine = req.params.dininghall;
-    dbUtils.getDoc(dine).then((doc) =>{
-        res.send(doc);
-    })
-   
+    let doc = await dbUtils.getReview(dine);
+    res.send(doc);
 })
 reviewRouter.get("/review/:userID", (req,res) => {
     
 });
 // create a new food review for a particular dining hall
 reviewRouter.post("/review/:diningHall", async (req, res) => {
-    let dine = req.body;
+    let rev = req.body.review;
     let hall = req.params.diningHall;
-    let doc = dbUtils.getDoc(hall);
-})
+    let result = await dbUtils.createReview(hall, rev);
+    res.send(result);
+});
 
 // update an existing food review for a particular dining hall
-reviewRouter.post("/review/:dininghall/:reviewID", (req, res) => {
-
-})
+reviewRouter.post("/review/:dininghall/:reviewID", async (req, res) => {
+    let rev = req.body.review;
+    let hall = req.params.dininghall;
+    let id = req.params.reviewID;
+    let result = await dbUtils.updateReview(hall, rev, id);
+    res.send(result);
+});
 
 // delete an existing food review for a particular dining hall
-reviewRouter.delete("/review/:dininghall/:reviewID", (req, res) => {
-    
-})
+reviewRouter.delete("/review/:dininghall/:reviewID", async (req, res) => {
+    let hall = req.params.diningHall;
+    let id = req.params.reviewID;
+    let result = await dbUtils.deleteReview(hall, id);
+    res.send(result);
+});
 
 reviewRouter.get("/:diningHall", (req, res) => {
     res.sendFile("./front-end/HTML/dining.html", {root: "./"});
@@ -56,6 +62,11 @@ reviewRouter.get("/info/:diningHall", (req, res) => {
     let list = diningInfo.filter((obj) => obj.name.toLowerCase() === hall.toLowerCase());
     if(list.length === 0) res.status(404).send("Not Found");
     else res.send(JSON.stringify(list[0]));
+});
+
+reviewRouter.post("/allReviews", async (req, res) => {
+    let msg = await dbUtils.init();
+    res.send(msg);
 });
 
 export default reviewRouter;
