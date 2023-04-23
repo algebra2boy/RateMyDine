@@ -1,10 +1,23 @@
+class Hours {
+    constructor(sun, mon, tues, wed, thurs, fri, sat){
+        this.sunday = sun;
+        this.monday = mon;
+        this.tuesday = tues;
+        this.wednesday = wed;
+        this.thursday = thurs;
+        this.friday = fri;
+        this.saturday = sat;
+    }
+}
+
 class DiningHall {
-    constructor(n, adr, pn, nr, desc){
+    constructor(n, adr, pn, nr, desc, hrs){
         this.name = n;
         this.address = adr;
         this.phone = pn;
         this.reviewCount = nr;
         this.description = desc;
+        this.hours = hrs;
     }
 }
 
@@ -26,5 +39,6 @@ class Review {
 
 export {
     DiningHall,
-    Review
+    Review,
+    Hours
 }
