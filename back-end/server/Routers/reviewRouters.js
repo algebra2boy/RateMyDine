@@ -53,7 +53,7 @@ reviewRouter.get("/:diningHall", (req, res) => {
 
 reviewRouter.get("/info/:diningHall", (req, res) => {
     let hall = req.params.diningHall;
-    let list = diningInfo.filter((obj) => obj["DiningName"].toLowerCase() === hall.toLowerCase());
+    let list = diningInfo.filter((obj) => obj.name.toLowerCase() === hall.toLowerCase());
     if(list.length === 0) res.status(404).send("Not Found");
     else res.send(JSON.stringify(list[0]));
 });
