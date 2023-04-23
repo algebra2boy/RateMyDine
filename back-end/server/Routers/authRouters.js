@@ -2,7 +2,7 @@ import express from "express"; // allow us to construct endpoints
 import path from "path"; // to find the current path of this project
 import bcrypt from "bcrypt"; // help us hash passwords (for later)
 import { validationResult } from "express-validator";
-import { ValidateSignupSchema, ValidateLoginSchema } from "../../schema/authentication-schema.js"; // used to validate user's input on the login and sign up page
+// import { ValidateSignupSchema, ValidateLoginSchema } from "../../schema/authentication-schema.js"; // used to validate user's input on the login and sign up page
 import { userDB } from "../server.js";
 const authRouter = express.Router();
 
@@ -22,15 +22,15 @@ authRouter.get('/signup', (req, res) => {
 })
 
 // signup for submitting a form
-authRouter.post('/signup', ValidateSignupSchema, async (req, res) => {
+authRouter.post('/signup', async (req, res) => {
     // user is not following the rules
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-        res.status(500).send({
-            message: errors,
-            status: "failure",
-        });
-    }
+    // const errors = validationResult(req);
+    // if (!errors.isEmpty()) {
+    //     res.status(500).send({
+    //         message: errors,
+    //         status: "failure",
+    //     });
+    // }
     // check if the user is already existed in the database 
     try {
         let userDocument = await userDB.get(req.body.SignUpEmail);
@@ -52,10 +52,11 @@ authRouter.post('/signup', ValidateSignupSchema, async (req, res) => {
                 password: signUpPassword
             });
             console.log(newRateMyDineUser);
-            res.status(201).send({
-                message: `successfully created user with ID ${newRateMyDineUser.id}`,
-                status: "success"
-            });
+            res.redirect("/");
+            // res.status(201).send({
+            //     message: `successfully created user with ID ${newRateMyDineUser.id}`,
+            //     status: "success"
+            // });
         } catch (error) {
             console.log("An error occurs when pouchDB tries to create an account for the user")
             res.status(500).send({ status: "failure" });
@@ -69,15 +70,15 @@ authRouter.get('/login', (req, res) => {
 })
 
 // login endpoint for submitting a form
-authRouter.post('/login', ValidateLoginSchema, async (req, res) => {
+authRouter.post('/login' , async (req, res) => {
 
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-        res.status(500).send({
-            message: errors,
-            status: "failure",
-        });
-    }
+    // const errors = validationResult(req);
+    // if (!errors.isEmpty()) {
+    //     res.status(500).send({
+    //         message: errors,
+    //         status: "failure",
+    //     });
+    // }
     const { LoginEmail, LoinInPassword } = req.body;
 
     try {
@@ -85,10 +86,11 @@ authRouter.post('/login', ValidateLoginSchema, async (req, res) => {
         let userDocument = await userDB.get(LoginEmail);
         // exists with correct password
         if (userDocument["password"] === LoinInPassword) {
-            res.status(200).send({
-                message: `User with ${LoginEmail} login in successfully`,
-                status: "success",
-            });
+            res.redirect("/");
+            // res.status(200).send({
+            //     message: `User with ${LoginEmail} login in successfully`,
+            //     status: "success",
+            // });
         } else { // incorrect passwrod 
             res.status(404).send({
                 message: `User with ${LoginEmail} login in unsuccessfully with incorrect password`,
