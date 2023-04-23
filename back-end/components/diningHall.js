@@ -12,12 +12,14 @@ async function loadPageInformation(){
         let addr = document.getElementById('dining-address');
         let phone = document.getElementById('dining-phone');
         let info = document.getElementById('dining-info');
+        let pic = document.getElementById('profile');
 
         //LOADING  
         nameRow.innerHTML = diningHall.name;
         addr.innerHTML = diningHall.address;
         phone.innerHTML = diningHall.phone;
         info.innerHTML = diningHall.description;
+        pic.src = `../../Pictures/${diningHall.name.toLowerCase()}.jpeg`;
 
         //LOADING HOUR INFORMATION
         for(let child of document.querySelectorAll('.time-hour')){
