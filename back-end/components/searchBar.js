@@ -52,4 +52,4 @@ async function generateList(potential_dinningHall) {
 
 // add event listener to the search bar
 searchBar.addEventListener("keyup", generateSuggestions);
-searchBar.addEventListener("focusout", () => {dropDownBox.innerHTML = "";})
+document.body.addEventListener("click", (event) => {if(event.target.id === 'search-box'){ generateSuggestions(); }else{ dropDownBox.innerHTML = ""; }})
