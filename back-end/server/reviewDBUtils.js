@@ -12,15 +12,18 @@ const keyMap = {
     SeatAvailability: "seatAvailability",
     Taste: "taste",
 }
-
+function computeOverall(review){
+    let sum = 100 * ((Number(review["FoodQuality"])/5) + (Number(review["CustomerService"])/5)
+                    + (Number(review["Atmosphere"])/5) + (Number(review["Healthiness"])/5) 
+                    + (Number(review["SeatAvailability"])/5) + (Number(review["Taste"])/5));
+    let average = Math.ceil(Math.ceil(sum / 6)  * 0.01 * 5); 
+    return average;
+}
 async function createReview(hall, revi){
     try{
         let doc = await reviewDB.get(hall);
         let review = JSON.parse(revi);
-        let sum = 100 * ((Number(review["FoodQuality"])/5) + (Number(review["CustomerService"])/5)
-                        + (Number(review["Atmosphere"])/5) + (Number(review["Healthiness"])/5) 
-                        + (Number(review["SeatAvailability"])/5) + (Number(review["Taste"])/5));
-        let average = Math.ceil(sum / 6)  * 0.01 * 5; 
+        let average = computeOverall(review);
         let nRev = new Review(""+(Number(doc.reviews[0].id)+1), "April 22, 2023", "ABCDED", average, review.ReviewDescription, 
         review.FoodQuality,review.Atmosphere, review.Healthiness, review.SeatAvailability, review.Taste);
         doc.reviews.unshift(nRev);
@@ -36,24 +39,29 @@ async function getReview(info){
         // console.log(info);
         let res = await reviewDB.get(info)
         // console.log(JSON.stringify(res));
-        console.log(res);
+        // console.log(res);
         return JSON.stringify(res);
     }
     catch (e){
         console.error(e);
     }
 }
-async function updateReview(hall, review, id){
+async function updateReview(hall, revi, id){
     try{
         let doc = await reviewDB.get(hall);
         for(let i = 0; i < doc["reviews"].length; i++){
             if(doc.reviews[i].id === id){
-                for(let key in review){
+                let review = JSON.parse(revi);
+                console.log(review);
+                for(let key in keyMap){
+                    // console.log(review[key]);
                     let mapKey = keyMap[key];
-                    doc.reviews[i][mapKey] = review.key;
+                    // console.log(mapKey);
+                    doc.reviews[i][mapKey] = review[key] === undefined ? doc.reviews[i][mapKey] : review[key];
                 }
+                doc.reviews[i].overall = computeOverall(review);
                 let res = await reviewDB.put(doc);
-                console.log(res);
+                // console.log(res);
                 return true;
             }
         }
