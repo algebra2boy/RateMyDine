@@ -32,11 +32,11 @@ class comment extends HTMLElement {
                     <div class="column fraction">5/5 Stars</div>
 
                     <div class="column stars">
-                    <i class="fas fa-star active"></i>
-                    <i class="fas fa-star active"></i>
-                    <i class="fas fa-star active"></i>
-                    <i class="fas fa-star active"></i>
-                    <i class="fas fa-star active"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
                     </div>
                 </div>
 
@@ -108,7 +108,7 @@ class comment extends HTMLElement {
                 </tr>
                 <tr class="seat-availability">
                 <td>Taste</td>
-                <td class="seat-availability-rating">
+                <td class="taste">
                     <i class="fas fa-star"></i>
                     <i class="fas fa-star"></i>
                     <i class="fas fa-star"></i>

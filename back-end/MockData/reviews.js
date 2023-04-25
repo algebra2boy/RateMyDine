@@ -4,7 +4,7 @@ const diningReview = [
     {
         "DiningName": "Worcester",
         "Reviews": [
-            new Review("1235", "March 28, 2023", "ABCDED", 5, "Noodle is the best!", 3, 2, 1, 2, 4),
+            new Review("1235", "March 28, 2023", "ABCDED", 5, "Noodle is the best!", 3, 2, 1, 2, 4, 3),
             new Review("1234", "Feb 26, 2023", "ABCDED", 4, "I love ramen!", 4, 4, 4, 4, 4, 4),
         ]
     },

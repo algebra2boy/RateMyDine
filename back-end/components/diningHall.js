@@ -49,17 +49,27 @@ async function loadComments(){
     let mostRecentComment = document.createElement('comment-component');
     commentSection.appendChild(mostRecentComment);
 
+    console.log(comments.reviews[0])
     fillComment(mostRecentComment, comments.reviews[0]);
 }
 
 function fillComment(comment, commentData){
-    function fillStars(elem){
-        
+    function fillStars(elem, field){
+        let stars = elem.getElementsByClassName("fa-star");
+        for(let i in stars){
+            if(i < commentData[field]){
+                stars[i].classList.add('active');
+            }
+        }
     }
 
     //POPULATE LEFT CONTAINER
+    
+
+
+
     let ovStars     = comment.getElementsByClassName('stars')[0];
-    fillStars()
+    fillStars(ovStars, "overall");
 
 
     //POPULATE RIGHT CONTAINER
@@ -68,9 +78,14 @@ function fillComment(comment, commentData){
     let atmosphere  = comment.getElementsByClassName('atmosphere-rating')[0];
     let healthy     = comment.getElementsByClassName('healthiness')[0];
     let seats       = comment.getElementsByClassName('seat-availability')[0];
-    
-    
+    let taste       = comment.getElementsByClassName('taste')[0];
 
+    fillStars(foodQuality, "foodQuality");
+    fillStars(custService, "customerService");
+    fillStars(atmosphere, "atmosphere");
+    fillStars(healthy, "healthiness");
+    fillStars(seats, "seatAvailability");
+    fillStars(taste, "taste");
 
 }
 
