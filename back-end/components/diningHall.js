@@ -50,10 +50,10 @@ async function loadComments(){
     commentSection.appendChild(mostRecentComment);
 
     console.log(comments.reviews[0])
-    fillComment(mostRecentComment, comments.reviews[0]);
+    fillComment(mostRecentComment, comments.reviews[0], diningHall);
 }
 
-function fillComment(comment, commentData){
+function fillComment(comment, commentData, diningHall){
     function fillStars(elem, field){
         let stars = elem.getElementsByClassName("fa-star");
         for(let i in stars){
@@ -64,20 +64,30 @@ function fillComment(comment, commentData){
     }
 
     //POPULATE LEFT CONTAINER
-    
+    let desc    = comment.getElementsByClassName("desc")[0];
+    desc.innerHTML = commentData.description;
 
+    let frac    = comment.getElementsByClassName('fraction')[0];
+    frac.innerHTML = `${commentData.overall}/5 Stars`
 
+    let nam     = comment.getElementsByClassName('dining-name')[0];
+    nam.innerHTML = diningHall.name;
 
-    let ovStars     = comment.getElementsByClassName('stars')[0];
+    let date    = comment.getElementsByClassName('time')[0];
+    date.innerHTML = `Date: ${commentData.postTime}`
+
+    //handle faces
+
+    let ovStars     = comment.getElementsByClassName('overall')[0];
     fillStars(ovStars, "overall");
 
 
     //POPULATE RIGHT CONTAINER
-    let foodQuality = comment.getElementsByClassName('food-quality-rating')[0];
-    let custService = comment.getElementsByClassName('customer-service-rating')[0];
-    let atmosphere  = comment.getElementsByClassName('atmosphere-rating')[0];
+    let foodQuality = comment.getElementsByClassName('foodQuality')[0];
+    let custService = comment.getElementsByClassName('customerService')[0];
+    let atmosphere  = comment.getElementsByClassName('atmosphere')[0];
     let healthy     = comment.getElementsByClassName('healthiness')[0];
-    let seats       = comment.getElementsByClassName('seat-availability')[0];
+    let seats       = comment.getElementsByClassName('seatAvailability')[0];
     let taste       = comment.getElementsByClassName('taste')[0];
 
     fillStars(foodQuality, "foodQuality");

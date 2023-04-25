@@ -31,7 +31,7 @@ class comment extends HTMLElement {
 
                     <div class="column fraction">5/5 Stars</div>
 
-                    <div class="column stars">
+                    <div class="column overall" style="position: relative; right: 30px;">
                     <i class="fas fa-star"></i>
                     <i class="fas fa-star"></i>
                     <i class="fas fa-star"></i>
@@ -49,7 +49,7 @@ class comment extends HTMLElement {
                 </div>
 
                 <div class="row">
-                    <div style="text-align:left" class="column" id="time">Date: 4/21/2023</div>
+                    <div style="text-align:left; position: relative; top: 130px;" class="column time" id="time">Date: 4/21/2023</div>
                 </div>
 
             </div>
@@ -58,7 +58,7 @@ class comment extends HTMLElement {
                 <table class="rank">
                 <tbody><tr class="food-quality">
                 <td>Food Quality</td>
-                <td class="food-quality-rating">
+                <td class="foodQuality">
                     <i class="fas fa-star"></i>
                     <i class="fas fa-star"></i>
                     <i class="fas fa-star"></i>
@@ -68,7 +68,7 @@ class comment extends HTMLElement {
                 </tr>
                 <tr class="customer-service">
                 <td>Customer Service</td>
-                <td class="customer-service-rating">
+                <td class="customerService">
                     <i class="fas fa-star"></i>
                     <i class="fas fa-star"></i>
                     <i class="fas fa-star"></i>
@@ -76,9 +76,9 @@ class comment extends HTMLElement {
                     <i class="fas fa-star"></i>
                 </td>
                 </tr>
-                <tr class="atmosphere">
+                <tr class="atmo-sphere">
                 <td>Atmosphere</td>
-                <td class="atmosphere-rating">
+                <td class="atmosphere">
                     <i class="fas fa-star"></i>
                     <i class="fas fa-star"></i>
                     <i class="fas fa-star"></i>
@@ -86,9 +86,9 @@ class comment extends HTMLElement {
                     <i class="fas fa-star"></i>
                 </td>
                 </tr>
-                <tr class="healthiness">
+                <tr class="healthy">
                 <td>Healthiness</td>
-                <td class="healthiness-rating">
+                <td class="healthiness">
                     <i class="fas fa-star"></i>
                     <i class="fas fa-star"></i>
                     <i class="fas fa-star"></i>
@@ -98,7 +98,7 @@ class comment extends HTMLElement {
                 </tr>
                 <tr class="seat-availability">
                 <td>Seat Availability</td>
-                <td class="seat-availability-rating">
+                <td class="seatAvailability">
                     <i class="fas fa-star"></i>
                     <i class="fas fa-star"></i>
                     <i class="fas fa-star"></i>
@@ -106,7 +106,7 @@ class comment extends HTMLElement {
                     <i class="fas fa-star"></i>
                 </td>
                 </tr>
-                <tr class="seat-availability">
+                <tr class="tas">
                 <td>Taste</td>
                 <td class="taste">
                     <i class="fas fa-star"></i>
