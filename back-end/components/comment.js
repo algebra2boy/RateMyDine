@@ -25,11 +25,11 @@ class comment extends HTMLElement {
                     <div class="column dining-name">Hampshire</div>
 
                     <div class="column emoji">
-                    <i class="far fa-smile happy"></i>
-                    <span>GREAT!</span>
+                    <i class="far fa-smile face"></i>
+                    <span id="rating">GREAT!</span>
                     </div>
 
-                    <div class="column">5/5 Stars</div>
+                    <div class="column fraction">5/5 Stars</div>
 
                     <div class="column stars">
                     <i class="fas fa-star active"></i>
@@ -41,7 +41,7 @@ class comment extends HTMLElement {
                 </div>
 
                 <div class="row">
-                    <div class="column big-column">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Labore reprehenderit ex
+                    <div class="column big-column desc">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Labore reprehenderit ex
                     rerum harum laboriosam illum repellat molestias ullam eum libero quam neque, sunt inventore. Fugit quisquam a
                     maxime autem odit. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Consectetur excepturi ex veniam
                     debitis tempore recusandae, fugiat vel alias sunt voluptas expedita quod? Ipsam deserunt laborum dignissimos
