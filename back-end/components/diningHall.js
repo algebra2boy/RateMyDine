@@ -6,31 +6,36 @@
 ; //this is so stupid someone please fix this
 
 async function loadPageInformation(){
-    try{
+    // try{
         let res = await fetch(`/info/${window.location.href.split("/")[3]}`);
         let diningHall = await res.json();
-        console.log(diningHall);
-        let nameRow = document.getElementById('name-row');
-        let addr = document.getElementById('dining-address');
-        let phone = document.getElementById('dining-phone');
-        let info = document.getElementById('dining-info');
-        let pic = document.getElementById('profile');
 
-        //LOADING  
-        nameRow.innerHTML = diningHall.name;
-        addr.innerHTML = diningHall.address;
-        phone.innerHTML = diningHall.phone;
-        info.innerHTML = diningHall.description;
-        pic.src = `../../Pictures/${diningHall.name.toLowerCase()}.jpeg`;
+        //LOADING ONE-OFF DISPLAY INFORMATION
+        document.getElementById('name-row').innerHTML = diningHall.name;
+        document.getElementById('dining-address').innerHTML = diningHall.address;
+        document.getElementById('dining-phone').innerHTML = diningHall.phone;
+        document.getElementById('dining-info').innerHTML = diningHall.description;
+        document.getElementById('profile').src = `../../Pictures/${diningHall.name.toLowerCase()}.jpeg`;
+        document.getElementById('hourHeader').innerHTML = "Hours:";
 
         // //LOADING HOUR INFORMATION
-        // for(let child of document.querySelectorAll('.time-hour')){
-        //     child.innerHTML = diningHall.hours[child.id];
-        // }
+        let table = document.getElementById('thours').children[0].children;
+        for(let elem in table){
+            let tr = table[elem]
+            for(let child in tr.children){
+                let id = undefined;
+                if(tr.children[child].tagName === "TD"){
+                    tr.children[child].innerHTML = diningHall.hours[tr.children[child].id];
+                }
+                if(tr.children[child].tagName === "TR" && id != undefined){    
+                    tr.children[child].innerHTML = id.charAt(0) + id.slice(1);
+                }
+            }
+        }
         
-    }catch{
-        console.log("THE HELL HAPPENED???")
-    }
+    // }catch{
+    //     console.log("THE HELL HAPPENED???")
+    // }
 }
 
 
