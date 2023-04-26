@@ -50,12 +50,8 @@ class comment extends HTMLElement {
                     debitis tempore recusandae, fugiat vel alias sunt voluptas expedita quod? Ipsam deserunt laborum dignissimos
                     quidem illum cumque sit.</div>
                 </div>
-
-                <div class="row">
-                    <div style="text-align:left; position: relative; top: 130px;" class="column time" id="time">Date: 4/21/2023</div>
-                </div>
-
             </div>
+            
             <div class="right-container" style="width: 450px;">
                 
                 <table class="rank">
