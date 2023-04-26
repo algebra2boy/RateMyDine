@@ -1,5 +1,7 @@
 const cardGroup = document.getElementById("card-group");
 
+//This function is responsible for generating the cards (html elements) you see in the middle section of the page just below the search bar
+//renderGenerateCardView(diningHall: DiningHall object) => <HTML Element>
 function renderGenerateCardView(diningHall) {
     // construct the column 
     const ColumnView = document.createElement("div");
@@ -42,6 +44,8 @@ function renderGenerateCardView(diningHall) {
     return ColumnView;
 }
 
+//Handles the placement of the html object and redirect hooks for each individual dining hall
+//renderCardListView() => void
 async function renderCardListView() {
     const diningHallInfo = await fetch("http://localhost:3000/diningInfo");
     const diningHallInfoJSON = await diningHallInfo.json();

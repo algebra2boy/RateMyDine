@@ -1,3 +1,6 @@
+//This file is the template for all comment objects (the grey block and anything inside it under the "Most recent review" section in dining.html
+//diningHall.js and dining.html require this file
+
 // define a comment class
 class comment extends HTMLElement {
     constructor() {
@@ -25,23 +28,23 @@ class comment extends HTMLElement {
                     <div class="column dining-name">Hampshire</div>
 
                     <div class="column emoji">
-                    <i class="far fa-smile happy"></i>
-                    <span>GREAT!</span>
+                    <i class="far fa-smile face"></i>
+                    <span id="rating">GREAT!</span>
                     </div>
 
-                    <div class="column">5/5 Stars</div>
+                    <div class="column fraction">5/5 Stars</div>
 
-                    <div class="column stars">
-                    <i class="fas fa-star active"></i>
-                    <i class="fas fa-star active"></i>
-                    <i class="fas fa-star active"></i>
-                    <i class="fas fa-star active"></i>
-                    <i class="fas fa-star active"></i>
+                    <div class="column overall" style="position: relative; right: 30px;">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
                     </div>
                 </div>
 
                 <div class="row">
-                    <div class="column big-column">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Labore reprehenderit ex
+                    <div class="column big-column desc">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Labore reprehenderit ex
                     rerum harum laboriosam illum repellat molestias ullam eum libero quam neque, sunt inventore. Fugit quisquam a
                     maxime autem odit. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Consectetur excepturi ex veniam
                     debitis tempore recusandae, fugiat vel alias sunt voluptas expedita quod? Ipsam deserunt laborum dignissimos
@@ -49,7 +52,7 @@ class comment extends HTMLElement {
                 </div>
 
                 <div class="row">
-                    <div style="text-align:left" class="column" id="time">Date: 4/21/2023</div>
+                    <div style="text-align:left; position: relative; top: 130px;" class="column time" id="time">Date: 4/21/2023</div>
                 </div>
 
             </div>
@@ -58,7 +61,7 @@ class comment extends HTMLElement {
                 <table class="rank">
                 <tbody><tr class="food-quality">
                 <td>Food Quality</td>
-                <td class="food-quality-rating">
+                <td class="foodQuality">
                     <i class="fas fa-star"></i>
                     <i class="fas fa-star"></i>
                     <i class="fas fa-star"></i>
@@ -68,7 +71,7 @@ class comment extends HTMLElement {
                 </tr>
                 <tr class="customer-service">
                 <td>Customer Service</td>
-                <td class="customer-service-rating">
+                <td class="customerService">
                     <i class="fas fa-star"></i>
                     <i class="fas fa-star"></i>
                     <i class="fas fa-star"></i>
@@ -76,9 +79,9 @@ class comment extends HTMLElement {
                     <i class="fas fa-star"></i>
                 </td>
                 </tr>
-                <tr class="atmosphere">
+                <tr class="atmo-sphere">
                 <td>Atmosphere</td>
-                <td class="atmosphere-rating">
+                <td class="atmosphere">
                     <i class="fas fa-star"></i>
                     <i class="fas fa-star"></i>
                     <i class="fas fa-star"></i>
@@ -86,9 +89,9 @@ class comment extends HTMLElement {
                     <i class="fas fa-star"></i>
                 </td>
                 </tr>
-                <tr class="healthiness">
+                <tr class="healthy">
                 <td>Healthiness</td>
-                <td class="healthiness-rating">
+                <td class="healthiness">
                     <i class="fas fa-star"></i>
                     <i class="fas fa-star"></i>
                     <i class="fas fa-star"></i>
@@ -98,7 +101,7 @@ class comment extends HTMLElement {
                 </tr>
                 <tr class="seat-availability">
                 <td>Seat Availability</td>
-                <td class="seat-availability-rating">
+                <td class="seatAvailability">
                     <i class="fas fa-star"></i>
                     <i class="fas fa-star"></i>
                     <i class="fas fa-star"></i>
@@ -106,9 +109,9 @@ class comment extends HTMLElement {
                     <i class="fas fa-star"></i>
                 </td>
                 </tr>
-                <tr class="seat-availability">
+                <tr class="tas">
                 <td>Taste</td>
-                <td class="seat-availability-rating">
+                <td class="taste">
                     <i class="fas fa-star"></i>
                     <i class="fas fa-star"></i>
                     <i class="fas fa-star"></i>

@@ -1,3 +1,4 @@
+//Obtain Current Time
 function currentTime() {
     let todayDate = new Date();
     let dayzone = "AM"
@@ -12,6 +13,7 @@ function currentTime() {
     let ss = (String(second).length === 1) ? "0" + second : second;
 
     let time = hh + ":" + mm + ":" + ss + " " + dayzone;
+    //Set the element 'search-box' with the Time
     document.getElementById("search-box").placeholder = "Scroll to rate at " + time;
     // call the function every 1000ms, which is 1 second
     var t = setTimeout(currentTime, 1000);

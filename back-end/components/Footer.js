@@ -1,3 +1,6 @@
+//This is the file that is responsible for handling the footer html element (also a red ribbon) at the bottom of the page
+//All pages require this file
+
 // define a footer class
 class Footer extends HTMLElement {
     constructor() {
