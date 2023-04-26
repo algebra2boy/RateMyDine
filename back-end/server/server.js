@@ -6,7 +6,7 @@ import PouchDB from "pouchdb";
 const app = express();
 const port = 3000;
 
-// TODO: implement pounchDB and initialize the DB here
+// implement pounchDB and initialize the DB here
 let userDB = new PouchDB("users");
 let reviewDB = new PouchDB("reviews");
 
@@ -28,7 +28,6 @@ app.use(express.json());
 app.use(logger("dev"));
 
 // decode the the request body send through html form
-// documentation: https://stackoverflow.com/questions/25471856/express-throws-error-as-body-parser-deprecated-undefined-extended
 app.use(express.urlencoded({ extended: true }));
 
 // where we activate the routers
