@@ -1,5 +1,8 @@
 import { DiningHall, Hours } from "./classDefinitions.js";
 
+
+//BATCH OF TESTING DATA FOR INDIVIDUAL DINING HALLS
+//This is the table that is responsible for the information being displayed on the dining.html and fetched by diningHall.js
 const diningInfo = [
     new DiningHall("Worcester", "669 North Pleasent Street, Amherst MA 01003", "413-545-2143", 0, "The new Worcester Commons, opened Fall 2020, is a state of the art facility featuring a “Food Hall” design. Worcester’s globally inspired menu, 12 action stations, teaching kitchen, Grab'N Go, retail café and restaurant will operate from 7am to midnight seven days a week. Worcester Commons is located in the Northeast Residential Area and is handicapped accessible.", new Hours("7AM-12AM","7AM-12AM","7AM-12AM","7AM-12AM","7AM-12AM","7AM-12AM","7AM-12AM")),
     new DiningHall("Franklin", "260 Stockbridge Rd, Amherst MA 01003", "413-545-5373", 0, "Located in the Central Residential Area, Franklin Dining Commons is famous for its vegan and vegetarian cuisine. Enjoy a continuous, all-you care-to-eat assortment of dining concepts, such as sushi bar, pizza station, international bar, salad bar, stand alone vegetarian station, deli bar and cereal station, as well as many American fare items. In addition, Franklin Dining Commons also features Grab n’Go for those on the run. Certified Kosher Dining is also available at Franklin.", new Hours("7AM-9PM","7AM-9PM","7AM-9PM","7AM-9PM","7AM-9PM","7AM-9PM","7AM-9PM")),

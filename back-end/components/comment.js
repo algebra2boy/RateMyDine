@@ -1,3 +1,6 @@
+//This file is the template for all comment objects (the grey block and anything inside it under the "Most recent review" section in dining.html
+//diningHall.js and dining.html require this file
+
 // define a comment class
 class comment extends HTMLElement {
     constructor() {

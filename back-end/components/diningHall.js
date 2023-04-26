@@ -1,12 +1,9 @@
-//redirect to dining hall page + load information on dining hall + handle review loading
+//This is the js file responsible for all functionality (barring the footer and header) of the dining.html page
 
-//get dining hall name from url
-//fetch dining hall information from database and update the page
-
-; //this is so stupid someone please fix this
+//TODO: Implement uni-directional dataflow; too many fetches are being made
 
 async function loadPageInformation(){
-    // try{
+    try{
         let res = await fetch(`/info/${window.location.href.split("/")[3]}`);
         let diningHall = await res.json();
 
@@ -33,13 +30,14 @@ async function loadPageInformation(){
             }
         }
         
-    // }catch{
-    //     console.log("THE HELL HAPPENED???")
-    // }
+    }catch{
+        console.log("big bad error dont dead open inside")
+    }
 }
 
 
-//trust me i tried working them into the same function; didnt work
+//We need to load comments AFTER the page is loaded, otherwise the elements get broken
+//loadComments() => void
 async function loadComments(){
     let res = await fetch(`/info/${window.location.href.split("/")[3]}`);
     let diningHall = await res.json();
@@ -53,6 +51,8 @@ async function loadComments(){
     fillComment(mostRecentComment, comments.reviews[0], diningHall);
 }
 
+//Used to populate individual <comment-component>
+//fillComment(comment: <comment-component>, commentData: Review object, diningHall: DiningHall object) => void
 function fillComment(comment, commentData, diningHall){
     function fillStars(elem, field){
         let stars = elem.getElementsByClassName("fa-star");

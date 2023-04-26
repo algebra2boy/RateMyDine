@@ -1,3 +1,6 @@
+//This is the file responsble for the big red colored ribbon at the top, alongside any and all links within it
+//All pages require this file
+
 // define a header class
 class Header extends HTMLElement {
     constructor() {
