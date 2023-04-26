@@ -17,6 +17,8 @@ async function loadPageInformation(){
 
         // //LOADING HOUR INFORMATION
         let table = document.getElementById('thours').children[0].children;
+
+        console.log(diningHall.hours)
         for(let elem in table){
             let tr = table[elem]
             for(let child in tr.children){
@@ -46,8 +48,6 @@ async function loadComments(){
     let commentSection = document.getElementById('comment-section');
     let mostRecentComment = document.createElement('comment-component');
     commentSection.appendChild(mostRecentComment);
-
-    console.log(comments.reviews[0])
     fillComment(mostRecentComment, comments.reviews[0], diningHall);
 }
 
@@ -73,8 +73,8 @@ function fillComment(comment, commentData, diningHall){
     let nam     = comment.getElementsByClassName('dining-name')[0];
     nam.innerHTML = diningHall.name;
 
-    let date    = comment.getElementsByClassName('time')[0];
-    date.innerHTML = `Date: ${commentData.postTime}`
+    // let date    = comment.getElementsByClassName('time')[0];
+    // date.innerHTML = `Date: ${commentData.postTime}`;
 
     //handle faces
 
