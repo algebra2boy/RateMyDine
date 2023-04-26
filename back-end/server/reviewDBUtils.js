@@ -1,6 +1,5 @@
 import { reviewDB } from "./server.js";
 import { diningReview } from "../MockData/reviews.js";
-import { diningInfo } from "../MockData/diningHallInfo.js";
 import { Review } from "../MockData/classDefinitions.js";
 
 const keyMap = {

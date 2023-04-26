@@ -5,6 +5,7 @@
 
 async function loadPageInformation(){
     try{
+        // let res2 = await fetch("/allReviews", {method: "POST"});
         let res = await fetch(`/info/${window.location.href.split("/")[3]}`);
         let diningHall = await res.json();
 
