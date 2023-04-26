@@ -112,6 +112,7 @@
     rotate: 2deg;
     transition: 0.2s ease-out;
     transition-timing-function: linear;
+    cursor: pointer;
 }
 
 .card-img-top {
