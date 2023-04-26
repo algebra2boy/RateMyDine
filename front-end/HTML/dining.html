@@ -12,8 +12,8 @@
   <link rel="stylesheet" href="../CSS/header-footer.css">
   <link href="../CSS/dining.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
-  <script type="module" src="../../back-end/date.js" defer></script>
-  <script type="module" src="../../back-end/popup.js" defer></script>
+  <script type="module" src="../../back-end/components/date.js" defer></script>
+  <script type="module" src="../../back-end/components/popup.js" defer></script>
   <!-- header and footer -->
   <script src="../../back-end/components/Header.js" defer></script>
   <script src="../../back-end/components/Footer.js" defer></script>
@@ -192,26 +192,26 @@
             <table>
               <tr>
                 <td>Food Quality</td>
-                <td><input type="number" name="FoodQuality" min="1" max="5" required></td>
+                <td><input type="number" id="FoodQuality" min="1" max="5" required></td>
                 <td>Customer Service</td>
-                <td><input type="number" name="CustomerService" min="1" max="5" required></td>
+                <td><input type="number" id="CustomerService" min="1" max="5" required></td>
               </tr>
               <tr>
                 <td>Atmosphere</td>
-                <td><input type="number" name="Atmosphere" min="1" max="5" required></td>
+                <td><input type="number" id="Atmosphere" min="1" max="5" required></td>
                 <td>Healthiness</td>
-                <td><input type="number" name="Healthiness" min="1" max="5" required></td>
+                <td><input type="number" id="Healthiness" min="1" max="5" required></td>
               </tr>
               <tr>
                 <td>Seat Availability</td>
-                <td><input type="number" name="SeatAvailability" min="1" max="5" required></td>
+                <td><input type="number" id="SeatAvailability" min="1" max="5" required></td>
                 <td>Taste</td>
-                <td><input type="number" name="Taste" min="1" max="5" required></td>
+                <td><input type="number" id="Taste" min="1" max="5" required></td>
               </tr>
             </table>
             <p></p>
 						<label>Review:</label> 
-						<textarea placeholder="Your Review..." name = "ReviewDescription" minlength="30" maxlength="400" required></textarea>
+						<textarea placeholder="Your Review..." id = "ReviewDescription" minlength="0" maxlength="400" required></textarea>
 						<button id="closePopup" type="submit">Submit</button>
 					</form>
 				</div>
