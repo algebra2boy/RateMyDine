@@ -1,23 +1,24 @@
 //all fields for the Hours class are made of a tuple of 2 integers; represents time in 24hr format. Ex: (7, 21) => 7AM - 9PM
 class Hours {
-    constructor(sunday, monday, tuesday, wednesday, thursday, friday, saturday){
-        this.sunday = sunday;
-        this.monday = monday;
-        this.tuesday = tuesday;
-        this.wednesday = wednesday;
-        this.thursday = thursday;
-        this.friday = friday;
-        this.saturday = saturday;
+    constructor(sun, mon, tues, wed, thurs, fri, sat){
+        this.sunday = sun;
+        this.monday = mon;
+        this.tuesday = tues;
+        this.wednesday = wed;
+        this.thursday = thurs;
+        this.friday = fri;
+        this.saturday = sat;
     }
 }
 
 class DiningHall {
-    constructor(name, address, phone, reviewCount, description) {
+    constructor(name, address, phone, reviewCount, description, hrs) {
         this.name = name;
         this.address = address;
         this.phone = phone;
         this.reviewCount = reviewCount;
         this.description = description;
+        this.hours = hrs;
     }
 }
 
