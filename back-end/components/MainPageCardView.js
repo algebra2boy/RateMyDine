@@ -8,7 +8,7 @@ function renderGenerateCardView(diningHall) {
     ColumnView.classList.add("col");
     ColumnView.classList.add("mb-5");
     
-    // constructCard the column 
+    // construct the card view
     const CardView = document.createElement("div");
     CardView.classList.add("card");
     CardView.classList.add("h-100");
@@ -30,7 +30,7 @@ function renderGenerateCardView(diningHall) {
     cardText.classList.add("card-text");
     cardText.innerHTML = `${diningHall.reviewCount} reviews`;
 
-    // order hierarchical level
+    // add element to the card body
     cardBody.appendChild(h5);
     cardBody.appendChild(hr);
     cardBody.appendChild(cardText);

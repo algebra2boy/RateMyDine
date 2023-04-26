@@ -11,7 +11,7 @@ function generateSuggestions() {
     // clean the drop down box every time it gets rendered 
     dropDownBox.innerHTML = "";
     const searchBarValue = searchBar.value;
-    
+
     if (searchBarValue.length === 0) {
         generateList(diningHallInfoJSON);
         return;
@@ -23,7 +23,7 @@ function generateSuggestions() {
         // exact word
         if (lowerCaseValue === diningHall.name.toLowerCase()) {
             return true;
-        // check word by word
+            // check word by word
         } else if (lowerCaseValue.length >= 0 && diningHall.name.length >= 0 && diningHall.name.toLowerCase().substring(0, lowerCaseValue.length).includes(lowerCaseValue)) {
             return true;
         }
@@ -40,11 +40,11 @@ function generateSuggestions() {
  * Append the li as a child to the drop down box 
  */
 
-async function generateList(potential_dinningHall) {
+function generateList(potential_dinningHall) {
     for (let item = 0; item < potential_dinningHall.length; ++item) {
         const diningHallName = potential_dinningHall[item].name;
         let prediction = document.createElement("li");
-        prediction.addEventListener("click", () => window.location=`/${diningHallName}`);
+        prediction.addEventListener("click", () => window.location = `/${diningHallName}`);
         prediction.innerHTML = diningHallName;
         dropDownBox.appendChild(prediction);
     }
@@ -52,4 +52,10 @@ async function generateList(potential_dinningHall) {
 
 // add event listener to the search bar
 searchBar.addEventListener("keyup", generateSuggestions);
-document.body.addEventListener("click", (event) => {if(event.target.id === 'search-box'){ generateSuggestions(); }else{ dropDownBox.innerHTML = ""; }})
+document.body.addEventListener("click", (event) => {
+    if (event.target.id === 'search-box') {
+        generateSuggestions();
+    } else {
+        dropDownBox.innerHTML = "";
+    }
+})
