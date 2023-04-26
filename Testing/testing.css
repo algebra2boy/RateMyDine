@@ -1,0 +1,108 @@
+* {
+    font-family: HelveticaNeue, arial;
+}
+
+.dining-hall-container {
+    display: flex;
+}
+
+.dining-hall-container>#img-container>img {
+    max-width: 70%;
+    height: auto;
+    margin: 50px 80px 50px 80px;
+    border: 2px solid rgb(45, 41, 41);
+}
+
+#name-row {
+    font-weight: bold;
+    font-size: xx-large;
+    text-align: center;
+}
+
+.dining-hall-description {
+    max-width: 100%;
+}
+
+#meta-data {
+    padding-top: 50px;
+    text-align: center;
+}
+
+#hours>p {
+    width: fit-content;
+    margin-bottom: 2px;
+
+}
+
+#thours {
+    margin-left: 30px;
+}
+
+.time-hour {
+    padding-left: 10px;
+}
+
+/* very important to place review in the center */
+.center {
+    margin: auto;
+    width: 50%;
+}
+
+.review-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 1000px;
+    height: 300px;
+    position: relative;
+    /* verticle line */
+    background-color: black;
+}
+
+.square-container {
+    width: calc(50% - 1px);
+    height: 300px;
+    background-color: #FFB4B4;
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.column {
+    flex: 1;
+    padding: 5px;
+    width: 100px;
+}
+
+.big-row {
+    flex: 2;
+    display: flex;
+}
+
+.big-column {
+    flex: 1;
+    width: 120%;
+}
+
+.rank {
+    border-collapse: separate;
+    border-spacing: 1em;
+}
+
+.active, .happy{
+    color: #FDF7C3;
+}
+
+.dining-name {
+    font-size: 15px;
+    font-weight: bolder;
+    text-align: left;
+}

@@ -10,6 +10,13 @@ const port = 3000;
 let userDB = new PouchDB("users");
 let reviewDB = new PouchDB("reviews");
 
+//for testing purposes
+app.delete("/db", async (req, res)=>{
+    await reviewDB.destroy()
+    reviewDB = new PouchDB("reviews");
+    res.send("Success");
+})
+
 // a built-in middleware function in Express that serves static files and is based on serve-static.
 // must use this to load the css and pictures to the all the pages
 app.use(express.static("."));

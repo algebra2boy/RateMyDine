@@ -2,7 +2,7 @@
     background-color: maroon;
     color: white;
     font-size: x-large;
-    font-family: Helvetica;
+    font-family: Helvetica !important;
     align-items: center;
     justify-content: center;
     color: white;
@@ -10,7 +10,7 @@
     margin-bottom: 0.5px; 
 }
 
-.banner>p {
+#title {
     flex: 0 1 auto;
     position: absolute;
     left: 50%;
@@ -18,13 +18,13 @@
     height: 45px;
     font-size: xx-large;
     font-weight: bold;
-    margin-top: 20px;
+    /* margin-top: 20px; */
 }
 
 .img-fluid {
     height: auto;
     width: 110px;
-    margin-top: 5px;
+    margin-top: 0px;
     margin-left: 40px;
     margin-bottom: 5px;
     margin-right: auto;
@@ -43,14 +43,14 @@
     margin-right: 20px;
     overflow: hidden;
     transition: box-shadow .3s;
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif !important;
 }
 
 .banner>a:hover {
-    text-decoration: underline;
+    /* text-decoration: underline; */
     -webkit-transform: scale(1.2);
     -ms-transform: scale(1.2);
     transform: scale(1.2);
-    color: aquamarine;
-    box-shadow: 0 0 11px rgba(33, 33, 33, .2);
+    /* color: aquamarine; */
+    /* box-shadow: 0 0 11px rgba(33, 33, 33, .2); */
 }
