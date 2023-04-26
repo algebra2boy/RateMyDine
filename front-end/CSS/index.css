@@ -109,7 +109,6 @@
     color: white;
     background-size: 100%;
     background-position: center;
-    rotate: 2deg;
     transition: 0.2s ease-out;
     transition-timing-function: linear;
 }
