@@ -1,3 +1,4 @@
+//Obtain Current Date
 function currentDate() {
     let todayDate = new Date();
     document.getElementById("time").innerHTML =  `Date: ${todayDate.toLocaleDateString()}`;

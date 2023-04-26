@@ -16,8 +16,10 @@
   <link href="front-end/CSS/dining.css" rel="stylesheet">
   
   <!-- LOAD ASSETS AND BACKEND -->
-  <script type="module" src="../../back-end/date.js" defer></script>
   <script type="module" src="../../back-end/components/diningHall.js" defer></script>
+  <script type="module" src="../../back-end/components/date.js" defer></script>
+  <script type="module" src="../../back-end/components/popup.js" defer></script>
+  <!-- header and footer -->
   <script src="../../back-end/components/Header.js" defer></script>
   <script src="../../back-end/components/Footer.js" defer></script>
   <script src="../../back-end/components/comment.js" defer></script>
@@ -30,6 +32,7 @@
   <div class="dining-hall-container container-fluid">
     <div class="col-6" id="img-container">
       <img src="" id="profile">
+
     </div>
     <div class="col-6 dining-hall-description">
       <div class="row">
@@ -79,10 +82,11 @@
     </div>
   </div>
 
-
   <!-- BELOW IS CODE FOR THE COMMENT SECTION -->
-  <div>
-    <h3 style="text-align:center">Most Recent Reviews</h3>
+  <div style="text-align:center">
+    <h3>Most Recent Reviews
+      <button id="openPopup" class="btn btn-outline-primary" style="float:right; position:absolute; right:500px; font-size:15px;">Add a Review</button>
+    </h3>
   </div>
 
   <div class="comment-container center" style="
@@ -101,6 +105,43 @@
   </div>
 
   <footer-component></footer-component>
+
+  <div class="overlay" id="popWindow">
+		<div class="popup">
+			<h3>Add a Food Review</h3>&ensp;<button id="xClose" class="close">&times;</button>
+			<div class="content">
+				<div class="container">
+					<form action = "/review" method = "POST">
+            <table>
+              <tr>
+                <td>Food Quality</td>
+                <td><input type="number" id="FoodQuality" min="1" max="5" required></td>
+                <td>Customer Service</td>
+                <td><input type="number" id="CustomerService" min="1" max="5" required></td>
+              </tr>
+              <tr>
+                <td>Atmosphere</td>
+                <td><input type="number" id="Atmosphere" min="1" max="5" required></td>
+                <td>Healthiness</td>
+                <td><input type="number" id="Healthiness" min="1" max="5" required></td>
+              </tr>
+              <tr>
+                <td>Seat Availability</td>
+                <td><input type="number" id="SeatAvailability" min="1" max="5" required></td>
+                <td>Taste</td>
+                <td><input type="number" id="Taste" min="1" max="5" required></td>
+              </tr>
+            </table>
+            <p></p>
+						<label>Review:</label> 
+						<textarea placeholder="Your Review..." id = "ReviewDescription" minlength="0" maxlength="400" required></textarea>
+						<button id="closePopup" type="submit">Submit</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
 </body>
 
 </html>
