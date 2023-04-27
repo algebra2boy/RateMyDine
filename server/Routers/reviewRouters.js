@@ -1,6 +1,6 @@
 import express from "express";
-import * as dbUtils from "../reviewDBUtils.js"; //importing helper functions.
-import { diningInfo } from "../../MockData/diningHallInfo.js"; //importing information object
+import * as dbUtils from "../DataBase/reviewDBUtils.js"; //importing helper functions.
+import { diningInfo } from "../MockData/diningHallInfo.js"; //importing information object
 
 const reviewRouter = express.Router();
 
