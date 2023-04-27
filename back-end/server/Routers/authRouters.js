@@ -13,7 +13,7 @@ authRouter.get('/', (req, res) => {
 
 // signup endpoint to retrieve sign up page
 authRouter.get('/signup', (req, res) => {
-    res.sendFile(path.join(__dirname, "/front-end/HTML/", "signup.html"));
+    res.sendFile(path.join(__dirname, "/client/HTML/", "signup.html"));
 })
 
 // signup for submitting a form
@@ -48,7 +48,7 @@ authRouter.post('/signup', async (req, res) => {
 
 // login endpoint to retrieve login page
 authRouter.get('/login', (req, res) => {
-    res.sendFile(path.join(__dirname, "/front-end/HTML/", "login.html"));
+    res.sendFile(path.join(__dirname, "/client/HTML/", "login.html"));
 })
 
 // login endpoint for submitting a form

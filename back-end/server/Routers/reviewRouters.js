@@ -51,7 +51,7 @@ reviewRouter.delete("/review/:dininghall/:reviewID", async (req, res) => {
 });
 
 reviewRouter.get("/:diningHall", (req, res) => {
-    res.sendFile("./front-end/HTML/dining.html", {root: "./"});
+    res.sendFile("./client/HTML/dining.html", {root: "./"});
 });
 
 reviewRouter.get("/info/:diningHall", (req, res) => {
