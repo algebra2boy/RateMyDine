@@ -1,4 +1,4 @@
-import { reviewDB } from "./server.js";
+import { reviewDB } from "../server.js";
 import { diningReview } from "../MockData/reviews.js";
 import { Review } from "../MockData/classDefinitions.js";
 

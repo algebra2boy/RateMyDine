@@ -1,6 +1,6 @@
 import express from "express";
-import * as dbUtils from "../reviewDBUtils.js"; //importing helper functions.
-import { diningInfo } from "../../MockData/diningHallInfo.js"; //importing information object
+import * as dbUtils from "../DataBase/reviewDBUtils.js"; //importing helper functions.
+import { diningInfo } from "../MockData/diningHallInfo.js"; //importing information object
 
 const reviewRouter = express.Router();
 
@@ -51,7 +51,7 @@ reviewRouter.delete("/review/:dininghall/:reviewID", async (req, res) => {
 });
 
 reviewRouter.get("/:diningHall", (req, res) => {
-    res.sendFile("./front-end/HTML/dining.html", {root: "./"});
+    res.sendFile("./client/HTML/dining.html", {root: "./"});
 });
 
 reviewRouter.get("/info/:diningHall", (req, res) => {

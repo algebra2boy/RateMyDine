@@ -2,7 +2,7 @@
   "name": "326-project-repo-team-21",
   "version": "1.0.0",
   "description": "## RateMyDine",
-  "main": "back-end/server/server.js",
+  "main": "server/server.js",
   "live": "nodemon server.js",
   "type": "module",
   "directories": {
@@ -10,8 +10,8 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node back-end/server.js",
-    "dev": "nodemon back-end/server.js"
+    "start": "node server/server.js",
+    "dev": "nodemon server/server.js"
   },
   "repository": {
     "type": "git",

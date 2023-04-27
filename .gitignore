@@ -2,7 +2,13 @@ test-code/
 test-code
 users/
 users
+reviews
 reviews/*
+Testing
+Testing/*
+node_modules
+node_modules/*
+.env
 
 users/
 users
