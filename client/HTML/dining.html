@@ -82,11 +82,10 @@
   </div>
 
   <!-- BELOW IS CODE FOR THE COMMENT SECTION -->
-  <div style="text-align:center">
-    <h3>Most Recent Reviews
-      <button id="openPopup" class="btn btn-outline-primary"
-        style="float:right; position:absolute; right:500px; font-size:15px;">Add a Review</button>
-    </h3>
+  <div id = "comment-header">
+    <h3 class = "comment-component">Most Recent Reviews </h3>
+    <button id="openPopup" class="btn btn-outline-primary comment-component">
+      Add a Review</button>
   </div>
 
   <div class="comment-container center" style="
@@ -133,8 +132,7 @@
               </tr>
             </table>
             <label>Review:</label>&nbsp;
-            <textarea placeholder="Your Review..." id="ReviewDescription" minlength="0" maxlength="400"
-              required>
+            <textarea placeholder="Your Review..." id="ReviewDescription" minlength="0" maxlength="400" required>
             </textarea>
             <button id="closePopup" type="submit">Submit</button>
           </form>
