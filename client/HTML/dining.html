@@ -14,7 +14,7 @@
   <link rel="icon" type="image/png" href="../../Pictures/favicon.png">
   <link rel="stylesheet" href="client/CSS/header-footer.css">
   <link href="client/CSS/dining.css" rel="stylesheet">
-  
+
   <!-- LOAD ASSETS AND BACKEND -->
   <script type="module" src="../../client/components/diningHall.js" defer></script>
   <script type="module" src="../../client/components/popup.js" defer></script>
@@ -82,10 +82,10 @@
   </div>
 
   <!-- BELOW IS CODE FOR THE COMMENT SECTION -->
-  <div style="text-align:center">
-    <h3>Most Recent Reviews
-      <button id="openPopup" class="btn btn-outline-primary" style="float:right; position:absolute; right:500px; font-size:15px;">Add a Review</button>
-    </h3>
+  <div id = "comment-header">
+    <h3 class = "comment-component">Most Recent Reviews </h3>
+    <button id="openPopup" class="btn btn-outline-primary comment-component">
+      Add a Review</button>
   </div>
 
   <div class="comment-container center" style="
@@ -96,8 +96,8 @@
     grid-row-gap: 5px;
     justify-items: center;
     " id="comment-section">
-        <!-- <comment-component id="24"></comment-component> -->
-    </div>
+    <!-- <comment-component id="24"></comment-component> -->
+  </div>
   <br></br>
   <div>
     <h3 style="text-align:center">See More...</h3>
@@ -106,11 +106,11 @@
   <footer-component></footer-component>
 
   <div class="overlay" id="popWindow">
-		<div class="popup">
-			<h3>Add a Food Review</h3>&ensp;<button id="xClose" class="close">&times;</button>
-			<div class="content">
-				<div class="container">
-					<form action = "/review" method = "POST">
+    <div class="popup">
+      <h3>Add a Food Review</h3>&ensp;<button id="xClose" class="close">&times;</button>
+      <div class="content">
+        <div class="container">
+          <form action="/review" method="POST">
             <table>
               <tr>
                 <td>Food Quality</td>
@@ -131,15 +131,15 @@
                 <td><input type="number" id="Taste" min="1" max="5" required></td>
               </tr>
             </table>
-            <p></p>
-						<label>Review:</label> 
-						<textarea placeholder="Your Review..." id = "ReviewDescription" minlength="0" maxlength="400" required></textarea>
-						<button id="closePopup" type="submit">Submit</button>
-					</form>
-				</div>
-			</div>
-		</div>
-	</div>
+            <label>Review:</label>&nbsp;
+            <textarea placeholder="Your Review..." id="ReviewDescription" minlength="0" maxlength="400" required>
+            </textarea>
+            <button id="closePopup" type="submit">Submit</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
 
 </body>
 
