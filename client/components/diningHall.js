@@ -78,6 +78,18 @@ function fillComment(comment, commentData, diningHall){
     // date.innerHTML = `Date: ${commentData.postTime}`;
 
     //handle faces
+    let emoji   = comment.getElementsByClassName('face')[0];
+    let rating  = comment.getElementsByClassName('rating')[0];
+    if(commentData.overall > 3){
+        emoji.classList.add('fa-smile');
+        rating.innerHTML = "GREAT!";
+    }else if(commentData.overall === 3){
+        emoji.classList.add('fa-meh');
+        rating.innerHTML = "Meh.";
+    }else{
+        emoji.classList.add('fa-frown');
+        rating.innerHTML = "Horrible";
+    }
 
     let ovStars     = comment.getElementsByClassName('overall')[0];
     fillStars(ovStars, "overall");

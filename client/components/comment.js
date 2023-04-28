@@ -28,8 +28,8 @@ class comment extends HTMLElement {
                     <div class="column dining-name">Hampshire</div>
 
                     <div class="column emoji">
-                    <i class="far fa-smile face"></i>
-                    <span id="rating">GREAT!</span>
+                    <i class="far face"></i>
+                    <span class="rating" id="rating">GREAT!</span>
                     </div>
 
                     <div class="column fraction">5/5 Stars</div>
