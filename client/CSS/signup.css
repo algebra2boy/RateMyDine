@@ -70,3 +70,18 @@ form-control::placeholder {
 #signup-alert {
     display: none;
 }
+
+.password-section {
+    height: 100%;
+    width: 100%;
+    /* inline-block is important to put components side by side */
+    display: inline-block;
+    position: relative;
+}
+
+.password-section .icon {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin-right: 10px;
+}
