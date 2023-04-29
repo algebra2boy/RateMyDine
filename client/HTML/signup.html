@@ -10,7 +10,21 @@
     integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
   <link href="/client/CSS/signup.css" rel="stylesheet">
   <link rel="icon" type="image/png" href="/Pictures/favicon.png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+
   <script src="../../client/SignUp-Login.js" defer></script>
+
+  <script>
+    // revealing password
+    function revealPassword() {
+      const signUpPassword = document.getElementById("signUpPassword");
+      if (signUpPassword.type === "password") {
+        signUpPassword.type = "text";
+      } else {
+        signUpPassword.type = "password";
+      }
+    }
+  </script>
 </head>
 
 <body>
@@ -37,17 +51,21 @@
             <form action="/signup" method='POST' id="signup-form">
               <div class="input-group">
                 <input type="text" class="form-control form-control-lg" placeholder="First name" id="firstName"
-                  name="firstName" minlength="2" maxlength="20" required/> <br />
+                  name="firstName" minlength="2" maxlength="20" required /> <br />
                 <input type="text" class="form-control form-control-lg" placeholder="Last name" id="lastName"
                   name="lastName" minlength="2" maxlength="20" required /> <br />
               </div>
               <br>
               <input type="text" class="form-control form-control-lg" placeholder="Username" id="userName"
-                name="userName" minlength="5" maxlength="20" required/><br />
+                name="userName" minlength="5" maxlength="20" required /><br />
               <input type="email" class="form-control form-control-lg" placeholder="Email Address" id="SignUpEmail"
-                name="SignUpEmail" required/><br />
-              <input type="password" class="form-control form-control-lg" placeholder="Password" id="signUpPassword"
-                name="signUpPassword" minlength="8" required/><br />
+                name="SignUpEmail" required /><br />
+              <div class="password-section">
+                <input type="password" class="form-control form-control-lg" placeholder="Password" id="signUpPassword"
+                  name="signUpPassword" minlength="8" required />
+                <i class="fas fa-eye-slash icon" onclick="revealPassword()"></i>
+              </div>
+              <br /><br>
               <button type="submit" class="btn btn-primary">Continue</button>
             </form>
           </div>
