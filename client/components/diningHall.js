@@ -26,9 +26,8 @@ async function loadPageInformation(){
 async function loadComments(diningHall){
     let resp = await fetch(`/review/${diningHall.name}`);
     let comments = await resp.json();
-    let commentSection = document.getElementById('comment-section');
     let mostRecentComment = document.createElement('comment-component');
-    commentSection.appendChild(mostRecentComment);
+    document.getElementById('comment-section').appendChild(mostRecentComment);
     fillComment(mostRecentComment, comments.reviews[0], diningHall);
 }
 
@@ -68,6 +67,19 @@ function loadReviewButton(diningHall){
     let inputElements = ["FoodQuality", "CustomerService", "Atmosphere", "Healthiness", "SeatAvailability", "Taste"];
     inputElements = inputElements.map((x) => document.getElementById(x));
 
+    async function sendRequest(){
+        let options = {
+            headers: { "Content-Type": "application/json"},
+            method: "POST",
+            body: JSON.stringify(inputElements.reduce((acc, e) => {acc[e.id] = e.value; return acc},{}))
+        }
+        let response = await fetch(`/review/${diningHall.name}`, options).then(
+            () => { console.log("success!") }
+        ).catch(
+            err => { console.error(err)}
+        )
+    }
+
     //Create New/Edit a Review opens up the Popup
     document.getElementById("openPopup").addEventListener("click", () => {
         popUp.classList.add("popup-open");       
@@ -75,10 +87,13 @@ function loadReviewButton(diningHall){
     //Popup Submit button should close the pop-up by removing the class when everything is filled
     document.getElementById("closePopup").addEventListener("click", () => {
         if(!(inputElements.filter((x) => x.value === "").length > 0)){
-            document.getElementById("submit").action += diningHall.name;
             popUp.classList.remove("popup-open");
         }
     });
+    document.getElementById("reviewForm").addEventListener("submit", (event) => {
+        event.preventDefault();
+        sendRequest();
+    })
     //X button should close the pop-up by removing the class
     document.getElementById("xClose").addEventListener("click", () => {
         popUp.classList.remove("popup-open");
