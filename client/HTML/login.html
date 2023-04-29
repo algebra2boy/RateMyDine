@@ -10,6 +10,19 @@
     integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
   <link href="/client/CSS/login.css" rel="stylesheet">
   <link rel="icon" type="image/png" href="/Pictures/favicon.png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+
+  <script>
+    // revealing password
+    function revealPassword() {
+      const password = document.getElementById("loginPassword");
+      if (password.type === "password") {
+        password.type = "text";
+      } else {
+        password.type = "password";
+      }
+    }
+  </script>
 </head>
 
 <body>
@@ -30,10 +43,15 @@
           <!-- center area -->
           <div class="card-body text-center">
             <label id="login"><b>Login in to your account</b></label> <br /><br />
-            <form action="/login" method = 'POST'>
-              <input type="email" class="form-control form-control-lg" placeholder="Email Address" id="email_address" name="LoginEmail" /><br />
-              <input type="password" class="form-control form-control-lg" placeholder="Password" id="password" name="LoinInPassword" /><br />
-              <button type = "submit" class = "btn btn-primary">Continue</button>
+            <form action="/login" method='POST'>
+              <input type="email" class="form-control form-control-lg" placeholder="Email Address" id="email_address"
+                name="LoginEmail" /><br />
+              <div class="password-section">
+                <input type="password" class="form-control form-control-lg" placeholder="Password"
+                  id="loginPassword" name="loginPassword" /><br />
+                <i class="fas fa-eye-slash icon" onclick="revealPassword()"></i>
+              </div>
+              <button type="submit" class="btn btn-primary">Continue</button>
             </form>
           </div>
           <!-- end of center area -->

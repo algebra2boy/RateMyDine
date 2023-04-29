@@ -182,7 +182,7 @@ input[type=number] {
     box-sizing: border-box;
 }
 
-button[type="submit"] {
+#closePopup {
     display: block;
     margin: auto;
     background-color: maroon;
