@@ -18,10 +18,12 @@
   <!-- LOAD ASSETS AND BACKEND -->
   <script type="module" src="../../client/components/diningHall.js" defer></script>
   <script type="module" src="../../client/components/popup.js" defer></script>
+
   <!-- header and footer -->
   <script src="../../client/components/Header.js" defer></script>
   <script src="../../client/components/Footer.js" defer></script>
   <script src="../../client/components/comment.js" defer></script>
+  <script src="../../client/reviewSubmission.js" defer></script>
 
   <title>Dining</title>
 </head>
@@ -110,7 +112,7 @@
       <h3>Add a Food Review</h3>&ensp;<button id="xClose" class="close">&times;</button>
       <div class="content">
         <div class="container">
-          <form action="/review" method="POST">
+          <form id = "reviewForm">
             <table>
               <tr>
                 <td>Food Quality</td>
@@ -134,7 +136,7 @@
             <label>Review:</label>&nbsp;
             <textarea placeholder="Your Review..." id="ReviewDescription" minlength="0" maxlength="400" required>
             </textarea>
-            <button id="closePopup" type="submit">Submit</button>
+            <button id="closePopup">Submit</button>
           </form>
         </div>
       </div>
