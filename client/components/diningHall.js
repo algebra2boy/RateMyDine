@@ -4,34 +4,12 @@
 
 async function loadPageInformation(){
     try{
-        // let res2 = await fetch("/allReviews", {method: "POST"});
         let res = await fetch(`/info/${window.location.href.split("/")[3]}`);
         let diningHall = await res.json();
 
-        //LOADING ONE-OFF DISPLAY INFORMATION
-        document.getElementById('name-row').innerHTML = diningHall.name;
-        document.getElementById('dining-address').innerHTML = diningHall.address;
-        document.getElementById('dining-phone').innerHTML = diningHall.phone;
-        document.getElementById('dining-info').innerHTML = diningHall.description;
-        document.getElementById('profile').src = `../../Pictures/${diningHall.name.toLowerCase()}.jpeg`;
-        document.getElementById('hourHeader').innerHTML = "Hours:";
+        loadUpperHalfText(diningHall);
 
-        // //LOADING HOUR INFORMATION
-        let table = document.getElementById('thours').children[0].children;
-
-        console.log(diningHall.hours)
-        for(let elem in table){
-            let tr = table[elem]
-            for(let child in tr.children){
-                let id = undefined;
-                if(tr.children[child].tagName === "TD"){
-                    tr.children[child].innerHTML = diningHall.hours[tr.children[child].id];
-                }
-                if(tr.children[child].tagName === "TR" && id != undefined){    
-                    tr.children[child].innerHTML = id.charAt(0) + id.slice(1);
-                }
-            }
-        }
+        loadReviewButton();
         
     }catch{
         console.log("big bad error dont dead open inside")
@@ -52,66 +30,94 @@ async function loadComments(){
     fillComment(mostRecentComment, comments.reviews[0], diningHall);
 }
 
+function loadUpperHalfText(diningHall){
+
+    //LOADING ONE-OFF TEXT INFORMATION
+    document.getElementById('name-row').innerHTML = diningHall.name;
+    document.getElementById('dining-address').innerHTML = diningHall.address;
+    document.getElementById('dining-phone').innerHTML = diningHall.phone;
+    document.getElementById('dining-info').innerHTML = diningHall.description;
+    document.getElementById('profile').src = `../../Pictures/${diningHall.name.toLowerCase()}.jpeg`;
+    document.getElementById('hourHeader').innerHTML = "Hours:";
+
+
+    //LOADING HOURS
+    let table = document.getElementById('thours').children[0].children;
+
+        for(let elem in table){
+            let tr = table[elem]
+            for(let child in tr.children){
+                let id = undefined;
+                if(tr.children[child].tagName === "TD"){
+                    tr.children[child].innerHTML = diningHall.hours[tr.children[child].id];
+                }
+                if(tr.children[child].tagName === "TR" && id != undefined){    
+                    tr.children[child].innerHTML = id.charAt(0) + id.slice(1);
+                }
+            }
+        }
+}
+
+function loadReviewButton(){
+    //Popup window element
+    const popUp = document.getElementById("popWindow");
+
+    //Popup input elements
+    let inputElements = ["FoodQuality", "CustomerService", "Atmosphere", "Healthiness", "SeatAvailability", "Taste"];
+    inputElements = inputElements.map((x) => document.getElementById(x));
+
+    //Create New/Edit a Review opens up the Popup
+    document.getElementById("openPopup").addEventListener("click", () => {
+        popUp.classList.add("popup-open");
+    });
+    //Popup Submit button should close the pop-up by removing the class when everything is filled
+    document.getElementById("closePopup").addEventListener("click", () => {
+        if(!(inputElements.filter((x) => x.value === "").length > 0))
+            popUp.classList.remove("popup-open");
+    });
+    //X button should close the pop-up by removing the class
+    document.getElementById("xClose").addEventListener("click", () => {
+        popUp.classList.remove("popup-open");
+    });
+}
+
 //Used to populate individual <comment-component>
 //fillComment(comment: <comment-component>, commentData: Review object, diningHall: DiningHall object) => void
 function fillComment(comment, commentData, diningHall){
+
+    //Helper function to add the "active" class to each html element that is a star within spec of commentData
+    //fillStars(elem: HTML Element, field: string) => void
     function fillStars(elem, field){
-        let stars = elem.getElementsByClassName("fa-star");
-        for(let i in stars){
-            if(i < commentData[field]){
-                stars[i].classList.add('active');
-            }
-        }
+        let stars = Array.from(elem.getElementsByClassName("fa-star"));
+        stars.length = commentData[field];
+        stars.forEach((x) => x.classList.add('active'));
     }
 
-    //POPULATE LEFT CONTAINER
-    let desc    = comment.getElementsByClassName("desc")[0];
-    desc.innerHTML = commentData.description;
+    //POPULATE LEFT CONTAINER EXCEPT OVERALL STARS
 
-    let frac    = comment.getElementsByClassName('fraction')[0];
-    frac.innerHTML = `${commentData.overall}/5 Stars`
+    //Handle text
+    comment.getElementsByClassName("desc")[0].innerHTML = commentData.description;
+    comment.getElementsByClassName('fraction')[0].innerHTML = `${commentData.overall}/5 Stars`
+    comment.getElementsByClassName('dining-name')[0].innerHTML = diningHall.name;
+    comment.getElementsByClassName('time')[0].innerHTML = `Date published: ${commentData.postTime}`;
 
-    let nam     = comment.getElementsByClassName('dining-name')[0];
-    nam.innerHTML = diningHall.name;
-
-    // let date    = comment.getElementsByClassName('time')[0];
-    // date.innerHTML = `Date: ${commentData.postTime}`;
-
-    //handle faces
-    let emoji   = comment.getElementsByClassName('face')[0];
-    let rating  = comment.getElementsByClassName('rating')[0];
+    //Handle faces
+    let changeFace = (face, rate) => {comment.getElementsByClassName('face')[0].classList.add(face); comment.getElementsByClassName('rating')[0].innerHTML = rate};
+    
     if(commentData.overall > 3){
-        emoji.classList.add('fa-smile');
-        rating.innerHTML = "GREAT!";
+        changeFace('fa-smile', "GREAT!");
     }else if(commentData.overall === 3){
-        emoji.classList.add('fa-meh');
-        rating.innerHTML = "Meh.";
+        changeFace('fa-meh', "Meh.");
     }else{
-        emoji.classList.add('fa-frown');
-        rating.innerHTML = "Horrible";
+        changeFace('fa-frown', 'Horrible');
     }
 
-    let ovStars     = comment.getElementsByClassName('overall')[0];
-    fillStars(ovStars, "overall");
-
-
-    //POPULATE RIGHT CONTAINER
-    let foodQuality = comment.getElementsByClassName('foodQuality')[0];
-    let custService = comment.getElementsByClassName('customerService')[0];
-    let atmosphere  = comment.getElementsByClassName('atmosphere')[0];
-    let healthy     = comment.getElementsByClassName('healthiness')[0];
-    let seats       = comment.getElementsByClassName('seatAvailability')[0];
-    let taste       = comment.getElementsByClassName('taste')[0];
-
-    fillStars(foodQuality, "foodQuality");
-    fillStars(custService, "customerService");
-    fillStars(atmosphere, "atmosphere");
-    fillStars(healthy, "healthiness");
-    fillStars(seats, "seatAvailability");
-    fillStars(taste, "taste");
+    //POPULATE RIGHT CONTAINER (OR RATHER, STARS)
+    let x = ['overall', 'foodQuality', 'customerService', 'atmosphere', 'healthiness', 'seatAvailability', 'taste']
+    x.forEach((elem) => fillStars(comment.getElementsByClassName(elem)[0], elem));
 
 }
 
-//LISTENERS
+//PAGE LISTENERS
 window.onload = (loadPageInformation);
 document.addEventListener("DOMContentLoaded", loadComments);
