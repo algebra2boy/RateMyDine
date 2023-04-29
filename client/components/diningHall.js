@@ -12,6 +12,8 @@ async function loadPageInformation(){
         loadUpperHalfText(diningHall);
 
         loadReviewButton(diningHall);
+
+        loadComments(diningHall);
         
     }catch{
         console.log("big bad error dont dead open inside")
@@ -21,9 +23,7 @@ async function loadPageInformation(){
 
 //We need to load comments AFTER the page is loaded, otherwise the elements get broken
 //loadComments() => void
-async function loadComments(){
-    let res = await fetch(`/info/${window.location.href.split("/")[3]}`);
-    let diningHall = await res.json();
+async function loadComments(diningHall){
     let resp = await fetch(`/review/${diningHall.name}`);
     let comments = await resp.json();
     let commentSection = document.getElementById('comment-section');
@@ -124,4 +124,3 @@ function fillComment(comment, commentData, diningHall){
 
 //PAGE LISTENERS
 window.onload = (loadPageInformation);
-document.addEventListener("DOMContentLoaded", loadComments);
