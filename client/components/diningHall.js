@@ -2,6 +2,8 @@
 
 //TODO: Implement uni-directional dataflow; too many fetches are being made
 
+// let res = await fetch('/allReviews', {method: "POST"})
+
 async function loadPageInformation(){
     try{
         let res = await fetch(`/info/${window.location.href.split("/")[3]}`);
@@ -9,7 +11,7 @@ async function loadPageInformation(){
 
         loadUpperHalfText(diningHall);
 
-        loadReviewButton();
+        loadReviewButton(diningHall);
         
     }catch{
         console.log("big bad error dont dead open inside")
@@ -58,7 +60,7 @@ function loadUpperHalfText(diningHall){
         }
 }
 
-function loadReviewButton(){
+function loadReviewButton(diningHall){
     //Popup window element
     const popUp = document.getElementById("popWindow");
 
@@ -68,12 +70,14 @@ function loadReviewButton(){
 
     //Create New/Edit a Review opens up the Popup
     document.getElementById("openPopup").addEventListener("click", () => {
-        popUp.classList.add("popup-open");
+        popUp.classList.add("popup-open");       
     });
     //Popup Submit button should close the pop-up by removing the class when everything is filled
     document.getElementById("closePopup").addEventListener("click", () => {
-        if(!(inputElements.filter((x) => x.value === "").length > 0))
+        if(!(inputElements.filter((x) => x.value === "").length > 0)){
+            document.getElementById("submit").action += diningHall.name;
             popUp.classList.remove("popup-open");
+        }
     });
     //X button should close the pop-up by removing the class
     document.getElementById("xClose").addEventListener("click", () => {
