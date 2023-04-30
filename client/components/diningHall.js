@@ -73,7 +73,7 @@ function loadReviewButton(diningHall){
             method: "POST",
             body: JSON.stringify(inputElements.reduce((acc, e) => {acc[e.id] = e.value; return acc},{}))
         }
-        let response = await fetch(`/review/${diningHall.name}`, options).then(
+        await fetch(`/review/${diningHall.name}`, options).then(
             () => { console.log("success!") }
         ).catch(
             err => { console.error(err)}
