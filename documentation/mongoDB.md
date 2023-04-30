@@ -1,7 +1,7 @@
 ## Instruction on how to run mongoDB
 
 1. Open up terminal, and enter the following command line: 
-    $ mongosh "mongodb+srv://cluster0.g5oouwb.mongodb.net/myFirstDatabase" --apiVersion 1 --username rateMyDine
+    - mongosh "mongodb+srv://cluster0.g5oouwb.mongodb.net/myFirstDatabase" --apiVersion 1 --username rateMyDine
 2. Enter the password
 
 ## Important command lines 
@@ -14,6 +14,7 @@
         - db.users.find({"userID": "1234"}); 
 
 ## Connect MongoDB using Mongo Compass
+- Download [Mongo Compass](https://www.mongodb.com/products/compass), the GUI of Mongo shell
 - URL connection (replace the link of "mongodb://localhost:27017" to the following link)
     - mongodb+srv://rateMyDine:<password>@cluster0.g5oouwb.mongodb.net/test
 - Click on "Advanced Connection Options"
