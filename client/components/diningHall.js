@@ -1,7 +1,5 @@
 //This is the js file responsible for all functionality (barring the footer and header) of the dining.html page
 
-//TODO: Implement uni-directional dataflow; too many fetches are being made
-
 // let res = await fetch('/allReviews', {method: "POST"})
 
 async function loadPageInformation(){
@@ -9,28 +7,45 @@ async function loadPageInformation(){
         let res = await fetch(`/info/${window.location.href.split("/")[3]}`);
         let diningHall = await res.json();
 
+        let resp = await fetch(`/review/${diningHall.name}`);
+        let comments = await resp.json();
+
         loadUpperHalfText(diningHall);
 
         loadReviewButton(diningHall);
 
-        loadComments(diningHall);
+        loadComments(comments, document.getElementById('recent-comment'), 1, diningHall.name);
+
+
+        //TODO: OPTIMIZE THIS USING POP() OR SHIFT() PROBABLY
+        let pointer = comments.reviews.length;
+
+        loadComments(comments, document.getElementById('comment-section'), Math.min(pointer, comments.reviews.length), diningHall.name);
+        pointer-=5;
+
+        document.getElementById('see-more').addEventListener('click', () => {
+            if(pointer < 0){ console.log("WHAT"); return 0;}
+            loadComments(comments, document.getElementById('comment-section'), Math.min(pointer, comments.reviews.length), diningHall.name);
+            pointer-=5;
+        })
         
-    }catch{
-        console.log("big bad error dont dead open inside")
+    }catch (err){
+        console.warn(err);
     }
 }
 
 
-//We need to load comments AFTER the page is loaded, otherwise the elements get broken
-//loadComments() => void
-async function loadComments(diningHall){
-    let resp = await fetch(`/review/${diningHall.name}`);
-    let comments = await resp.json();
-    let mostRecentComment = document.createElement('comment-component');
-    document.getElementById('comment-section').appendChild(mostRecentComment);
-    fillComment(mostRecentComment, comments.reviews[0], diningHall);
+//Loads the specified number of comments from the table of comments into the specified container.
+//loadComments(comments: []Review Object, container: <HTML Object>, numComments: int) => void
+function loadComments(comments, container, numComments, diningHallName){
+    for(let i=0; i<numComments; i++){
+        let comment = document.createElement('comment-component');
+        container.appendChild(comment);
+        fillComment(comment, comments.reviews[i], diningHallName);
+    }
 }
 
+//loadUpperHalfText(diningHall: diningHall Object) => void
 function loadUpperHalfText(diningHall){
 
     //LOADING ONE-OFF TEXT INFORMATION
@@ -44,21 +59,22 @@ function loadUpperHalfText(diningHall){
 
     //LOADING HOURS
     let table = document.getElementById('thours').children[0].children;
-
-        for(let elem in table){
-            let tr = table[elem]
-            for(let child in tr.children){
-                let id = undefined;
-                if(tr.children[child].tagName === "TD"){
-                    tr.children[child].innerHTML = diningHall.hours[tr.children[child].id];
-                }
-                if(tr.children[child].tagName === "TR" && id != undefined){    
-                    tr.children[child].innerHTML = id.charAt(0) + id.slice(1);
-                }
+    for(let elem in table){
+        let tr = table[elem]
+        for(let child in tr.children){
+            let id = undefined;
+            if(tr.children[child].tagName === "TD"){
+                tr.children[child].innerHTML = diningHall.hours[tr.children[child].id];
+            }
+            if(tr.children[child].tagName === "TR" && id != undefined){    
+                tr.children[child].innerHTML = id.charAt(0) + id.slice(1);
             }
         }
+    }
 }
 
+//Loads the review button at the right of "Most Recent Reviews"
+//loadReviewButton(diningHall: diningHall Object) => void
 function loadReviewButton(diningHall){
     //Popup window element
     const popUp = document.getElementById("popWindow");
@@ -73,11 +89,16 @@ function loadReviewButton(diningHall){
             method: "POST",
             body: JSON.stringify(inputElements.reduce((acc, e) => {acc[e.id] = e.value; return acc},{}))
         }
-        await fetch(`/review/${diningHall.name}`, options).then(
-            () => { console.log("success!") }
-        ).catch(
-            err => { console.error(err)}
-        )
+        try{
+            let res = await fetch(`/review/${diningHall.name}`, options);
+            let data = await res.json();
+            let recentCommentContainer = document.getElementById('recent-commment');
+            recentCommentContainer.innerHTML = "";
+            //THEN USE LOADCOMMENTDATA() TO CREATE A COMMENT
+            
+        }catch (err){
+            console.warn(err);
+        }
     }
 
     //Create New/Edit a Review opens up the Popup
@@ -117,7 +138,7 @@ function fillComment(comment, commentData, diningHall){
     //Handle text
     comment.getElementsByClassName("desc")[0].innerHTML = commentData.description;
     comment.getElementsByClassName('fraction')[0].innerHTML = `${commentData.overall}/5 Stars`
-    comment.getElementsByClassName('dining-name')[0].innerHTML = diningHall.name;
+    comment.getElementsByClassName('dining-name')[0].innerHTML = diningHall;
     comment.getElementsByClassName('time')[0].innerHTML = `Date published: ${commentData.postTime}`;
 
     //Handle faces

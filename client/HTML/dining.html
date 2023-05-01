@@ -82,7 +82,7 @@
 
   <!-- BELOW IS CODE FOR THE COMMENT SECTION -->
   <div id = "comment-header">
-    <h3 class = "comment-component">Most Recent Reviews </h3>
+    <h3 class = "comment-component">Most Recent Review </h3>
     <button id="openPopup" class="btn btn-outline-primary comment-component">
       Add a Review</button>
   </div>
@@ -94,12 +94,30 @@
     grid-template-rows: repeat(auto-fill, 300px);
     grid-row-gap: 5px;
     justify-items: center;
-    " id="comment-section">
-    <!-- <comment-component id="24"></comment-component> -->
+    " id="recent-comment">
   </div>
+
+  
+  <br></body>
+
+  <div id="comment-header">
+    <h3 class = "comment-component">All Reviews</h3>
+  </div>
+
+  <div class="comment-section center" style="
+    display: grid;
+    width: 1000px;
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(auto-fill, 300px);
+    grid-row-gap: 5px;
+    justify-items: center;
+    " id="comment-section">
+  </div>
+
   <br></br>
+
   <div>
-    <h3 style="text-align:center">See More...</h3>
+    <h3 style="text-align:center" id="see-more">See More...</h3>
   </div>
 
   <footer-component></footer-component>
