@@ -1,9 +1,11 @@
+
+// UI elements of the sign up form
 const signup_form = document.getElementById("signup-form");
-const signUpFirstName = document.getElementById("firstName");
-const signUpLastName = document.getElementById("lastName");
+const firstName = document.getElementById("firstName");
+const lastName = document.getElementById("lastName");
 const userName = document.getElementById("userName");
-const signUpEmail = document.getElementById("SignUpEmail");
-const signUpPassword = document.getElementById("signUpPassword");
+const email = document.getElementById("SignUpEmail");
+const password = document.getElementById("signUpPassword");
 
 
 async function signupFormSubmit(event) {
@@ -11,19 +13,19 @@ async function signupFormSubmit(event) {
     event.preventDefault();
     const options = {
         headers: {
-            "Content-Type": "application/json",
+            "Content-Type": "application/json"
         },
         method: "POST",
         body: JSON.stringify({
-            firstName: signUpFirstName.value,
-            lastName: signUpLastName.value,
+            firstName: firstName.value,
+            lastName: lastName.value,
             userName: userName.value,
-            SignUpEmail: signUpEmail.value,
-            signUpPassword: signUpPassword.value
+            email: email.value,
+            password: password.value
         }),
     };
     const response = await fetch("http://localhost:3000/signup", options)
-        .then(function () {
+        .then(() => {
             console.log("successully fetching signup endpoint")
         }).catch(error => {
             console.log(error);
