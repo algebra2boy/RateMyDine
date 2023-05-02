@@ -1,6 +1,6 @@
 import express from "express"; // allow us to construct endpoints
 import path from "path"; // to find the current path of this project
-import { userDB } from "../server.js";
+import { userDB } from "../../server.js";
 const authRouter = express.Router();
 
 const __dirname = path.resolve();
