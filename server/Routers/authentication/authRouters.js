@@ -1,5 +1,6 @@
 import express from "express"; // allow us to construct endpoints
 import path from "path"; // to find the current path of this project
+import { findUser, validatePassword, addUser } from "../../DataBase/userDBUtils.js"
 const authRouter = express.Router();
 
 const __dirname = path.resolve();
@@ -22,6 +23,21 @@ authRouter.get('/', checkLoggedIn, (req, res) => {
     res.send('hello world');
     // res.sendFile(path.join(__dirname, "index.html"));
 })
+
+// signup for submitting a form
+authRouter.post('/signup', async (req, res) => {
+    try {
+        let userDocument = await userDB.get(req.body.SignUpEmail);
+        // when the account exists, but try to create an account with the same email again
+        res.status(403).send({
+            message: `User with id ${req.body.SignUpEmail} is already existed`,
+            status: "failure",
+        });
+    } catch (err) {
+            console.log("An error occurs when pouchDB tries to create an account for the user")
+            res.status(500).send({ status: "failure" });
+    }
+});
 
 // // signup endpoint to retrieve sign up page
 // authRouter.get('/signup', (req, res) => {
