@@ -23,10 +23,21 @@ async function findUser(collection, email) {
     }
 }
 
-
+async function validatePassword(collection, email, password) {
+    try {
+        const user = await collection.findOne({ email: email });
+        const user_json  = await user_query.json();
+        return user_json.password === password
+        
+    } catch (error) {
+        console.log(error);
+        return false;
+    }
+}
 
 
 export {
     createUser,
-    findUser
+    findUser, 
+    validatePassword
 }

@@ -2,8 +2,10 @@ import express from "express"; // allow us to construct endpoints
 import path from "path"; // to find the current path of this project
 import * as userDBUtils from "../../DataBase/userDBUtils.js";
 import server from "../../server.js";
+import passportAuth from "../authentication/passportAuth.js"
 
 const authRouter = express.Router();
+passportAuth.configure(authRouter);
 
 const __dirname = path.resolve();
 
@@ -32,6 +34,7 @@ authRouter.get('/signup', (req, res) => {
 
 // signup for submitting a form
 authRouter.post('/signup', async (req, res) => {
+    console.log(req.body);
 
     if (await userDBUtils.findUser(server.users, req.body.email)) {
         // making another account with the same email
@@ -41,12 +44,8 @@ authRouter.post('/signup', async (req, res) => {
         });
     } else {
         try {
-            // console.log(req.body);
             await userDBUtils.createUser(server.users, req.body);
-            res.status(201).send({
-                message: "A new user has been created",
-                status: "success"
-            })
+            res.redirect('/login');
         } catch (error) {
             res.status(500).send({ status: "failure" });
         }
@@ -57,6 +56,22 @@ authRouter.post('/signup', async (req, res) => {
 authRouter.get('/login', (req, res) => {
     res.sendFile(path.join(__dirname, "/client/HTML/", "login.html"));
 })
+
+authRouter.post(
+    '/login',
+    passportAuth.authenticate('local', {
+        // user email/password authentication 
+        successRedirect: '/',
+        failureRedirect: '/login',
+    })
+);
+
+// Handle logging out (takes us back to the login page).
+authRouter.get('/logout', (req, res) => {
+    req.logout(); // Logs us out!
+    res.redirect('/');
+  });
+  
 
 
 // // login endpoint for submitting a form

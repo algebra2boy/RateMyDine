@@ -1,5 +1,7 @@
 import passport from 'passport';
 import passportLocal from "passport-local";
+import server from "../../server.js";
+import * as userDBUtils from "../../DataBase/userDBUtils.js";
 
 const { Strategy } = passportLocal;
 
@@ -8,22 +10,19 @@ const { Strategy } = passportLocal;
 // from the client
 
 const strategy = new Strategy(async (email, password, done) => {
-
+    console.log("HELLLLLLLL");
     // cannot find the user 
-    // if () {
-    //     return done(null, false, {
-    //         message: 'email is not found'
-    //     });
-    // }
+    if (! await userDBUtils.findUser(server.users)) {
+        return done(null, false, { message: 'email is not found' });
+    }
+    console.log("email is found");
 
     // invalid password 
-    // if () {
-    //     await new Promise((rate) => setTimeout(rate, 2000)); // 2 seconds delay
-    //     return done(null, false, {
-    //         message: 'user password is incorrect'
-    //     }
-    //     )
-    // }
+    if (! await userDBUtils.validatePassword(server.users, email, password)) {
+        await new Promise((rate) => setTimeout(rate, 2000)); // 2 seconds delay
+        return done(null, false, { message: 'password is incorrect' });
+    }
+    console.log("user passport is correct");
 
     // success!
     // should create a user object here, associated with a unique identifier
@@ -53,7 +52,7 @@ export default {
         app.use(passport.initialize())
         // Middleware that will restore login state from a session
         app.use(passport.session())
-    }, 
+    },
 
     authenticate: (domain, where) => {
         return passport.authenticate(domain, where)
