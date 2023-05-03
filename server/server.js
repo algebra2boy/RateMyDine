@@ -1,7 +1,8 @@
 import authRouter from "./Routers/authentication/authRouters.js";
 import reviewRouter from "./Routers/reviewRouters.js";
 import passportAuth from "./Routers/authentication/passportAuth.js";
-import { RateMyDineDatabase } from "./DataBase/rateMyDineDB.js";
+import path from "path";
+import { MongoClient, ServerApiVersion } from 'mongodb';
 
 import expressSession from 'express-session';
 import express from "express";
@@ -13,18 +14,10 @@ import * as dotenv from 'dotenv';
 dotenv.config()  // load environment variables 
 
 // implement pounchDB and initialize the DB here
-let userDB = new PouchDB("users");
-let reviewDB = new PouchDB("reviews");
-
-//for testing purposes
-// app.delete("/db", async (req, res) => {
-//     await reviewDB.destroy()
-//     reviewDB = new PouchDB("reviews");
-//     res.send("Success");
-// })
+// let userDB = new PouchDB("users");
+// let reviewDB = new PouchDB("reviews");
 
 class Server {
-
     constructor(dbURL) {
         this.dbURL = dbURL;
         this.app = express();
@@ -44,8 +37,32 @@ class Server {
     }
 
     async initDB() {
-        this.client = new RateMyDineDatabase(process.env.DATABASE_URL)
-        await this.client.connect();
+        try {
+            this.client = await MongoClient.connect(this.dbURL, {
+                serverApi: {
+                    version: ServerApiVersion.v1,
+                    strict: true,
+                    deprecationErrors: true,
+                }
+            });
+
+            // Send a ping to confirm a successful connection
+            await this.client.db("RateMyDine").command({ ping: 1 });
+            console.log("Pinged your deployment. You successfully connected to MongoDB!");
+
+            // get database and collections
+            this.db = this.client.db("RateMyDine");
+            this.users = this.db.collection("users");
+            this.reviews = this.db.collection("reviews");
+
+            // testing purpose 
+            const user = await this.users.findOne({ "userID": "1234" });
+            console.log(`user has been found ${JSON.stringify(user)}`)
+
+        } catch (error) {
+            // Ensures that the client will close when you finish/error
+            console.log(error)
+        }
     }
 
     setupConfig() {
@@ -101,4 +118,6 @@ class Server {
 const server = new Server(process.env.DATABASE_URL);
 server.runServer();
 
-export { userDB, reviewDB };
+export default server;
+
+// export { userDB, reviewDB };

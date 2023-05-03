@@ -1,6 +1,8 @@
 import express from "express"; // allow us to construct endpoints
 import path from "path"; // to find the current path of this project
-import { findUser, validatePassword, addUser } from "../../DataBase/userDBUtils.js"
+// import { findUser, validatePassword, addUser } from "../../DataBase/userDBUtils.js"
+import server from "../../server.js";
+
 const authRouter = express.Router();
 
 const __dirname = path.resolve();
@@ -19,18 +21,19 @@ function checkLoggedIn(req, res, next) {
 }
 
 // the default endpoint to retrieve main page
-authRouter.get('/', checkLoggedIn, (req, res) => {
-    res.send('hello world');
-    // res.sendFile(path.join(__dirname, "index.html"));
+authRouter.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, "index.html"));
 })
 
 // signup for submitting a form
 authRouter.post('/signup', async (req, res) => {
     try {
-        let userDocument = await userDB.get(req.body.SignUpEmail);
+        
+        const user = await server.users.findOne({ "userID": "1234" });
+        console.log(`user has been found ${JSON.stringify(user)}`)
         // when the account exists, but try to create an account with the same email again
         res.status(403).send({
-            message: `User with id ${req.body.SignUpEmail} is already existed`,
+            message: `User is already existed`,
             status: "failure",
         });
     } catch (err) {
