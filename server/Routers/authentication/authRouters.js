@@ -1,6 +1,6 @@
 import express from "express"; // allow us to construct endpoints
 import path from "path"; // to find the current path of this project
-// import { findUser, validatePassword, addUser } from "../../DataBase/userDBUtils.js"
+import * as userDBUtils from "../../DataBase/userDBUtils.js";
 import server from "../../server.js";
 
 const authRouter = express.Router();
@@ -25,62 +25,39 @@ authRouter.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, "index.html"));
 })
 
+// signup endpoint to retrieve sign up page
+authRouter.get('/signup', (req, res) => {
+    res.sendFile(path.join(__dirname, "/client/HTML/", "signup.html"));
+})
+
 // signup for submitting a form
 authRouter.post('/signup', async (req, res) => {
-    try {
-        
-        const user = await server.users.findOne({ "userID": "1234" });
-        console.log(`user has been found ${JSON.stringify(user)}`)
-        // when the account exists, but try to create an account with the same email again
+
+    if (await userDBUtils.findUser(server.users, req.body.email)) {
+        // making another account with the same email
         res.status(403).send({
             message: `User is already existed`,
             status: "failure",
         });
-    } catch (err) {
-            console.log("An error occurs when pouchDB tries to create an account for the user")
+    } else {
+        try {
+            // console.log(req.body);
+            await userDBUtils.createUser(server.users, req.body);
+            res.status(201).send({
+                message: "A new user has been created",
+                status: "success"
+            })
+        } catch (error) {
             res.status(500).send({ status: "failure" });
+        }
     }
 });
 
-// // signup endpoint to retrieve sign up page
-// authRouter.get('/signup', (req, res) => {
-//     res.sendFile(path.join(__dirname, "/client/HTML/", "signup.html"));
-// })
+// login endpoint to retrieve login page
+authRouter.get('/login', (req, res) => {
+    res.sendFile(path.join(__dirname, "/client/HTML/", "login.html"));
+})
 
-// // signup for submitting a form
-// authRouter.post('/signup', async (req, res) => {
-//     try {
-//         let userDocument = await userDB.get(req.body.SignUpEmail);
-//         // when the account exists, but try to create an account with the same email again
-//         res.status(403).send({
-//             message: `User with id ${req.body.SignUpEmail} is already existed`,
-//             status: "failure",
-//         });
-//     } catch (error) {
-//         // when the account does not exists, then create an account
-//         const { firstName, lastName, userName, SignUpEmail, signUpPassword } = req.body;
-//         try {
-//             const newRateMyDineUser = await userDB.put({
-//                 _id: SignUpEmail,
-//                 firstName: firstName,
-//                 lastName: lastName,
-//                 userName: userName,
-//                 email: SignUpEmail,
-//                 password: signUpPassword
-//             });
-//             console.log(newRateMyDineUser);
-//             res.redirect("/login");
-//         } catch (error) {
-//             console.log("An error occurs when pouchDB tries to create an account for the user")
-//             res.status(500).send({ status: "failure" });
-//         }
-//     }
-// });
-
-// // login endpoint to retrieve login page
-// authRouter.get('/login', (req, res) => {
-//     res.sendFile(path.join(__dirname, "/client/HTML/", "login.html"));
-// })
 
 // // login endpoint for submitting a form
 // authRouter.post('/login', async (req, res) => {

@@ -1,7 +1,6 @@
 import authRouter from "./Routers/authentication/authRouters.js";
 import reviewRouter from "./Routers/reviewRouters.js";
 import passportAuth from "./Routers/authentication/passportAuth.js";
-import path from "path";
 import { MongoClient, ServerApiVersion } from 'mongodb';
 
 import expressSession from 'express-session';
@@ -56,7 +55,7 @@ class Server {
             this.reviews = this.db.collection("reviews");
 
             // testing purpose 
-            const user = await this.users.findOne({ "userID": "1234" });
+            const user = await this.users.findOne({ "email": "Liu@gmail.com" });
             console.log(`user has been found ${JSON.stringify(user)}`)
 
         } catch (error) {
