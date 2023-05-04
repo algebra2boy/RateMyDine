@@ -27,6 +27,7 @@ class Server {
             secret: process.env.SECRETKEY || 'MYFRIENDISACAT',
             resave: false,
             saveUninitialized: false,
+            cookie: { maxAge: 60 * 60 * 1000 } // 1 hour
         }
     }
 

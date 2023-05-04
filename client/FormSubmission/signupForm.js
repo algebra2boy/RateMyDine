@@ -17,20 +17,22 @@ async function signupFormSubmit(event) {
         },
         method: "POST",
         body: JSON.stringify({
-            firstName: firstName.value,
-            lastName: lastName.value,
+            fullName: firstName.value + " " + lastName.value,
             userName: userName.value,
             email: email.value,
             password: password.value
         }),
     };
-    const response = await fetch("http://localhost:3000/signup", options)
-        .then(() => {
-            console.log("successully fetching signup endpoint")
-        }).catch(error => {
+    await fetch("http://localhost:3000/signup", options)
+        .then((response) => response.json())
+        .then(response => {
+            if (response["status"] === "success") {
+                window.location.href = "/login";
+            }
+        })
+        .catch(error => {
             console.log(error);
         })
 }
 
 signup_form.addEventListener("submit", signupFormSubmit);
-
