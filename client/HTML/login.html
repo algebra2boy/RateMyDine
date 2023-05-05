@@ -18,11 +18,10 @@
     // revealing password
     function revealPassword() {
       const password = document.getElementById("password");
-      if (password.type === "password") {
-        password.type = "text";
-      } else {
-        password.type = "password";
-      }
+      const eye_icon = document.getElementById("icon");
+      password.type  = password.type === "password" ? "text" : "password";
+      eye_icon.classList.toggle("fa-eye-slash");
+      eye_icon.classList.toggle("fa-eye");
     }
   </script>
 </head>
@@ -49,9 +48,9 @@
               <input type="email" class="form-control form-control-lg" placeholder="Email Address" id="email"
                 name="email" /><br />
               <div class="password-section">
-                <input type="password" class="form-control form-control-lg" placeholder="Password"
-                  id="password" name="password" /><br />
-                <i class="fas fa-eye-slash icon" onclick="revealPassword()"></i>
+                <input type="password" class="form-control form-control-lg" placeholder="Password" id="password"
+                  name="password" /><br />
+                <i class="fas fa-eye-slash icon" id="icon" onclick="revealPassword()"></i>
               </div>
               <button type="submit" class="btn btn-primary">Continue</button>
             </form>
