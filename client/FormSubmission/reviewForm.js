@@ -18,17 +18,18 @@ async function reviewFormSubmit(event) {
         },
         method: "POST",
         body: JSON.stringify({
-            foodQuality: foodQuality.value,
-            CustomerService: CustomerService.value,
-            Atmosphere: Atmosphere.value,
-            Healthiness: Healthiness.value,
-            SeatAvailability: SeatAvailability.value,
-            Taste: Taste.value,
-            reviewDescription: reviewDescription.value
+            userID           :    "1234",
+            description      :    reviewDescription.value,
+            foodQuality      :    foodQuality.value,
+            customerService  :    CustomerService.value,
+            atmosphere       :    Atmosphere.value,
+            healthiness      :    Healthiness.value,
+            seatAvailability :    SeatAvailability.value,
+            taste            :    Taste.value,
         })
     };
     const diningHall = window.location.href.split("/")[3];
-    const response = await fetch(`http://localhost:3000/review/${diningHall}`, options)
+    await fetch(`http://localhost:3000/review/${diningHall}`, options)
         .then(function () {
             console.log("successully fetching reviewing endpoint")
         }).catch(error => {
