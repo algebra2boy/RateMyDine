@@ -5,7 +5,7 @@ async function createUser(collection, body) {
         await collection.insertOne({
             userName: userName,
             email: email,
-            passwort: password,
+            password: password,
             fullName: fullName
         });
     } catch (error) {
