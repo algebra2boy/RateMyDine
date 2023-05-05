@@ -15,7 +15,7 @@
   <script>
     // revealing password
     function revealPassword() {
-      const signUpPassword = document.getElementById("signUpPassword");
+      const password = document.getElementById("signUpPassword");
       const eye_icon = document.getElementById("icon");
       password.type = password.type === "password" ? "text" : "password";
       eye_icon.classList.toggle("fa-eye-slash"); // would not toggle if the class list is same
