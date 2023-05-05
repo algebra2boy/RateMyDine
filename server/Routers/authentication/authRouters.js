@@ -53,13 +53,8 @@ authRouter.post('/signup', async (req, res) => {
 
 // login endpoint to retrieve login page
 authRouter.get('/login', (req, res) => {
-<<<<<<< HEAD
-    res.sendFile(path.join(__dirname, "/client/HTML/", "login.html"));
-});
-=======
     res.sendFile(__dirname + "/client/HTML/login.html");
-})
->>>>>>> 840d60db8b633170f4e2d2abd8b36200dfaeb447
+});
 
 // login endpoint for submitting a form
 authRouter.post('/login',
