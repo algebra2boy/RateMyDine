@@ -9,22 +9,22 @@ import * as userDBUtils from "../../DataBase/userDBUtils.js";
 const strategy = new LocalStrategy(async (userName, password, done) => {
     try {
         // cannot find the user 
-        const user = await userDBUtils.findUser(server.users, userName)
+        const user = await userDBUtils.findUser(server.users, userName);
         if (!user) {
-            console.log("invalid email")
+            console.log("invalid email");
             return done(null, false, { message: 'Invalid email' });
         }
 
         // passoword is not correct
         const isValidPassword = await userDBUtils.validatePassword(server.users, userName, password);
         if (!isValidPassword) {
-            console.log("password is not correct")
+            console.log("password is not correct");
             await new Promise((rate) => setTimeout(rate, 2000)); // 2 seconds delay
             return done(null, false, { message: 'password is incorrect' });
         }
 
         // success
-        return done(null, userName)
+        return done(null, userName);
 
     } catch (error) {
         return done(error);

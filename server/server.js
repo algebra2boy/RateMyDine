@@ -23,7 +23,7 @@ class Server {
             resave: false,
             saveUninitialized: false,
             cookie: { maxAge: 60 * 60 * 1000 } // 1 hour
-        }
+        };
     }
 
     async initRoutes() {
@@ -56,7 +56,7 @@ class Server {
 
         } catch (error) {
             // Ensures that the client will close when you finish/error
-            console.log(error)
+            console.log(error);
         }
     }
 
@@ -98,7 +98,7 @@ class Server {
             // if we do not do this, there an issue relating to "address already in use::3000"
             process.on('SIGINT', () => {
                 this.client.close();
-                console.log("Database connection has been closed")
+                console.log("Database connection has been closed");
                 process.exit(0);
             });
 

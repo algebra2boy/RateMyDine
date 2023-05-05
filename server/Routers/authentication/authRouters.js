@@ -24,12 +24,12 @@ function checkLoggedIn(req, res, next) {
 // the default endpoint to retrieve main page
 authRouter.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, "index.html"));
-})
+});
 
 // signup endpoint to retrieve sign up page
 authRouter.get('/signup', (req, res) => {
     res.sendFile(path.join(__dirname, "/client/HTML/", "signup.html"));
-})
+});
 
 // signup for submitting a form
 authRouter.post('/signup', async (req, res) => {
@@ -54,7 +54,7 @@ authRouter.post('/signup', async (req, res) => {
 // login endpoint to retrieve login page
 authRouter.get('/login', (req, res) => {
     res.sendFile(path.join(__dirname, "/client/HTML/", "login.html"));
-})
+});
 
 // login endpoint for submitting a form
 authRouter.post('/login',

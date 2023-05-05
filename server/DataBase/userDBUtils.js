@@ -56,7 +56,7 @@ async function updateUser(collection, body) {
                 }
             },
             { upsert: true } // insert the document if it is not found
-        )
+        );
     } catch (error) {
         console.log(error);
     }
