@@ -8,6 +8,7 @@ const password = document.getElementById("password");
 async function loginFormSubmit(event) {
     // prevent it auto refreshes the screen
     event.preventDefault();
+    // specifying the fetch option
     const options = {
         headers: {
             "Content-Type": "application/json"
@@ -17,8 +18,9 @@ async function loginFormSubmit(event) {
             email: email.value,
             password: password.value
         }),
+        credentials: "include"
     };
-    const response = await fetch("http://localhost:3000/login", options)
+   await fetch("http://localhost:3000/login", options)
         .then(() => {
             console.log("successully fetching login endpoint")
         }).catch(error => {

@@ -12,12 +12,12 @@ const { Strategy } = passportLocal;
 const strategy = new Strategy(async (email, password, done) => {
     console.log("HELLLLLLLL");
     // cannot find the user 
-    if (! await userDBUtils.findUser(server.users)) {
+    if (! await userDBUtils.findUser(server.users, email)) {
         return done(null, false, { message: 'email is not found' });
     }
     console.log("email is found");
 
-    // invalid password 
+    // // invalid password 
     if (! await userDBUtils.validatePassword(server.users, email, password)) {
         await new Promise((rate) => setTimeout(rate, 2000)); // 2 seconds delay
         return done(null, false, { message: 'password is incorrect' });
@@ -28,7 +28,7 @@ const strategy = new Strategy(async (email, password, done) => {
     // should create a user object here, associated with a unique identifier
     return done(null, email);
 
-})
+});
 
 // Configure passport to use the LocalStrategy object.
 // The LocalStrategy object is used to authenticate a user using a user email and password
