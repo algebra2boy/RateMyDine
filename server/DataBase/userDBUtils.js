@@ -1,21 +1,21 @@
 
 async function createUser(collection, body) {
     try {
-        const { userName, email, password, fullName } = body;
+        const { userName, email, password, firstName, lastName } = body;
         await collection.insertOne({
             userName: userName,
             email: email,
             password: password,
-            fullName: fullName
+            fullName: firstName + " " + lastName
         });
     } catch (error) {
         console.log(error);
     }
 }
 
-async function findUser(collection, email) {
+async function findUser(collection, userName) {
     try {
-        const user = await collection.findOne({ email: email });
+        const user = await collection.findOne({ userName: userName });
         return user !== null;
     } catch (error) {
         console.log(error);
@@ -23,9 +23,9 @@ async function findUser(collection, email) {
     }
 }
 
-async function validatePassword(collection, email, password) {
+async function validatePassword(collection, userName, password) {
     try {
-        const user = await collection.findOne({ email: email });
+        const user = await collection.findOne({ userName: userName });
         return user.password === password;
         
     } catch (error) {
@@ -34,9 +34,9 @@ async function validatePassword(collection, email, password) {
     }
 }
 
-async function deleteUser(collection, email) {
+async function deleteUser(collection, userName) {
     try {
-        await collection.deleteOne({ email: email });
+        await collection.deleteOne({ userName: userName });
     } catch (error) {
         console.log(error);
     }

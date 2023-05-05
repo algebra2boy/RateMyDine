@@ -6,15 +6,10 @@ import { MongoClient, ServerApiVersion } from 'mongodb';
 import expressSession from 'express-session';
 import express from "express";
 import logger from "morgan";
-import PouchDB from "pouchdb";
 
 import * as dotenv from 'dotenv';
 
 dotenv.config()  // load environment variables 
-
-// implement pounchDB and initialize the DB here
-// let userDB = new PouchDB("users");
-// let reviewDB = new PouchDB("reviews");
 
 class Server {
     constructor(dbURL) {
@@ -119,5 +114,3 @@ const server = new Server(process.env.DATABASE_URL);
 server.runServer();
 
 export default server;
-
-// export { userDB, reviewDB };

@@ -1,12 +1,10 @@
-import express from "express"; // allow us to construct endpoints
-import path from "path"; // to find the current path of this project
+import express from "express";
+import path from "path";
 import * as userDBUtils from "../../DataBase/userDBUtils.js";
 import server from "../../server.js";
-// import passport from 'passport';
 import passportAuth from "../authentication/passportAuth.js"
 
 const authRouter = express.Router();
-// passportAuth.configure(authRouter);
 
 const __dirname = path.resolve();
 
@@ -46,7 +44,7 @@ authRouter.post('/signup', async (req, res) => {
     } else {
         try {
             await userDBUtils.createUser(server.users, req.body);
-            res.status(201).send({ message: "user has been created", status: "success" });
+            res.redirect("/login");
         } catch (error) {
             res.status(500).send({ status: "failure" });
         }

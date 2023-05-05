@@ -1,33 +1,34 @@
 import passport from 'passport';
-import passportLocal from "passport-local";
+import { Strategy as LocalStrategy } from 'passport-local';
 import server from "../../server.js";
 import * as userDBUtils from "../../DataBase/userDBUtils.js";
 
-const { Strategy } = passportLocal;
-
 // Passport Configuration
 // Create a new LocalStrategy objec to handle authentienticaiton using email and password
-// from the client
 
-const strategy = new Strategy(async (email, password, done) => {
-    console.log("HELLLLLLLL");
-    // cannot find the user 
-    if (! (await userDBUtils.findUser(server.users, email))) {
-        return done(null, false, { message: 'email is not found' });
+const strategy = new LocalStrategy(async (userName, password, done) => {
+    try {
+        // cannot find the user 
+        const user = await userDBUtils.findUser(server.users, userName)
+        if (!user) {
+            console.log("invalid email")
+            return done(null, false, { message: 'Invalid email' });
+        }
+
+        // passoword is not correct
+        const isValidPassword = await userDBUtils.validatePassword(server.users, userName, password);
+        if (!isValidPassword) {
+            console.log("password is not correct")
+            await new Promise((rate) => setTimeout(rate, 2000)); // 2 seconds delay
+            return done(null, false, { message: 'password is incorrect' });
+        }
+
+        // success
+        return done(null, userName)
+
+    } catch (error) {
+        return done(error);
     }
-    console.log("email is found");
-
-    // // invalid password 
-    if (! (await userDBUtils.validatePassword(server.users, email, password))) {
-        await new Promise((rate) => setTimeout(rate, 2000)); // 2 seconds delay
-        return done(null, false, { message: 'password is incorrect' });
-    }
-    console.log("user passport is correct");
-
-    // success!
-    // should create a user object here, associated with a unique identifier
-    return done(null, email);
-
 });
 
 // Configure passport to use the LocalStrategy object.

@@ -43,11 +43,11 @@
           <div class="card-body text-center">
             <label id="login"><b>Login in to your account</b></label> <br /><br />
             <form id="login-form" action="/login" method="POST">
-              <input type="email" class="form-control form-control-lg" placeholder="Email Address" id="email"
-                name="username" /><br />
+              <input type="text" class="form-control form-control-lg" placeholder="Username" id="username"
+                name="username" required/><br />
               <div class="password-section">
                 <input type="password" class="form-control form-control-lg" placeholder="Password" id="password"
-                  name="password" /><br />
+                  name="password" required/><br />
                 <i class="fas fa-eye-slash icon" id="icon" onclick="revealPassword()"></i>
               </div>
               <button type="submit" class="btn btn-primary">Continue</button>
