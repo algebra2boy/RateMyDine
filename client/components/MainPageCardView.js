@@ -57,4 +57,4 @@ async function renderCardListView() {
 }
 
 
-renderCardListView();
+await renderCardListView();
