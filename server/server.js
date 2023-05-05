@@ -47,7 +47,7 @@ class Server {
 
         } catch (error) {
             // Ensures that the client will close when you finish/error
-            console.log(error);
+            console.error(error);
         }
     }
 

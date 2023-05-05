@@ -35,7 +35,6 @@ async function createReview(diningHallName, foodReview) {
         let document = await server.reviews.findOne({"DiningHall": diningHallName}); // gets the document with id matching the dining hall.
         let review = JSON.parse(foodReview); // parses the document so the reviews can be accessed and updated with insertion of new review.
         let average = computeOverall(review); // computes the average
-
         let newFoodReview = {
             review_id: document.Reviews[0]["review_id"] + 1,
             review_date: new Date(Date.now()).toISOString(),
