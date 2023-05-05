@@ -3,7 +3,6 @@ import reviewRouter from "./Routers/reviewRouters.js";
 import passportAuth from "./Routers/authentication/passportAuth.js";
 import { MongoClient, ServerApiVersion } from 'mongodb';
 
-import expressSession from 'express-session';
 import express from "express";
 import logger from "morgan";
 
@@ -48,7 +47,7 @@ class Server {
 
         } catch (error) {
             // Ensures that the client will close when you finish/error
-            console.log(error)
+            console.log(error);
         }
     }
 
@@ -87,7 +86,7 @@ class Server {
             // if we do not do this, there an issue relating to "address already in use::3000"
             process.on('SIGINT', () => {
                 this.client.close();
-                console.log("Database connection has been closed")
+                console.log("Database connection has been closed");
                 process.exit(0);
             });
 
