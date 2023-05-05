@@ -63,7 +63,7 @@ authRouter.post('/login',
     passportAuth.authenticate('local', {
         // user email/password authentication 
         successRedirect: '/',
-        failureRedirect: '/login',
+        failureRedirect: '/login'
     })
 );
 
