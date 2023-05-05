@@ -2,11 +2,25 @@ import express from "express";
 import path from "path";
 import * as userDBUtils from "../../DataBase/userDBUtils.js";
 import server from "../../server.js";
+import passport from 'passport';
+import session from 'express-session';
 import passportAuth from "../authentication/passportAuth.js"
 
 const authRouter = express.Router();
-
 const __dirname = path.resolve();
+
+// session configuration
+const sessionConfig = {
+    secret: process.env.SECRETKEY || 'MYFRIENDISACAT',
+    resave: false,
+    saveUninitialized: false,
+    cookie: { maxAge: 60 * 60 * 1000 } // 1 hour
+}
+
+authRouter.use(session(sessionConfig));
+authRouter.use(passport.initialize());
+authRouter.use(passport.session());
+
 
 // Express routing documentation: https://expressjs.com/en/guide/routing.html
 

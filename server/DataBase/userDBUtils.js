@@ -44,7 +44,7 @@ async function deleteUser(collection, userName) {
 
 async function updateUser(collection, body) {
     try {
-        const { userName, email, password, fullName } = body;
+        const { userName, email, password, firstName, lastName } = body;
         await collection.updateOne(
             { userName: userName }, // searching user with this username
             {
@@ -52,7 +52,7 @@ async function updateUser(collection, body) {
                 {
                     email: email,
                     password: password,
-                    fullName: fullName
+                    fullName: firstName + " " + lastName
                 }
             },
             { upsert: true } // insert the document if it is not found
