@@ -16,14 +16,6 @@ class Server {
         this.dbURL = dbURL;
         this.app = express();
         this.port = process.env.DEV_PORT;
-
-        // session configuration
-        this.sessionConfig = {
-            secret: process.env.SECRETKEY || 'MYFRIENDISACAT',
-            resave: false,
-            saveUninitialized: false,
-            cookie: { maxAge: 60 * 60 * 1000 } // 1 hour
-        }
     }
 
     async initRoutes() {
@@ -74,10 +66,7 @@ class Server {
         // decode the the request body send through html form
         this.app.use(express.urlencoded({ extended: true }));
 
-        // set up session middleware
-        this.app.use(expressSession(this.sessionConfig));
-
-        // configure our authentication stratefy
+        // configure our authentication strategy
         passportAuth.configure(this.app);
 
     }
