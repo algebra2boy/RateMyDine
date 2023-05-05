@@ -27,6 +27,8 @@ async function validatePassword(collection, email, password) {
     try {
         const user = await collection.findOne({ email: email });
         return user.password === password
+        return user.password === password;
+        
     } catch (error) {
         console.log(error);
         return false;

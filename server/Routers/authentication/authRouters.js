@@ -59,14 +59,15 @@ authRouter.get('/login', (req, res) => {
 })
 
 // login endpoint for submitting a form
-authRouter.post(
-    '/login',
+authRouter.post('/login',
     passportAuth.authenticate('local', {
         // user email/password authentication 
         successRedirect: '/',
         failureRedirect: '/login',
     })
 );
+
+
 
 // Handle logging out (takes us back to the login page).
 authRouter.get('/logout', (req, res) => {
