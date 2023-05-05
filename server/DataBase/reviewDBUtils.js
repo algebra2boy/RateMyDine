@@ -1,6 +1,7 @@
 // import { reviewDB } from "../server.js";
 import { diningReview } from "../MockData/reviews.js";
 import { Review } from "../MockData/classDefinitions.js";
+import server from "../server.js";
 
 const keyMap = {
     ReviewDescription: "description",
@@ -31,16 +32,33 @@ function computeOverall(foodReview) {
 async function createReview(diningHallName, foodReview) {
     try {
 
-        let document = await reviewDB.get(diningHallName); // gets the document with id matching the dining hall.
+        let document = await server.reviews.findOne({"DiningHall": diningHallName}); // gets the document with id matching the dining hall.
         let review = JSON.parse(foodReview); // parses the document so the reviews can be accessed and updated with insertion of new review.
         let average = computeOverall(review); // computes the average
 
-        let newFoodReview = new Review("" + (Number(document.reviews[0].id) + 1), "April 22, 2023", "ABCDED", average, review.ReviewDescription,
-            review.FoodQuality, review.Atmosphere, review.Healthiness, review.SeatAvailability, review.Taste);
-        document.reviews.unshift(newFoodReview); // addes the new review object to the front of the reviews array.
-
-        let response = await reviewDB.put(document); //puts the updated dining hall doc into the database
-        return JSON.stringify(response);
+        let newFoodReview = {
+            review_id: document.Reviews[0]["review_id"] + 1,
+            review_date: new Date(Date.now()).toISOString(),
+            reviewer_id: "ABCDED",
+            description: "Seafood Ramen is Great!",
+            overall: average,
+            FoodQuality:4,
+            CustomerService: 4,
+            Atmosphere: 4,
+            Healthiness: 4,
+            SeatAvailability: 4,
+            Taste: 4
+        };
+        document.Reviews.unshift(newFoodReview); // addes the new review object to the front of the reviews array.
+        const filter = {"DiningHall" : diningHallName}; //puts the updated dining hall doc into the database
+        const options = {upsert: true};
+        const updateDoc = {
+            $set: {
+                Reviews: document.Reviews
+            }
+        };
+        const updateRes = server.reviews.updateOne(filter, updateDoc, options);
+        return JSON.stringify(await server.reviews.findOne({"DiningHall" : diningHallName}));
     }
     catch (error) {
         console.error(error);
