@@ -12,17 +12,14 @@
   <link rel="icon" type="image/png" href="/Pictures/favicon.png">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
 
-  <script src="../../client/FormSubmission/SignUp-Login.js" defer></script>
-
   <script>
     // revealing password
     function revealPassword() {
-      const signUpPassword = document.getElementById("signUpPassword");
-      if (signUpPassword.type === "password") {
-        signUpPassword.type = "text";
-      } else {
-        signUpPassword.type = "password";
-      }
+      const password = document.getElementById("signUpPassword");
+      const eye_icon = document.getElementById("icon");
+      password.type = password.type === "password" ? "text" : "password";
+      eye_icon.classList.toggle("fa-eye-slash"); // would not toggle if the class list is same
+      eye_icon.classList.toggle("fa-eye");
     }
   </script>
 </head>
@@ -48,7 +45,7 @@
               <b>Create a RMD account</b>
             </label> <br /><br />
 
-            <form action="/signup" method='POST' id="signup-form">
+            <form id="signup-form" method = "POST" action="/signup">
               <div class="input-group">
                 <input type="text" class="form-control form-control-lg" placeholder="First name" id="firstName"
                   name="firstName" minlength="2" maxlength="20" required /> <br />
@@ -59,11 +56,11 @@
               <input type="text" class="form-control form-control-lg" placeholder="Username" id="userName"
                 name="userName" minlength="5" maxlength="20" required /><br />
               <input type="email" class="form-control form-control-lg" placeholder="Email Address" id="SignUpEmail"
-                name="SignUpEmail" required /><br />
+                name="email" required /><br />
               <div class="password-section">
                 <input type="password" class="form-control form-control-lg" placeholder="Password" id="signUpPassword"
-                  name="signUpPassword" minlength="8" required />
-                <i class="fas fa-eye-slash icon" onclick="revealPassword()"></i>
+                  name="password" minlength="8" required />
+                <i class="fas fa-eye-slash icon" id="icon" onclick="revealPassword()"></i>
               </div>
               <br /><br>
               <button type="submit" class="btn btn-primary">Continue</button>

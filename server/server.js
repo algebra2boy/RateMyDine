@@ -1,42 +1,116 @@
-import authRouter from "./Routers/authRouters.js";
+import authRouter from "./Routers/authentication/authRouters.js";
 import reviewRouter from "./Routers/reviewRouters.js";
+import passportAuth from "./Routers/authentication/passportAuth.js";
+import { MongoClient, ServerApiVersion } from 'mongodb';
+
+import expressSession from 'express-session';
 import express from "express";
 import logger from "morgan";
-import PouchDB from "pouchdb";
-const app = express();
-const port = 3000;
 
-// implement pounchDB and initialize the DB here
-let userDB = new PouchDB("users");
-let reviewDB = new PouchDB("reviews");
+import * as dotenv from 'dotenv';
 
-//for testing purposes
-app.delete("/db", async (req, res)=>{
-    await reviewDB.destroy()
-    reviewDB = new PouchDB("reviews");
-    res.send("Success");
-})
+dotenv.config()  // load environment variables 
 
-// a built-in middleware function in Express that serves static files and is based on serve-static.
-// must use this to load the css and pictures to the all the pages
-app.use(express.static("."));
+class Server {
+    constructor(dbURL) {
+        this.dbURL = dbURL;
+        this.app = express();
+        this.port = process.env.DEV_PORT;
 
-// Support JSON on requests and HTML form
-app.use(express.json());
+        // session configuration
+        this.sessionConfig = {
+            secret: process.env.SECRETKEY || 'MYFRIENDISACAT',
+            resave: false,
+            saveUninitialized: false,
+            cookie: { maxAge: 60 * 60 * 1000 } // 1 hour
+        };
+    }
 
-// Use the logger middleware to easily log every HTTP request to our server
-app.use(logger("dev"));
+    async initRoutes() {
+        this.app.use(authRouter);
+        this.app.use(reviewRouter);
+    }
 
-// decode the the request body send through html form
-app.use(express.urlencoded({ extended: true }));
+    async initDB() {
+        try {
+            this.client = await MongoClient.connect(this.dbURL, {
+                serverApi: {
+                    version: ServerApiVersion.v1,
+                    strict: true,
+                    deprecationErrors: true,
+                }
+            });
 
-// where we activate the routers
-app.use(authRouter);
-app.use(reviewRouter);
+            // Send a ping to confirm a successful connection
+            await this.client.db("RateMyDine").command({ ping: 1 });
+            console.log("Pinged your deployment. You successfully connected to MongoDB!");
 
+            // get database and collections
+            this.db = this.client.db("RateMyDine");
+            this.users = this.db.collection("users");
+            this.reviews = this.db.collection("reviews");
 
-app.listen(port, () => {
-    console.log(`server started at ${port}`);
-});
+            // testing purpose 
+            const user = await this.users.findOne({ "email": "ivan@umass.edu" });
+            console.log(user);
 
-export { userDB, reviewDB };
+        } catch (error) {
+            // Ensures that the client will close when you finish/error
+            console.log(error);
+        }
+    }
+
+    setupConfig() {
+
+        // a built-in middleware function in Express that serves static files and is based on serve-static.
+        this.app.use(express.static("."));
+
+        // Support JSON on requests and HTML form
+        this.app.use(express.json());
+
+        // Use the logger middleware to easily log every HTTP request to our server
+        this.app.use(logger("dev"));
+
+        // decode the the request body send through html form
+        this.app.use(express.urlencoded({ extended: true }));
+
+        // set up session middleware
+        this.app.use(expressSession(this.sessionConfig));
+
+        // configure our authentication stratefy
+        passportAuth.configure(this.app);
+
+    }
+
+    async runServer() {
+
+        try {
+
+            this.setupConfig();
+            await this.initRoutes();
+            await this.initDB();
+
+            this.app.listen(this.port, () => {
+                console.log(`server started at ${this.port}`);
+            });
+
+            // kill the server process to prevent running ( SIGINT is same as CTRL+C )
+            // if we do not do this, there an issue relating to "address already in use::3000"
+            process.on('SIGINT', () => {
+                this.client.close();
+                console.log("Database connection has been closed");
+                process.exit(0);
+            });
+
+        } catch (error) {
+            console.log(error);
+        }
+
+    }
+
+}
+
+const server = new Server(process.env.DATABASE_URL);
+server.runServer();
+
+export default server;
