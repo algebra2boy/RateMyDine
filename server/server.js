@@ -56,8 +56,8 @@ class Server {
             this.reviews = this.db.collection("reviews");
 
             // testing purpose 
-            const user = await this.users.findOne({ "email": "Liu@gmail.com" });
-            console.log(`user has been found ${JSON.stringify(user)}`)
+            const user = await this.users.findOne({ "email": "ivan@umass.edu" });
+            console.log(user);
 
         } catch (error) {
             // Ensures that the client will close when you finish/error
