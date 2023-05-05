@@ -26,18 +26,45 @@ async function findUser(collection, email) {
 async function validatePassword(collection, email, password) {
     try {
         const user = await collection.findOne({ email: email });
-        const user_json  = await user_query.json();
-        return user_json.password === password
-        
+        return user.password === password
     } catch (error) {
         console.log(error);
         return false;
     }
 }
 
+async function deleteUser(collection, email) {
+    try {
+        await collection.deleteOne({ email: email });
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+async function updateUser(collection, body) {
+    try {
+        const { userName, email, password, fullName } = body;
+        await collection.updateOne(
+            { userName: userName }, // searching user with this username
+            {
+                $set:
+                {
+                    email: email,
+                    password: password,
+                    fullName: fullName
+                }
+            },
+            { upsert: true } // insert the document if it is not found
+        )
+    } catch (error) {
+        console.log(error);
+    }
+}
 
 export {
     createUser,
-    findUser, 
-    validatePassword
+    findUser,
+    validatePassword,
+    deleteUser,
+    updateUser
 }
