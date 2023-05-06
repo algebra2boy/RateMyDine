@@ -2,13 +2,10 @@ import express from "express";
 import path from "path";
 import * as userDBUtils from "../../DataBase/userDBUtils.js";
 import server from "../../server.js";
-import passport from 'passport';
-import session from 'express-session';
 import passportAuth from "../authentication/passportAuth.js"
 
 const authRouter = express.Router();
 const __dirname = path.resolve();
-
 
 // Express routing documentation: https://expressjs.com/en/guide/routing.html
 
@@ -24,7 +21,7 @@ function checkLoggedIn(req, res, next) {
 }
 
 // the default endpoint to retrieve main page
-authRouter.get('/', (req, res) => {
+authRouter.get('/', checkLoggedIn, (req, res) => {
     res.sendFile(__dirname + "index.html");
 });
 
@@ -35,9 +32,8 @@ authRouter.get('/signup', (req, res) => {
 
 // signup for submitting a form
 authRouter.post('/signup', async (req, res) => {
-    console.log(req.body);
-
-    if (await userDBUtils.findUser(server.users, req.body.email)) {
+    const user = userDBUtils.findUser(server.users, req.body.email);
+    if (user) {
         // making another account with the same email
         res.status(403).send({
             message: `User is already existed`,
@@ -67,12 +63,47 @@ authRouter.post('/login',
     })
 );
 
-
-
 // Handle logging out (takes us back to the login page).
 authRouter.get('/logout', (req, res) => {
     req.logout(); // Logs us out!
-    res.redirect('/');
+    res.redirect('/login');
 });
+
+authRouter.get('/profile',
+    checkLoggedIn,
+    (req, res) => {
+        console.log(res);
+        // sessionID
+        // user
+        res.redirect('/profile/' + req.sessionID);
+    }
+);
+
+authRouter.get('/testing',
+    checkLoggedIn,
+    (req, res) => {
+        console.log(res);
+        // sessionID
+        // user
+        res.redirect('/testing/' + req.sessionID);
+    }
+);
+
+// A dummy page for the user.
+authRouter.get(
+    '/private/:userID/',
+    checkLoggedIn, // We also protect this route: authenticated...
+    (req, res) => {
+      // Verify this is the right user.
+      if (req.params.userID === req.user) {
+        res.writeHead(200, { 'Content-Type': 'text/html' });
+        res.write('<H1>HELLO ' + req.params.userID + '</H1>');
+        res.write('<br/><a href="/logout">click here to logout</a>');
+        res.end();
+      } else {
+        res.redirect('/private/');
+      }
+    }
+  );
 
 export default authRouter;
