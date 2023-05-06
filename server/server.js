@@ -3,6 +3,7 @@ import reviewRouter from "./Routers/reviewRouters.js";
 import passportAuth from "./Routers/authentication/passportAuth.js";
 import { MongoClient, ServerApiVersion } from 'mongodb';
 
+import expressSession from 'express-session';
 import express from "express";
 import logger from "morgan";
 
@@ -15,6 +16,13 @@ class Server {
         this.dbURL = dbURL;
         this.app = express();
         this.port = process.env.DEV_PORT;
+
+        this.sessionConfig = {
+            secret: process.env.SECRETKEY || 'MYFRIENDISACAT',
+            resave: false,
+            saveUninitialized: false,
+            cookie: { maxAge: 60 * 60 * 1000 } // 1 hour
+        }
     }
 
     async initRoutes() {
@@ -37,9 +45,10 @@ class Server {
             console.log("Pinged your deployment. You successfully connected to MongoDB!");
 
             // get database and collections
-            this.db = this.client.db("RateMyDine");
-            this.users = this.db.collection("users");
-            this.reviews = this.db.collection("reviews");
+            this.db         = this.client.db("RateMyDine");
+            this.diningInfo = this.db.collection("diningInfo");
+            this.users      = this.db.collection("users");
+            this.reviews    = this.db.collection("reviews");
 
             // testing purpose 
             const rev = await this.reviews.findOne({ "DiningHall": "Worcester" });
@@ -64,6 +73,9 @@ class Server {
 
         // decode the the request body send through html form
         this.app.use(express.urlencoded({ extended: true }));
+
+        // set up session middleware
+        this.app.use(expressSession(this.sessionConfig));
 
         // configure our authentication strategy
         passportAuth.configure(this.app);
