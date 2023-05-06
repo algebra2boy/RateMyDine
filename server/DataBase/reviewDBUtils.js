@@ -36,7 +36,7 @@ async function createReview(diningHall, foodReview) {
         let review = JSON.parse(foodReview); // parses the document so the reviews can be accessed and updated with insertion of new review.
         let average = computeOverall(review); // computes the average
         let newFoodReview = {
-            review_id: document.Reviews[0]["review_id"] + 1,
+            review_id: document.Reviews[0] !== undefined ? document.Reviews[0]["review_id"] + 1 : 1,
             review_date: new Date(Date.now()).toISOString(),
             reviewer_id: "ABCDED",
             description: review.description,
@@ -103,7 +103,7 @@ async function updateReview(diningHall, foodReview, foodReviewID) {
                 for (let key in review) {
                     document.Reviews[i][key] = review[key] === undefined ? document.reviews[i][key] : review[key]; // updates the review in the document if the property exists in the body passed from the POST request. Keeps it the same if undefined.
                 }
-                document.Reviews[i].overall = computeOverall(review); //recomputes overall with updated information
+                document.Reviews[i].overall = computeOverall(document.Reviews[i]); //recomputes overall with updated information
                 server.reviews.updateOne({"DiningHall": diningHall}, {$set:{Reviews: document.Reviews}}, {upsert:true}); // PUTS the document back into the db as update.
                 return true;
             }
