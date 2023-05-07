@@ -16,13 +16,21 @@
   
   <script type="module" src="client/components/searchBar.js" defer></script>
   <script type="module" src="client/components/time.js" defer></script>
-  <script src="client/components/Header.js" defer></script>
   <script src="client/components/Footer.js" defer></script>
   <script type="module" src="client/components/MainPageCardView.js" defer></script>
 </head>
 
 <body>
-  <header-component></header-component>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-12 banner">
+        <img src="../../Pictures/logo.png" class="img-fluid" alt="RMD Logo">
+        <a href="/" id="title"><p>RateMyDine</p></a>
+        <a href="/login">Log in</a>&nbsp;
+        <a href="/signup">Sign up</a>
+      </div>
+    </div>
+  </div>
 
   <div class="main-search-area">
     <p>Enter your favorite Dining Hall at UMass Amherst!</p>
