@@ -20,7 +20,6 @@
   <script type="module" src="../../client/components/popup.js" defer></script>
 
   <!-- header and footer -->
-  <script src="../../client/components/Header.js" defer></script>
   <script src="../../client/components/Footer.js" defer></script>
   <script src="../../client/components/comment.js" defer></script>
   <script src="../../client/FormSubmission/reviewForm.js" defer></script>
@@ -29,7 +28,16 @@
 </head>
 
 <body>
-  <header-component></header-component>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-12 banner">
+        <img src="../../Pictures/logo.png" class="img-fluid" alt="RMD Logo">
+        <a href="/" id="title"><p>RateMyDine</p></a>
+        <a href="/login">Log in</a>&nbsp;
+        <a href="/signup">Sign up</a>
+      </div>
+    </div>
+  </div>
   <div class="dining-hall-container container-fluid">
     <div class="col-6" id="img-container">
       <img src="" id="profile">
