@@ -2,7 +2,7 @@ import express from "express";
 import path from "path";
 import * as userDBUtils from "../../DataBase/userDBUtils.js";
 import server from "../../server.js";
-import passportAuth from "../authentication/passportAuth.js"
+import passportAuth from "../authentication/passportAuth.js";
 
 const authRouter = express.Router();
 const __dirname = path.resolve();
@@ -72,7 +72,6 @@ authRouter.get('/logout', (req, res) => {
 authRouter.get('/profile',
     checkLoggedIn,
     (req, res) => {
-        console.log(res);
         // sessionID
         // user
         res.redirect('/profile/' + req.sessionID);
@@ -80,7 +79,6 @@ authRouter.get('/profile',
 );
 
 authRouter.get('/testing',
-    checkLoggedIn,
     (req, res) => {
         console.log(res);
         // sessionID
@@ -90,20 +88,20 @@ authRouter.get('/testing',
 );
 
 // A dummy page for the user.
-authRouter.get(
-    '/private/:userID/',
-    checkLoggedIn, // We also protect this route: authenticated...
-    (req, res) => {
-      // Verify this is the right user.
-      if (req.params.userID === req.user) {
-        res.writeHead(200, { 'Content-Type': 'text/html' });
-        res.write('<H1>HELLO ' + req.params.userID + '</H1>');
-        res.write('<br/><a href="/logout">click here to logout</a>');
-        res.end();
-      } else {
-        res.redirect('/private/');
-      }
-    }
-  );
+// authRouter.get(
+//     '/profile/:userID/',
+//     checkLoggedIn, // We also protect this route: authenticated...
+//     (req, res) => {
+//       // Verify this is the right user.
+//       if (req.params.userID === req.user) {
+//         res.writeHead(200, { 'Content-Type': 'text/html' });
+//         res.write('<H1>HELLO ' + req.params.userID + '</H1>');
+//         res.write('<br/><a href="/logout">click here to logout</a>');
+//         res.end();
+//       } else {
+//         res.redirect('/private/');
+//       }
+//     }
+//   );
 
 export default authRouter;
