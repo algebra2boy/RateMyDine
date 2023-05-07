@@ -57,7 +57,7 @@ authRouter.get('/login', (req, res) => {
 // login endpoint for submitting a form
 authRouter.post('/login',
     passportAuth.authenticate('local', {
-        // user email/password authentication 
+        // user userName/password authentication 
         successRedirect: '/',
         failureRedirect: '/login'
     })
@@ -69,40 +69,25 @@ authRouter.get('/logout', (req, res) => {
     res.redirect('/login');
 });
 
+// router to redirect to user profile page
 authRouter.get('/profile',
     checkLoggedIn,
     (req, res) => {
-        // sessionID
-        // user
-        res.send('my session ID is ' + req.sessionID);
-        // res.redirect('/profile/' + req.sessionID);
+        res.redirect('/profile/' + req.user);
     }
 );
 
-authRouter.get('/testing',
+// router to redirect to user profile page with userName
+authRouter.get('/profile/:userName/',
+    checkLoggedIn,
     (req, res) => {
-        console.log(req);
-        // sessionID
-        // user
-        res.send("my sesion ID is " + req.sessionID + "and I am " + req.user + "uid is ")
+      // Verify this is the right user.
+      if (req.params.userName === req.user) {
+        res.sendFile(__dirname + "/client/HTML/profile.html");
+      } else {
+        res.redirect('/profile/');
+      }
     }
-);
-
-// A dummy page for the user.
-// authRouter.get(
-//     '/profile/:userID/',
-//     checkLoggedIn, // We also protect this route: authenticated...
-//     (req, res) => {
-//       // Verify this is the right user.
-//       if (req.params.userID === req.user) {
-//         res.writeHead(200, { 'Content-Type': 'text/html' });
-//         res.write('<H1>HELLO ' + req.params.userID + '</H1>');
-//         res.write('<br/><a href="/logout">click here to logout</a>');
-//         res.end();
-//       } else {
-//         res.redirect('/private/');
-//       }
-//     }
-//   );
+  );
 
 export default authRouter;

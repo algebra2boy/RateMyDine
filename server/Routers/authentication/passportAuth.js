@@ -23,9 +23,8 @@ const strategy = new LocalStrategy(async (userName, password, done) => {
             return done(null, false, { message: 'password is incorrect' });
         }
 
-        // success => get document id, levels up security by not passing the userName
-        const user_documentID = await userDBUtils.getDocumentID(server.users, userName);
-        return done(null, user_documentID);
+        // success
+        return done(null, userName);
 
     } catch (error) {
         return done(error);
@@ -37,7 +36,7 @@ const strategy = new LocalStrategy(async (userName, password, done) => {
 passport.use(strategy);
 
 // Convert user object to a unique identifier.
-// can access to user by doing req.user, which gets access to the document ID
+// can access to user by doing req.user, which gets access to the userName
 passport.serializeUser((user, done) => {
     done(null, user);
 });
