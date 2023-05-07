@@ -62,10 +62,20 @@ async function updateUser(collection, body) {
     }
 }
 
+async function getDocumentID(collection, userName) {
+    try {
+        const user = await collection.findOne({ userName: userName });
+        return user._id;
+    } catch (error) {
+        console.error(error);
+    }
+}
+
 export {
     createUser,
     findUser,
     validatePassword,
     deleteUser,
-    updateUser
+    updateUser,
+    getDocumentID
 }

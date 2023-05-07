@@ -4,7 +4,7 @@ import server from "../../server.js";
 import * as userDBUtils from "../../DataBase/userDBUtils.js";
 
 // Passport Configuration
-// Create a new LocalStrategy objec to handle authentienticaiton using email and password
+// Create a new LocalStrategy object to handle authentication using userName and password
 
 const strategy = new LocalStrategy(async (userName, password, done) => {
     try {
@@ -23,8 +23,9 @@ const strategy = new LocalStrategy(async (userName, password, done) => {
             return done(null, false, { message: 'password is incorrect' });
         }
 
-        // success
-        return done(null, userName);
+        // success => get document id, levels up security by not passing the userName
+        const user_documentID = await userDBUtils.getDocumentID(server.users, userName);
+        return done(null, user_documentID);
 
     } catch (error) {
         return done(error);
@@ -36,6 +37,7 @@ const strategy = new LocalStrategy(async (userName, password, done) => {
 passport.use(strategy);
 
 // Convert user object to a unique identifier.
+// can access to user by doing req.user, which gets access to the document ID
 passport.serializeUser((user, done) => {
     done(null, user);
 });

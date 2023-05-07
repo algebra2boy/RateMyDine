@@ -21,15 +21,16 @@ class Server {
 
         this.sessionConfig = {
             secret: process.env.SECRETKEY || 'MYFRIENDISACAT',
-            resave: false,
-            saveUninitialized: true,
+            resave: false, // don't create session until something stored
+            saveUninitialized: false, //don't save session if unmodified
             // this stores the session in the database
             // documentation: https://github.com/jdesboeufs/connect-mongo#express-or-connect-integration
             store: MongoStore.create({
                 mongoUrl: this.dbURL,
                 ttl: 15 * 60, // 15 minutes. Default
                 autoRemove: 'native',
-                autoRemoveInterval: 10 // take care of removing expired sessions every 10 minutes
+                autoRemoveInterval: 10, // take care of removing expired sessions every 10 minutes,
+                dbName: "test"
             })
         }
 

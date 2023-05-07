@@ -74,16 +74,17 @@ authRouter.get('/profile',
     (req, res) => {
         // sessionID
         // user
-        res.redirect('/profile/' + req.sessionID);
+        res.send('my session ID is ' + req.sessionID);
+        // res.redirect('/profile/' + req.sessionID);
     }
 );
 
 authRouter.get('/testing',
     (req, res) => {
-        console.log(res);
+        console.log(req);
         // sessionID
         // user
-        res.redirect('/testing/' + req.sessionID);
+        res.send("my sesion ID is " + req.sessionID + "and I am " + req.user + "uid is ")
     }
 );
 
