@@ -64,9 +64,13 @@ authRouter.post('/login',
 );
 
 // Handle logging out (takes us back to the login page).
-authRouter.get('/logout', (req, res) => {
-    req.logout(); // Logs us out!
-    res.redirect('/login');
+authRouter.post('/logout', (req, res, next) => {
+    req.logout((error) => {
+        if (error) {
+            return next(error);
+        }
+        res.redirect('/');
+    });
 });
 
 // router to redirect to user profile page
@@ -81,13 +85,13 @@ authRouter.get('/profile',
 authRouter.get('/profile/:userName/',
     checkLoggedIn,
     (req, res) => {
-      // Verify this is the right user.
-      if (req.params.userName === req.user) {
-        res.sendFile(__dirname + "/client/HTML/profile.html");
-      } else {
-        res.redirect('/profile/');
-      }
+        // Verify this is the right user.
+        if (req.params.userName === req.user) {
+            res.sendFile(__dirname + "/client/HTML/profile.html");
+        } else {
+            res.redirect('/profile/');
+        }
     }
-  );
+);
 
 export default authRouter;
