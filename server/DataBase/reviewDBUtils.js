@@ -165,5 +165,4 @@ export {
     getReview,
     updateReview,
     deleteReview,
-    init
 }
