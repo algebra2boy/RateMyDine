@@ -30,6 +30,9 @@ if (isAuthenticated) {
                     signup_btn.href = "/signup";
                     // deactivate click after switching back to "login" mode
                     signup_btn.removeEventListener('click', destorySession);
+
+                    // redirect to the main page
+                    window.location.replace(request.url);
                 }
             }).catch(error => {
                 console.log(error);
