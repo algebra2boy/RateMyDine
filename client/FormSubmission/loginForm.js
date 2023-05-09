@@ -4,7 +4,7 @@ const username = document.getElementById("username");
 const password = document.getElementById("password");
 
 // set up session storage
-sessionStorage.setItem("isAuthenticated", false);
+sessionStorage.setItem("isAuthenticated", JSON.stringify(false));
 
 async function loginFormSubmit(event) {
     // prevent it auto refreshes the screen
@@ -19,7 +19,7 @@ async function loginFormSubmit(event) {
         .then((request) => {
             if (request.redirected && request.url === "http://localhost:3000/") {
                 // save the user's state
-                sessionStorage.setItem("isAuthenticated", true);
+                sessionStorage.setItem("isAuthenticated", JSON.stringify(true));
             }
             window.location.replace(request.url);
         }).catch(error => {
