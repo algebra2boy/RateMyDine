@@ -7,6 +7,7 @@ async function loadPageInformation(){
 
         let resp = await fetch(`/review/${diningHall.name}`);
         let comments = await resp.json();
+        console.log(comments);
 
         loadUpperHalfText(diningHall);
 
@@ -16,14 +17,14 @@ async function loadPageInformation(){
 
 
         //TODO: OPTIMIZE THIS USING POP() OR SHIFT() PROBABLY
-        let pointer = comments.reviews.length;
-
-        loadComments(comments, document.getElementById('comment-section'), Math.min(pointer, comments.reviews.length), diningHall.name);
+        
+        let pointer = comments.length;
+        loadComments(comments, document.getElementById('comment-section'), Math.min(pointer, comments.length), diningHall.name);
         pointer-=5;
 
         document.getElementById('see-more').addEventListener('click', () => {
             if(pointer < 0){ console.log("WHAT"); return 0;}
-            loadComments(comments, document.getElementById('comment-section'), Math.min(pointer, comments.reviews.length), diningHall.name);
+            loadComments(comments, document.getElementById('comment-section'), Math.min(pointer, comments.length), diningHall.name);
             pointer-=5;
         })
         
@@ -39,7 +40,7 @@ function loadComments(comments, container, numComments, diningHallName){
     for(let i=0; i<numComments; i++){
         let comment = document.createElement('comment-component');
         container.appendChild(comment);
-        fillComment(comment, comments.reviews[i], diningHallName);
+        fillComment(comment, comments[i], diningHallName);
     }
 }
 
