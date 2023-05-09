@@ -62,10 +62,11 @@ async function updateUser(collection, body) {
     }
 }
 
+
 export {
     createUser,
     findUser,
     validatePassword,
     deleteUser,
-    updateUser
+    updateUser,
 }

@@ -2,13 +2,10 @@ import express from "express";
 import path from "path";
 import * as userDBUtils from "../../DataBase/userDBUtils.js";
 import server from "../../server.js";
-import passport from 'passport';
-import session from 'express-session';
-import passportAuth from "../authentication/passportAuth.js"
+import passportAuth from "../authentication/passportAuth.js";
 
 const authRouter = express.Router();
 const __dirname = path.resolve();
-
 
 // Express routing documentation: https://expressjs.com/en/guide/routing.html
 
@@ -24,7 +21,7 @@ function checkLoggedIn(req, res, next) {
 }
 
 // the default endpoint to retrieve main page
-authRouter.get('/', (req, res) => {
+authRouter.get('/', checkLoggedIn, (req, res) => {
     res.sendFile(__dirname + "index.html");
 });
 
@@ -35,9 +32,8 @@ authRouter.get('/signup', (req, res) => {
 
 // signup for submitting a form
 authRouter.post('/signup', async (req, res) => {
-    console.log(req.body);
-
-    if (await userDBUtils.findUser(server.users, req.body.email)) {
+    const user = userDBUtils.findUser(server.users, req.body.email);
+    if (user) {
         // making another account with the same email
         res.status(403).send({
             message: `User is already existed`,
@@ -61,18 +57,39 @@ authRouter.get('/login', (req, res) => {
 // login endpoint for submitting a form
 authRouter.post('/login',
     passportAuth.authenticate('local', {
-        // user email/password authentication 
+        // user userName/password authentication 
         successRedirect: '/',
         failureRedirect: '/login'
     })
 );
 
-
-
 // Handle logging out (takes us back to the login page).
-authRouter.get('/logout', (req, res) => {
-    req.logout(); // Logs us out!
-    res.redirect('/');
+authRouter.post('/logout', (req, res, next) => {
+    req.logout((error) => {
+        if (error) { return next(error); }
+        res.redirect('/');
+    });
 });
+
+// router to redirect to user profile page
+authRouter.get('/profile',
+    checkLoggedIn,
+    (req, res) => {
+        res.redirect('/profile/' + req.user);
+    }
+);
+
+// router to redirect to user profile page with userName
+authRouter.get('/profile/:userName/',
+    checkLoggedIn,
+    (req, res) => {
+        // Verify this is the right user.
+        if (req.params.userName === req.user) {
+            res.sendFile(__dirname + "/client/HTML/profile.html");
+        } else {
+            res.redirect('/profile/');
+        }
+    }
+);
 
 export default authRouter;

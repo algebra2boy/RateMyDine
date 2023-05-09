@@ -1,6 +1,8 @@
 import authRouter from "./Routers/authentication/authRouters.js";
 import reviewRouter from "./Routers/reviewRouters.js";
 import passportAuth from "./Routers/authentication/passportAuth.js";
+
+import MongoStore from 'connect-mongo';
 import { MongoClient, ServerApiVersion } from 'mongodb';
 
 import expressSession from 'express-session';
@@ -19,10 +21,19 @@ class Server {
 
         this.sessionConfig = {
             secret: process.env.SECRETKEY || 'MYFRIENDISACAT',
-            resave: false,
-            saveUninitialized: false,
-            cookie: { maxAge: 60 * 60 * 1000 } // 1 hour
+            resave: false, // don't create session until something stored
+            saveUninitialized: false, //don't save session if unmodified
+            // this stores the session in the database
+            // documentation: https://github.com/jdesboeufs/connect-mongo#express-or-connect-integration
+            store: MongoStore.create({
+                mongoUrl: this.dbURL,
+                ttl: 15 * 60, // 15 minutes. Default
+                autoRemove: 'native',
+                autoRemoveInterval: 10, // take care of removing expired sessions every 10 minutes,
+                dbName: "test"
+            })
         }
+
     }
 
     async initRoutes() {
