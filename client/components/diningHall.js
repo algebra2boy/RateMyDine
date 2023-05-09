@@ -1,7 +1,5 @@
 //This is the js file responsible for all functionality (barring the footer and header) of the dining.html page
 
-// let res = await fetch('/allReviews', {method: "POST"})
-
 async function loadPageInformation(){
     try{
         let res = await fetch(`/info/${window.location.href.split("/")[3]}`);
