@@ -66,11 +66,9 @@ authRouter.post('/login',
 // Handle logging out (takes us back to the login page).
 authRouter.post('/logout', (req, res, next) => {
     req.logout((error) => {
-        if (error) {
-            return next(error);
-        }
-        res.redirect('/');
+        if (error) { return next(error); }
     });
+    res.redirect('/');
 });
 
 // router to redirect to user profile page
