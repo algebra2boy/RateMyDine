@@ -4,8 +4,6 @@ async function loadPageInformation(){
     try{
         let res = await fetch(`/info/${window.location.href.split("/")[3]}`);
         let diningHall = await res.json();
-        
-        console.log(diningHall);
 
         let resp = await fetch(`/review/${diningHall.name}`);
         let comments = await resp.json();
@@ -36,7 +34,7 @@ async function loadPageInformation(){
 
 
 //Loads the specified number of comments from the table of comments into the specified container.
-//loadComments(comments: []Review Object, container: <HTML Object>, numComments: int) => void
+//loadComments(comments: []Review Object, container: <HTML Object>, numComments: int, diningHallName: string) => void
 function loadComments(comments, container, numComments, diningHallName){
     for(let i=0; i<numComments; i++){
         let comment = document.createElement('comment-component');
@@ -56,17 +54,18 @@ function loadUpperHalfText(diningHall){
     document.getElementById('profile').src = `../../Pictures/${diningHall.name.toLowerCase()}.jpeg`;
     document.getElementById('hourHeader').innerHTML = "Hours:";
 
-
     //LOADING HOURS
     let table = document.getElementById('thours').children[0].children;
+
     for(let elem in table){
         let tr = table[elem]
         for(let child in tr.children){
             let id = undefined;
-            if(tr.children[child].tagName === "TD"){
+            if(tr.children[child].tagName === undefined){
+                continue;
+            }else if(tr.children[child].tagName === "TD"){
                 tr.children[child].innerHTML = diningHall.hours[tr.children[child].id];
-            }
-            if(tr.children[child].tagName === "TR" && id != undefined){    
+            }else if(tr.children[child].tagName === "TR" && id != undefined){   
                 tr.children[child].innerHTML = id.charAt(0) + id.slice(1);
             }
         }
@@ -80,14 +79,14 @@ function loadReviewButton(diningHall){
     const popUp = document.getElementById("popWindow");
 
     //Popup input elements
-    let inputElements = ["FoodQuality", "CustomerService", "Atmosphere", "Healthiness", "SeatAvailability", "Taste"];
+    let inputElements = ["FoodQuality", "CustomerService", "Atmosphere", "Healthiness", "SeatAvailability", "Taste", "ReviewDescription"];
     inputElements = inputElements.map((x) => document.getElementById(x));
 
     async function sendRequest(){
         let options = {
             headers: { "Content-Type": "application/json"},
             method: "POST",
-            body: JSON.stringify(inputElements.reduce((acc, e) => {acc[e.id] = e.value; return acc},{}))
+            body: JSON.stringify(inputElements.reduce((acc, e) => {acc[e.id] = e.value; return acc},{reviewer_id: 1236}))
         }
         try{
             let res = await fetch(`/review/${diningHall.name}`, options);
@@ -95,7 +94,7 @@ function loadReviewButton(diningHall){
             let recentCommentContainer = document.getElementById('recent-commment');
             recentCommentContainer.innerHTML = "";
             //THEN USE LOADCOMMENTDATA() TO CREATE A COMMENT
-            
+            loadComments(data,recentCommentContainer, 1, diningHall.name);
         }catch (err){
             console.warn(err);
         }
