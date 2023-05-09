@@ -57,7 +57,7 @@ async function createReview(diningHall, foodReview) {
             }
         };
         await server.reviews.updateOne(filter, updateDoc, options);
-        const infoDoc = JSON.parse(server.diningInfo.findOne({"name": diningHall}));
+        const infoDoc = await server.diningInfo.findOne({"name": diningHall});
         await server.diningInfo.updateOne({"name": diningHall}, {$set:{numReviews : infoDoc.numReviews + 1}});
         return JSON.stringify(await server.reviews.findOne({"DiningHall" : diningHall}));
     }
@@ -122,14 +122,14 @@ async function updateReview(diningHall, foodReview, foodReviewID) {
  * @param  {diningHallName} the name of the diningName, ex "worcester"
  * @param  {foodReviewID} the food review ID
  */
-async function deleteReview(diningHallName, foodReviewID) {
+async function deleteReview(diningHall, foodReviewID) {
 
-    let document = await reviewDB.get(diningHallName); //gets the dining hall requested in the body of the delete request
+    let document = await server.reviews.findOne({"DiningHall": diningHall}); //gets the dining hall requested in the body of the delete request
     let found = false; // flag for loop
     let i = undefined; // place holder
 
     for (i = 0; i < document.Reviews.length; i++) { // looping through the reviews of the dining hall for to find the corresponding id of the message to be deleted.
-        if (document.Reviews[i].id === foodReviewID) {
+        if (document.Reviews[i].review_id === Number(foodReviewID)) {
             found = true; //when found, set flag - break
             break;
         }
@@ -137,7 +137,8 @@ async function deleteReview(diningHallName, foodReviewID) {
 
     if (found) { // if flag is set
         document.Reviews.splice(i, 1); // remove the review from the reviews array.
-        reviewDB.put(document);  // PUT the updated document back into the database
+        await server.reviews.updateOne({"DiningHall":diningHall}, {$set:{Reviews: document.Reviews}}, {upsert:true}); // PUT the updated document back into the database
+        await server.diningInfo.updateOne({"name": diningHall}, {$set: {numReviews: document.Reviews.length}}, {upsert:true}) // update the count with the length of reviews array.
     }
 
     return found;
