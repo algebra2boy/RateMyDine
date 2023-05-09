@@ -59,7 +59,7 @@ async function createReview(diningHall, foodReview) {
         await server.reviews.updateOne(filter, updateDoc, options);
         const infoDoc = await server.diningInfo.findOne({"name": diningHall});
         await server.diningInfo.updateOne({"name": diningHall}, {$set:{numReviews : infoDoc.numReviews + 1}});
-        return JSON.stringify(await server.reviews.findOne({"DiningHall" : diningHall}));
+        return newFoodReview;
     }
     catch (error) {
         console.error(error);
