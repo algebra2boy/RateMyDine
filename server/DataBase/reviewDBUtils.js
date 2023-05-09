@@ -57,6 +57,8 @@ async function createReview(diningHall, foodReview) {
             }
         };
         await server.reviews.updateOne(filter, updateDoc, options);
+        const infoDoc = JSON.parse(server.diningInfo.findOne({"name": diningHall}));
+        await server.diningInfo.updateOne({"name": diningHall}, {$set:{numReviews : infoDoc.numReviews + 1}});
         return JSON.stringify(await server.reviews.findOne({"DiningHall" : diningHall}));
     }
     catch (error) {
