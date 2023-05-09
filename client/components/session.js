@@ -5,7 +5,7 @@ const signup_btn = document.getElementById("signup-btn");
 // session variable to know whether the user is authenticated after logining
 // this session variable will be gone after the user closes the browser
 // isAuthenticated is either trur or false
-const isAuthenticated = sessionStorage.getItem("isAuthenticated");
+const isAuthenticated = JSON.parse(sessionStorage.getItem("isAuthenticated"));
 
 // check user is authenticated
 login_btn.innerHTML = isAuthenticated  ? "Profile" : "Log in";
@@ -22,7 +22,7 @@ if (isAuthenticated) {
         await fetch("http://localhost:3000/logout", options)
             .then((request) => {
                 if (request.redirected) {
-                    sessionStorage.setItem("isAuthenticated", false);
+                    sessionStorage.setItem("isAuthenticated", JSON.stringify(false));
                     console.log("session has been destoryed remotely and on local");
                     login_btn.innerHTML = "Log in";
                     signup_btn.innerHTML = "Sign up";
@@ -30,6 +30,9 @@ if (isAuthenticated) {
                     signup_btn.href = "/signup";
                     // deactivate click after switching back to "login" mode
                     signup_btn.removeEventListener('click', destorySession);
+
+                    // redirect to the main page
+                    window.location.replace(request.url);
                 }
             }).catch(error => {
                 console.log(error);
