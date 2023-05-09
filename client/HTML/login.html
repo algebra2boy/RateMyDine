@@ -12,6 +12,7 @@
   <link rel="icon" type="image/png" href="/Pictures/favicon.png">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
 
+  <script src="../../client/FormSubmission/loginForm.js" defer></script>
   <script>
     // revealing password
     function revealPassword() {
@@ -42,7 +43,7 @@
           <!-- center area -->
           <div class="card-body text-center">
             <label id="login"><b>Login in to your account</b></label> <br /><br />
-            <form id="login-form" action="/login" method="POST">
+            <form id="login-form">
               <input type="text" class="form-control form-control-lg" placeholder="Username" id="username"
                 name="username" required/><br />
               <div class="password-section">
