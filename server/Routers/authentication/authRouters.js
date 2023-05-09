@@ -67,8 +67,8 @@ authRouter.post('/login',
 authRouter.post('/logout', (req, res, next) => {
     req.logout((error) => {
         if (error) { return next(error); }
+        res.redirect('/');
     });
-    res.redirect('/');
 });
 
 // router to redirect to user profile page
