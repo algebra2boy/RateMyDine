@@ -2,13 +2,14 @@
 
 //TODO: Implement uni-directional dataflow; too many fetches are being made
 
-async function loadPageInformation(){
-    try{
-        // let res2 = await fetch("/allReviews", {method: "POST"});
+async function loadInformation() {
+    try {
         let res = await fetch(`/info/${window.location.href.split("/")[3]}`);
         let diningHall = await res.json();
+        
+        console.log(diningHall);
 
-        //LOADING ONE-OFF DISPLAY INFORMATION
+        // LOADING ONE-OFF DISPLAY INFORMATION
         document.getElementById('name-row').innerHTML = diningHall.name;
         document.getElementById('dining-address').innerHTML = diningHall.address;
         document.getElementById('dining-phone').innerHTML = diningHall.phone;
@@ -16,25 +17,31 @@ async function loadPageInformation(){
         document.getElementById('profile').src = `../../Pictures/${diningHall.name.toLowerCase()}.jpeg`;
         document.getElementById('hourHeader').innerHTML = "Hours:";
 
-        // //LOADING HOUR INFORMATION
+        // LOADING HOUR INFORMATION
         let table = document.getElementById('thours').children[0].children;
+        
+        //TODO: fix this please using the db 
 
-        console.log(diningHall.hours)
-        for(let elem in table){
-            let tr = table[elem]
+        // console.log(diningHall.hours)
+        for(let element in table){
+            let tr = table[element]
             for(let child in tr.children){
-                let id = undefined;
-                if(tr.children[child].tagName === "TD"){
-                    tr.children[child].innerHTML = diningHall.hours[tr.children[child].id];
-                }
-                if(tr.children[child].tagName === "TR" && id != undefined){    
-                    tr.children[child].innerHTML = id.charAt(0) + id.slice(1);
-                }
+                // let id = undefined;
+                // if(tr.children[child].tagName === "TD"){
+                //     tr.children[child].innerHTML = diningHall.Hours[tr.children[child].id];
+                // }
+                // if(tr.children[child].tagName === "TR" && id != undefined){    
+                //     tr.children[child].innerHTML = id.charAt(0) + id.slice(1);
+                // }
             }
         }
-        
-    }catch{
-        console.log("big bad error dont dead open inside")
+
+        // load map-kit from the google-map
+        document.getElementById("map").src = diningHall.mapURL;
+
+    } catch (error) {
+        console.log("loadPageInformation is crushing");
+        console.log(error);
     }
 }
 
@@ -42,19 +49,18 @@ async function loadPageInformation(){
 //We need to load comments AFTER the page is loaded, otherwise the elements get broken
 //loadComments() => void
 async function loadComments(){
-    let res = await fetch(`/info/${window.location.href.split("/")[3]}`);
-    let diningHall = await res.json();
-    let resp = await fetch(`/review/${diningHall.name}`);
-    let comments = await resp.json();
-    let commentSection = document.getElementById('comment-section');
+    const diningName = window.location.href.split("/")[3];
+    let response = await fetch(`/review/${diningName}`);
+    let comments = await response.json();
+    let commentSection    = document.getElementById('comment-section');
     let mostRecentComment = document.createElement('comment-component');
     commentSection.appendChild(mostRecentComment);
-    fillComment(mostRecentComment, comments.reviews[0], diningHall);
+    fillComment(mostRecentComment, comments.reviews[0]);
 }
 
 //Used to populate individual <comment-component>
-//fillComment(comment: <comment-component>, commentData: Review object, diningHall: DiningHall object) => void
-function fillComment(comment, commentData, diningHall){
+//fillComment(comment: <comment-component>, commentData: Review object) => void
+function fillComment(comment, commentData){
     function fillStars(elem, field){
         let stars = elem.getElementsByClassName("fa-star");
         for(let i in stars){
@@ -64,6 +70,9 @@ function fillComment(comment, commentData, diningHall){
         }
     }
 
+    // retrieve dininng name from the URL
+    const diningName = window.location.href.split("/")[3];
+    console.log("diningName " + diningName );
     //POPULATE LEFT CONTAINER
     let desc    = comment.getElementsByClassName("desc")[0];
     desc.innerHTML = commentData.description;
@@ -72,7 +81,7 @@ function fillComment(comment, commentData, diningHall){
     frac.innerHTML = `${commentData.overall}/5 Stars`
 
     let nam     = comment.getElementsByClassName('dining-name')[0];
-    nam.innerHTML = diningHall.name;
+    nam.innerHTML = diningName;
 
     // let date    = comment.getElementsByClassName('time')[0];
     // date.innerHTML = `Date: ${commentData.postTime}`;
@@ -97,9 +106,12 @@ function fillComment(comment, commentData, diningHall){
     fillStars(healthy, "healthiness");
     fillStars(seats, "seatAvailability");
     fillStars(taste, "taste");
-
 }
 
-//LISTENERS
-window.onload = (loadPageInformation);
-document.addEventListener("DOMContentLoaded", loadComments);
+async function loadPage() {
+    await loadInformation();
+    await loadComments();
+}
+
+// this is where we load everything from the template
+await loadPage();
