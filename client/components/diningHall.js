@@ -4,6 +4,8 @@ async function loadPageInformation(){
     try{
         let res = await fetch(`/info/${window.location.href.split("/")[3]}`);
         let diningHall = await res.json();
+        
+        console.log(diningHall);
 
         let resp = await fetch(`/review/${diningHall.name}`);
         let comments = await resp.json();

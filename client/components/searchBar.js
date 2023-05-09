@@ -2,12 +2,15 @@
 const searchBar = document.getElementById("search-box");
 const dropDownBox = document.getElementById("dropdown");
 
-// fetching the dining Hall from the json 
-const diningHallInfo = await fetch("http://localhost:3000/diningInfo");
-const diningHallInfoJSON = await diningHallInfo.json();
 
 // Considering the user's input, then generate a list of dinning hall suggestions
-function generateSuggestions() {
+async function generateSuggestions() {
+
+    // fetching the dining Hall from the endpoint
+    const diningHallInfo     = await fetch("http://localhost:3000/diningInfo");
+    const diningHallInfoJSON = await diningHallInfo.json();
+
+
     // clean the drop down box every time it gets rendered 
     dropDownBox.innerHTML = "";
     const searchBarValue = searchBar.value;
@@ -58,4 +61,4 @@ document.body.addEventListener("click", (event) => {
     } else {
         dropDownBox.innerHTML = "";
     }
-})
+});

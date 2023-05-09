@@ -9,6 +9,7 @@ Testing/*
 node_modules
 node_modules/*
 .env
+userDBTest.js
 
 users/
 users
