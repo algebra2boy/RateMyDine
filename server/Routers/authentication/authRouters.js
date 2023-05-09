@@ -32,7 +32,7 @@ authRouter.get('/signup', (req, res) => {
 
 // signup for submitting a form
 authRouter.post('/signup', async (req, res) => {
-    const user = userDBUtils.findUser(server.users, req.body.email);
+    const user = await userDBUtils.findUser(server.users, req.body.userName);
     if (user) {
         // making another account with the same email
         res.status(403).send({
