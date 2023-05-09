@@ -1,7 +1,7 @@
 import express from "express";
 import * as dbUtils from "../DataBase/reviewDBUtils.js"; // helper for database CRUD
 import server from "../server.js";
-
+import { Hours, DiningHall } from "../MockData/classDefinitions.js";
 const reviewRouter = express.Router();
 
 // retrieve dining hall info such as name and count of reviews
@@ -18,9 +18,16 @@ reviewRouter.get("/:diningHall", (req, res) => {
 // retrieve dining info 
 reviewRouter.get("/info/:diningHall", async (req, res) => {
     // grabs the dining hall name from the URL
-    let name = req.params.diningHall;
-    const diningInfo = await server.diningInfo.findOne({"name": name});
-
+    let diningName = req.params.diningHall;
+    const diningInfo = await server.diningInfo.findOne({"name": diningName});
+    let diningObj = new DiningHall(
+        diningInfo.name,
+        diningInfo.address,
+        diningInfo.phone,
+        diningInfo.numReview,
+        diningInfo.description,
+        new Hours(diningInfo.hours[0],diningInfo.hours[1],diningInfo.hours[2],diningInfo.hours[3],diningInfo.hours[4],diningInfo.hours[5],diningInfo.hours[6])
+    )
     // Dining Hall information doesn't exist
     if (diningInfo === null) {
         res.status(404).send({
@@ -28,7 +35,7 @@ reviewRouter.get("/info/:diningHall", async (req, res) => {
             "status": "failure"
         });
     } else {
-        res.send(diningInfo);
+        res.send(diningObj);
     }
 });
 
