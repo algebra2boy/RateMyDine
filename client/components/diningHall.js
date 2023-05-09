@@ -7,25 +7,23 @@ async function loadPageInformation(){
 
         let resp = await fetch(`/review/${diningHall.name}`);
         let comments = await resp.json();
-        console.log(comments);
 
         loadUpperHalfText(diningHall);
 
         loadReviewButton(diningHall);
 
-        loadComments(comments, document.getElementById('recent-comment'), 1, diningHall.name);
+        loadComments(comments[0], document.getElementById('recent-comment'), diningHall.name);
 
 
         //TODO: OPTIMIZE THIS USING POP() OR SHIFT() PROBABLY
         
-        let pointer = comments.length;
-        loadComments(comments, document.getElementById('comment-section'), Math.min(pointer, comments.length), diningHall.name);
-        pointer-=5;
+        batchLoadComments(comments, document.getElementById('comment-section'), diningHall.name, 5);
 
         document.getElementById('see-more').addEventListener('click', () => {
-            if(pointer < 0){ console.log("WHAT"); return 0;}
-            loadComments(comments, document.getElementById('comment-section'), Math.min(pointer, comments.length), diningHall.name);
-            pointer-=5;
+            batchLoadComments(comments, document.getElementById('comment-section'), diningHall.name, 5);
+            if(comments.length === 0){
+                document.getElementById('see-more').innerHTML = ""
+            }
         })
         
     }catch (err){
@@ -33,15 +31,22 @@ async function loadPageInformation(){
     }
 }
 
-
-//Loads the specified number of comments from the table of comments into the specified container.
-//loadComments(comments: []Review Object, container: <HTML Object>, numComments: int, diningHallName: string) => void
-function loadComments(comments, container, numComments, diningHallName){
-    for(let i=0; i<numComments; i++){
-        let comment = document.createElement('comment-component');
-        container.appendChild(comment);
-        fillComment(comment, comments[i], diningHallName);
+//Loads a specified amount of comments from the array of comments into the specified container.
+//batchLoadComments(comments: []Review Object, container: <HTML Object>, diningHallName: string, numComments: int) => void
+function batchLoadComments(comments, container, diningHallName, numComments){
+    let i = 0;
+    while(i < Math.min(comments.length, numComments)){
+        loadComments(comments.shift(), container, diningHallName);
+        i++;
     }
+}
+
+//Loads a comment from the array of comments into the specified container.
+//loadComments(comments: Review Object, container: <HTML Object>, diningHallName: string) => void
+function loadComments(comment, container, diningHallName){
+    let commentComponent = document.createElement('comment-component');
+    container.appendChild(commentComponent);
+    fillComment(commentComponent, comment, diningHallName);
 }
 
 //loadUpperHalfText(diningHall: diningHall Object) => void
@@ -62,11 +67,10 @@ function loadUpperHalfText(diningHall){
         let tr = table[elem]
         for(let child in tr.children){
             let id = undefined;
-            if(tr.children[child].tagName === undefined){
-                continue;
-            }else if(tr.children[child].tagName === "TD"){
+            if(tr.children[child].tagName === "TD"){
                 tr.children[child].innerHTML = diningHall.hours[tr.children[child].id];
-            }else if(tr.children[child].tagName === "TR" && id != undefined){   
+            }
+            if(tr.children[child].tagName === "TR" && id != undefined){   
                 tr.children[child].innerHTML = id.charAt(0) + id.slice(1);
             }
         }
@@ -95,7 +99,7 @@ function loadReviewButton(diningHall){
             let recentCommentContainer = document.getElementById('recent-commment');
             recentCommentContainer.innerHTML = "";
             //THEN USE LOADCOMMENTDATA() TO CREATE A COMMENT
-            loadComments(data,recentCommentContainer, 1, diningHall.name);
+            loadComments(data, recentCommentContainer, diningHall.name);
         }catch (err){
             console.warn(err);
         }
