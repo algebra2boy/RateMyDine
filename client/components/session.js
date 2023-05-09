@@ -4,22 +4,16 @@ const signup_btn = document.getElementById("signup-btn");
 
 // session variable to know whether the user is authenticated after logining
 // this session variable will be gone after the user closes the browser
-// isAuthenticated is either "true" or "false" (a string)
-const isAuthenticated = sessionStorage.getItem("isAuthenticated") === "true";
+// isAuthenticated is either trur or false
+const isAuthenticated = sessionStorage.getItem("isAuthenticated");
 
 // check user is authenticated
-const loginText = isAuthenticated  ? "Profile" : "Log in";
-const signupText = isAuthenticated ? "Log out" : "Sign up";
-const loginUrl = isAuthenticated   ? "/profile" : "/login";
-const signupUrl = isAuthenticated  ? "/" : "/signup";
-
-login_btn.innerHTML = loginText;
-signup_btn.innerHTML = signupText;
-login_btn.href = loginUrl;
-signup_btn.href = signupUrl;
-
+login_btn.innerHTML = isAuthenticated  ? "Profile" : "Log in";
+signup_btn.innerHTML = isAuthenticated ? "Log out" : "Sign up";
+login_btn.href = isAuthenticated   ? "/profile" : "/login";
+signup_btn.href = isAuthenticated  ? "/logout" : "/signup";
 // destory session
-if (isAuthenticated === "true") {
+if (isAuthenticated) {
     signup_btn.addEventListener("click", destorySession);
 
     async function destorySession(event) {
@@ -34,6 +28,8 @@ if (isAuthenticated === "true") {
                     signup_btn.innerHTML = "Sign up";
                     login_btn.href = "/login";
                     signup_btn.href = "/signup";
+                    // deactivate click after switching back to "login" mode
+                    signup_btn.removeEventListener('click', destorySession);
                 }
             }).catch(error => {
                 console.log(error);
