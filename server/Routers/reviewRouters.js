@@ -1,13 +1,14 @@
 import express from "express";
 import * as dbUtils from "../DataBase/reviewDBUtils.js"; // helper for database CRUD
 import { diningInfo } from "../MockData/diningHallInfo.js"; // every dining hall review data
+import server from "../server.js";
 
 const reviewRouter = express.Router();
 
-// testing purposes that dininghall info that is imported from diningHallInfo.js
+// retrieve dining hall info such as name and count of reviews
 reviewRouter.get("/diningInfo", async (req, res) => {
-    res.set('Content-Type', 'application/json');
-    res.status(200).send(JSON.stringify(diningInfo));
+    const diningInfo = await server.diningInfo.find({}).toArray();
+    res.send(diningInfo);
 });
 
 

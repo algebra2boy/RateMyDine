@@ -4,7 +4,7 @@ import server from "../../server.js";
 import * as userDBUtils from "../../DataBase/userDBUtils.js";
 
 // Passport Configuration
-// Create a new LocalStrategy objec to handle authentienticaiton using email and password
+// Create a new LocalStrategy object to handle authentication using userName and password
 
 const strategy = new LocalStrategy(async (userName, password, done) => {
     try {
@@ -36,6 +36,7 @@ const strategy = new LocalStrategy(async (userName, password, done) => {
 passport.use(strategy);
 
 // Convert user object to a unique identifier.
+// can access to user by doing req.user, which gets access to the userName
 passport.serializeUser((user, done) => {
     done(null, user);
 });

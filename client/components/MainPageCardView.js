@@ -1,7 +1,8 @@
+// UI Element 
 const cardGroup = document.getElementById("card-group");
 
-//This function is responsible for generating the cards (html elements) you see in the middle section of the page just below the search bar
-//renderGenerateCardView(diningHall: DiningHall object) => <HTML Element>
+// This function is responsible for generating the cards (html elements) you see in the middle section of the page just below the search bar
+// renderGenerateCardView(diningHall: DiningHall object) => <HTML Element>
 function renderGenerateCardView(diningHall) {
     // construct the column 
     const ColumnView = document.createElement("div");
@@ -28,7 +29,7 @@ function renderGenerateCardView(diningHall) {
     h5.classList.add("card-title");
     h5.innerHTML = diningHall.name;
     cardText.classList.add("card-text");
-    cardText.innerHTML = `${diningHall.reviewCount} reviews`;
+    cardText.innerHTML = `${diningHall.numReviews} reviews`;
 
     // add element to the card body
     cardBody.appendChild(h5);
@@ -44,10 +45,10 @@ function renderGenerateCardView(diningHall) {
     return ColumnView;
 }
 
-//Handles the placement of the html object and redirect hooks for each individual dining hall
-//renderCardListView() => void
+// Handles the placement of the html object and redirect hooks for each individual dining hall
+// renderCardListView() => void
 async function renderCardListView() {
-    const diningHallInfo = await fetch("http://localhost:3000/diningInfo");
+    const diningHallInfo     = await fetch("http://localhost:3000/diningInfo");
     const diningHallInfoJSON = await diningHallInfo.json();
     for (let index = 0; index < diningHallInfoJSON.length; ++index) {
         const diningHall = diningHallInfoJSON[index];
