@@ -55,11 +55,11 @@ reviewRouter.post("/review/:dininghall/:reviewID", async (req, res) => {
     res.send(result);
 });
 
-// fill the database with the Mockdata for testing and rendering purposes
-reviewRouter.post("/allReviews", async (req, res) => { 
-    let msg = await dbUtils.init();
-    res.send(msg);
-});
+// // fill the database with the Mockdata for testing and rendering purposes
+// reviewRouter.post("/allReviews", async (req, res) => { 
+//     let msg = await dbUtils.init();
+//     res.send(msg);
+// });
 
 // delete an existing food review for a particular dining hall
 reviewRouter.delete("/review/:dininghall/:reviewID", async (req, res) => {

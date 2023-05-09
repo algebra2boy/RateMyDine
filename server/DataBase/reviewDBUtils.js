@@ -144,20 +144,20 @@ async function deleteReview(diningHall, foodReviewID) {
     return found;
 }
 
-async function init() { // Since everyone is running Pouch on locally, seting up an init for db initialization.
-    try {
-        for (let i = 0; i < diningReview.length; i++) {   // looping through each object in the object of diningReview that is imported.
-            await reviewDB.put({            // PUT a document with the id of the dining hall and a reviews array from the diningReview object
-                _id: diningReview[i].DiningName,
-                reviews: diningReview[i].Reviews,
-            })
-        }
-        return ("Successful Initialization");
-    }
-    catch (error) {
-        console.error(error);
-    }
-}
+// async function init() { // Since everyone is running Pouch on locally, seting up an init for db initialization.
+//     try {
+//         for (let i = 0; i < diningReview.length; i++) {   // looping through each object in the object of diningReview that is imported.
+//             await reviewDB.put({            // PUT a document with the id of the dining hall and a reviews array from the diningReview object
+//                 _id: diningReview[i].DiningName,
+//                 reviews: diningReview[i].Reviews,
+//             })
+//         }
+//         return ("Successful Initialization");
+//     }
+//     catch (error) {
+//         console.error(error);
+//     }
+// }
 
 // exporting the function for use in other js files
 export {
