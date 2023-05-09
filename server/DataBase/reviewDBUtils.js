@@ -75,7 +75,7 @@ async function getReview(diningHall) {
         let result = await server.reviews.findOne({"DiningHall": diningHall}); // gets the document from the db
         let response = []
         for(let comment of result.Reviews){
-            let s = new Review(comment.review_id, comment.review_date, comment.reviewer_id, comment.overall, comment.description, comment.FoodQuality, 
+            let s = new Review(comment.review_id, new Date(comment.review_date).toDateString(), comment.reviewer_id, comment.overall, comment.description, comment.FoodQuality, 
                             comment.CustomerService, comment.Atmosphere, comment.Healthiness, comment.SeatAvailability,comment.Taste);
             response.push(s);
         }
