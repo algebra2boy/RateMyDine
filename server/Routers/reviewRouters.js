@@ -50,8 +50,10 @@ reviewRouter.get("/review/:dininghall", async (req, res) => {
 
 // create a new food review for a particular dining hall
 reviewRouter.post("/review/:diningHall", async (req, res) => {
-    let diningHallReview = req.body.review; //grabs the body from the post requests
+    let diningHallReview = req.body; //grabs the body from the post requests
     let diningHallName = req.params.diningHall;
+
+    console.log(diningHallReview)
 
     let result = await dbUtils.createReview(diningHallName, diningHallReview);
     let rev_Date = new Date(result.review_date)
