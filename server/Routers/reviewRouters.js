@@ -54,7 +54,9 @@ reviewRouter.post("/review/:diningHall", async (req, res) => {
     let diningHallName = req.params.diningHall;
 
     let result = await dbUtils.createReview(diningHallName, diningHallReview);
-    let leObject = new Review(result.review_id, new Date(result.review_date).toDateString(),result.reviewer_id, result.overall, result.description, 
+    let rev_Date = new Date(result.review_date)
+    let revDate_arr = rev_Date.toDateString().split(" ");
+    let leObject = new Review(result.review_id, (revDate_arr[1]+" "+ rev_Date.getDate() + ", " + revDate_arr[3]) ,result.reviewer_id, result.overall, result.description, 
                                 result.FoodQuality, result.CustomerService, result.Atmosphere, result.Healthiness, result.SeatAvailability, result.Taste);
     res.send(JSON.stringify(leObject));
 });
