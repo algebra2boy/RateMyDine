@@ -13,16 +13,13 @@ async function loadPageInformation(){
         loadReviewButton(diningHall);
 
         loadComments(comments[0], document.getElementById('recent-comment'), diningHall.name);
-
-
-        //TODO: OPTIMIZE THIS USING POP() OR SHIFT() PROBABLY
         
         batchLoadComments(comments, document.getElementById('comment-section'), diningHall.name, 5);
 
         document.getElementById('see-more').addEventListener('click', () => {
             batchLoadComments(comments, document.getElementById('comment-section'), diningHall.name, 5);
             if(comments.length === 0){
-                document.getElementById('see-more').innerHTML = ""
+                document.getElementById('see-more').innerHTML = "";
             }
         })
         
@@ -66,12 +63,11 @@ function loadUpperHalfText(diningHall){
     for(let elem in table){
         let tr = table[elem]
         for(let child in tr.children){
-            let id = undefined;
             if(tr.children[child].tagName === "TD"){
                 tr.children[child].innerHTML = diningHall.hours[tr.children[child].id];
             }
-            if(tr.children[child].tagName === "TR" && id != undefined){   
-                tr.children[child].innerHTML = id.charAt(0) + id.slice(1);
+            if(tr.children[child].tagName === "TH"){ 
+                tr.children[child].innerHTML = tr.children[child].id.charAt(0).toUpperCase() + tr.children[child].id.slice(1);
             }
         }
     }

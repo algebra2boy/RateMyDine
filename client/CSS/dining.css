@@ -7,25 +7,20 @@
 }
 
 .dining-hall-container>#img-container>img {
-    max-width: 70%;
     height: auto;
-    margin: 50px 80px 50px 80px;
+    width: 90%;
+    margin-left: 50px;
     border: 2px solid rgb(45, 41, 41);
 }
 
 #iframeMap { 
-    position:absolute;
-    left:0px;
-    top:0px;
-    opacity: 0;
     align-items: center;
-    margin: 125px 80px 50px 90px;
+    padding-left: 50px;
+    padding-right: 50px;
+    margin-top: 50px;
+    width: 100%;
+    height: 500px;
 }
-
-#iframeMap:hover {    
-    opacity: 1;
-}
-
 
 #name-row {
     font-weight: bold;
@@ -43,7 +38,6 @@
 }
 
 #hours>p {
-    width: fit-content;
     margin-bottom: 2px;
 
 }
