@@ -28,7 +28,7 @@ async function loadPageInformation(){
     }
 }
 
-//Loads a specified amount of comments from the array of comments into the specified container.
+//Loads a specified amount of comments from the array of comments into the specified container and removes them from the comment list.
 //batchLoadComments(comments: []Review Object, container: <HTML Object>, diningHallName: string, numComments: int) => void
 function batchLoadComments(comments, container, diningHallName, numComments){
     let i = 0;
@@ -87,7 +87,7 @@ function loadReviewButton(diningHall){
         let options = {
             headers: { "Content-Type": "application/json"},
             method: "POST",
-            body: JSON.stringify(inputElements.reduce((acc, e) => {acc[e.id] = e.value; return acc},{reviewer_id: 1236}))
+            body: JSON.stringify(inputElements.reduce((acc, e) => {acc[e.id] = e.value; return acc},{reviewer_id: "1236"}))
         }
         try{
             let res = await fetch(`/review/${diningHall.name}`, options);
@@ -113,6 +113,7 @@ function loadReviewButton(diningHall){
     });
     document.getElementById("reviewForm").addEventListener("submit", (event) => {
         event.preventDefault();
+        console.log(inputElements.reduce((acc, e) => {acc[e.id] = e.value; return acc},{reviewer_id: 1236}))
         sendRequest();
     })
     //X button should close the pop-up by removing the class
