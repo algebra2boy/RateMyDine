@@ -28,8 +28,8 @@ class comment extends HTMLElement {
                     <div class="column dining-name">Hampshire</div>
 
                     <div class="column emoji">
-                    <i class="far fa-smile face"></i>
-                    <span id="rating">GREAT!</span>
+                    <i class="far face"></i>
+                    <span class="rating" id="rating">GREAT!</span>
                     </div>
 
                     <div class="column fraction">5/5 Stars</div>
@@ -49,6 +49,10 @@ class comment extends HTMLElement {
                     maxime autem odit. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Consectetur excepturi ex veniam
                     debitis tempore recusandae, fugiat vel alias sunt voluptas expedita quod? Ipsam deserunt laborum dignissimos
                     quidem illum cumque sit.</div>
+                </div>
+
+                <div class="row">
+                    <div style="text-align:left; position: relative; bottom: 10%; left: 0;" class="column time" id="time">Date: 4/21/2023</div>
                 </div>
             </div>
             

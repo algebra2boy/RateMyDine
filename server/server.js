@@ -62,8 +62,8 @@ class Server {
             this.reviews    = this.db.collection("reviews");
 
             // testing purpose 
-            const rev = await this.reviews.findOne({ "DiningHall": "Worcester" });
-            console.log(rev);
+            // const rev = await this.reviews.findOne({ "DiningHall": "Worcester" });
+            // console.log(rev);
 
         } catch (error) {
             // Ensures that the client will close when you finish/error

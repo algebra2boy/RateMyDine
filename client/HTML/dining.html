@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<br lang="en">
 
 <head lang="en">
   <!-- WINDOW SIZING SHENANIGANS -->
@@ -17,18 +17,14 @@
 
   <!-- LOAD ASSETS AND BACKEND -->
   <script type="module" src="../../client/components/diningHall.js" defer></script>
-  <script type="module" src="../../client/components/popup.js" defer></script>
-  <script type="module" src="../../client/components/session.js" defer></script>
-
   <!-- header and footer -->
   <script src="../../client/components/Footer.js" defer></script>
   <script src="../../client/components/comment.js" defer></script>
-  <script src="../../client/FormSubmission/reviewForm.js" defer></script>
 
   <title>Dining</title>
 </head>
 
-<body>
+<br>
   <div class="container-fluid">
     <div class="row">
       <div class="col-lg-12 banner">
@@ -42,11 +38,6 @@
   <div class="dining-hall-container container-fluid">
     <div class="col-6" id="img-container">
       <img src="" id="profile">
-       <!-- add map kit -->
-      <div id="iframeMap">
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2946.5930741138627!2d-72.53449572691707!3d42.393814454996516!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89e6d2655c15013b%3A0xfc35d5b46781f76a!2sUMass%20Transit%20Services!5e0!3m2!1sen!2sus!4v1683341908290!5m2!1sen!2sus"
-        width="470px" height="243px" style="border:2px solid rgb(45, 41, 41);" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-      </div>
     </div>
     <div class="col-6 dining-hall-description">
       <div class="row">
@@ -60,34 +51,34 @@
           <p id="dining-info"></p>
         </div>
         <div class="col-5" id="hours">
-          <p id="hourHeader"></p>
+          <p id="hourHeader" style="text-align: center;"></p>
           <table id="thours">
             <tr>
-              <th></th>
+              <th id="sunday"></th>
               <td class="time-hour" id="sunday"></td>
             </tr>
             <tr>
-              <th></th>
+              <th id="monday"></th>
               <td class="time-hour" id="monday"></td>
             </tr>
             <tr>
-              <th></th>
+              <th id="tuesday"></th>
               <td class="time-hour" id="tuesday"></td>
             </tr>
             <tr>
-              <th></th>
+              <th id="wednesday"></th>
               <td class="time-hour" id="wednesday"></td>
             </tr>
             <tr>
-              <th></th>
+              <th id="thursday"></th>
               <td class="time-hour" id="thursday"></td>
             </tr>
             <tr>
-              <th></th>
+              <th id="friday"></th>
               <td class="time-hour" id="friday"></td>
             </tr>
             <tr>
-              <th></th>
+              <th id="saturday"></th>
               <td class="time-hour" id="saturday"></td>
             </tr>
           </table>
@@ -96,9 +87,11 @@
     </div>
   </div>
 
+  <br></br>
+
   <!-- BELOW IS CODE FOR THE COMMENT SECTION -->
   <div id = "comment-header">
-    <h3 class = "comment-component">Most Recent Reviews </h3>
+    <h3 class = "comment-component">Most Recent Review </h3>
     <button id="openPopup" class="btn btn-outline-primary comment-component">
       Add a Review</button>
   </div>
@@ -110,12 +103,37 @@
     grid-template-rows: repeat(auto-fill, 300px);
     grid-row-gap: 5px;
     justify-items: center;
-    " id="comment-section">
-    <!-- <comment-component id="24"></comment-component> -->
+    " id="recent-comment">
   </div>
+
+    <!-- MAP SECTION -->
+    <div id="iframeMap" class="center">
+      <iframe id = "map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2946.5930741138627!2d-72.53449572691707!3d42.393814454996516!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89e6d2655c15013b%3A0xfc35d5b46781f76a!2sUMass%20Transit%20Services!5e0!3m2!1sen!2sus!4v1683341908290!5m2!1sen!2sus"
+      width="100%" height="100%" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+  
+    <br></br>
+    
   <br></br>
+
+  <div id="comment-header">
+    <h3 class = "comment-component">All Reviews</h3>
+  </div>
+
+  <div class="comment-section center" style="
+    display: grid;
+    width: 1000px;
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(auto-fill, 300px);
+    grid-row-gap: 5px;
+    justify-items: center;
+    " id="comment-section">
+  </div>
+
+  <br></br>
+
   <div>
-    <h3 style="text-align:center">See More...</h3>
+    <h3 style="text-align:center" id="see-more">See More...</h3>
   </div>
 
   <footer-component></footer-component>
@@ -147,9 +165,8 @@
               </tr>
             </table>
             <label>Review:</label>&nbsp;
-            <textarea placeholder="Your Review..." id="ReviewDescription" minlength="0" maxlength="400" required>
-            </textarea>
-            <button id="closePopup">Submit</button>
+            <textarea placeholder="Your Review..." id="ReviewDescription" minlength="0" maxlength="400" required></textarea>
+            <button id="closePopup" type="submit">Submit</button>
           </form>
         </div>
       </div>
