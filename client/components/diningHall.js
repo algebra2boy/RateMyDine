@@ -37,7 +37,8 @@ async function loadPageInformation(){
 //batchLoadComments(comments: []Review Object, container: <HTML Object>, diningHallName: string, numComments: int) => void
 function batchLoadComments(comments, container, diningHallName, numComments){
     let i = 0;
-    while(i < Math.min(comments.length, numComments)){
+    const numLoad = Math.min(comments.length, numComments);
+    while(i < numLoad){
         loadComments(comments.shift(), container, diningHallName);
         i++;
     }

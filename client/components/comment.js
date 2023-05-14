@@ -46,9 +46,7 @@ class comment extends HTMLElement {
                 <div class="row">
                     <div class="column big-column desc">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Labore reprehenderit ex
                     rerum harum laboriosam illum repellat molestias ullam eum libero quam neque, sunt inventore. Fugit quisquam a
-                    maxime autem odit. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Consectetur excepturi ex veniam
-                    debitis tempore recusandae, fugiat vel alias sunt voluptas expedita quod? Ipsam deserunt laborum dignissimos
-                    quidem illum cumque sit.</div>
+                    maxime autem odit. Lorem ipsum dolor sit, amet consectetur adipisicing elit.</div>
                 </div>
 
                 <div class="row">
