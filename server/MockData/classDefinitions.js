@@ -12,12 +12,13 @@ class Hours {
 }
 
 class DiningHall {
-    constructor(name, address, phone, reviewCount, description, hrs) {
+    constructor(name, address, phone, reviewCount, description, mapURL, hrs) {
         this.name = name;
         this.address = address;
         this.phone = phone;
         this.reviewCount = reviewCount;
         this.description = description;
+        this.mapURL = mapURL;
         this.hours = hrs;
     }
 }

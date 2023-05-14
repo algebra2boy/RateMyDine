@@ -1,12 +1,15 @@
 //This is the js file responsible for all functionality (barring the footer and header) of the dining.html page
 
 async function loadPageInformation(){
-    try{
-        let res = await fetch(`/info/${window.location.href.split("/")[3]}`);
-        let diningHall = await res.json();
+    try {
+        const diningHallName = window.location.href.split("/")[3];
+        const [diningHalldResponse, reviewsResponse] = await Promise.all([
+            fetch(`/info/${diningHallName}`),
+            fetch(`/review/${diningHallName}`)
+        ]);
 
-        let resp = await fetch(`/review/${diningHall.name}`);
-        let comments = await resp.json();
+        let diningHall = await diningHalldResponse.json();
+        let comments   = await reviewsResponse.json();
 
         loadUpperHalfText(diningHall);
 
@@ -22,6 +25,8 @@ async function loadPageInformation(){
                 document.getElementById('see-more').innerHTML = "";
             }
         })
+
+        document.getElementById("map").src = diningHall.mapURL;
         
     }catch (err){
         console.warn(err);
@@ -160,4 +165,4 @@ function fillComment(comment, commentData, diningHall){
 }
 
 //PAGE LISTENERS
-window.onload = (loadPageInformation);
+await loadPageInformation();
