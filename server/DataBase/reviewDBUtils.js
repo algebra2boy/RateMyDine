@@ -1,102 +1,94 @@
-// import { reviewDB } from "../server.js";
-import { diningReview } from "../MockData/reviews.js";
 import { Review } from "../MockData/classDefinitions.js";
 import server from "../server.js";
 
-const keyMap = {
-    ReviewDescription: "description",
-    FoodQuality: "foodQuality",
-    CustomerService: "customerService",
-    Atmosphere: "atmosphere",
-    Healthiness: "healthiness",
-    SeatAvailability: "seatAvailability",
-    Taste: "taste",
-}
 /**
- * compute the overall stars that is the average of other six fields
- * @param  {Review} review
- * @return {float} average  
+ * Compute the overall stars that is the average of other six fields.
+ * @param  {Review object} foodReview - the review from a user when one submits a form on the pop up window
+ * @return {float} average of the review
  */
 function computeOverall(foodReview) {
     const { FoodQuality, CustomerService, Atmosphere, Healthiness, SeatAvailability, Taste } = foodReview;
     const sum = 100 * ((Number(FoodQuality) + Number(CustomerService) + Number(Atmosphere) + Number(Healthiness) + Number(SeatAvailability) + Number(Taste)) / 5);
-    let average = Math.ceil(Math.ceil(sum / 6) * 0.01 * 5);  //rounding up for the rendering of overall stars.
-    return average;
+    return Math.ceil(Math.ceil(sum / 6) * 0.01 * 5);  //rounding up for the rendering of overall stars.
 }
 
 /**
- *  adds new review to the dining hall document.
- * @param  {diningHall} the name of the dining hall that we want to insert a document into
- * @param {foodReview} the food review we wish to add to the dining hall  
+ * Adds new review to the dining hall document in the database.
+ * @param {string} diningHall - the name of the dining hall that we want to insert a document into
+ * @param {Review object} foodReview - the food review we wish to add to the dining hall  
  */
 async function createReview(diningHall, foodReview) {
     try {
-
-        let document = await server.reviews.findOne({"DiningHall": diningHall}); // gets the document with id matching the dining hall.
-        let review = JSON.parse(foodReview); // parses the document so the reviews can be accessed and updated with insertion of new review.
-        let average = computeOverall(review); // computes the average
+        let document = await server.reviews.findOne( { "DiningHall": diningHall } ); // gets the document with id matching the dining hall.
+        let review   = JSON.parse(foodReview); // parses the document so the reviews can be accessed and updated with insertion of new review.
+        let average  = computeOverall(review); // computes the average
+        const { FoodQuality, CustomerService, Atmosphere, Healthiness, SeatAvailability, Taste, description } = review;
         let newFoodReview = {
             review_id: document.Reviews[0] !== undefined ? document.Reviews[0]["review_id"] + 1 : 1,
             review_date: new Date(Date.now()).toISOString(),
-            reviewer_id: "ABCDED",
-            description: review.description,
-            overall: average,
-            FoodQuality: review.FoodQuality,
-            CustomerService: review.CustomerService,
-            Atmosphere: review.Atmosphere,
-            Healthiness: review.Healthiness,
-            SeatAvailability: review.SeatAvailability,
-            Taste: review.Taste
+            reviewer_id: "ABCDED"   , description     : description     ,   overall   : average   ,
+            FoodQuality: FoodQuality, CustomerService : CustomerService ,   Atmosphere: Atmosphere,
+            Healthiness: Healthiness, SeatAvailability: SeatAvailability,   Taste     : Taste
         };
-        document.Reviews.unshift(newFoodReview); // addes the new review object to the front of the reviews array.
-        const filter = {"DiningHall" : diningHall}; //puts the updated dining hall doc into the database
-        const options = {upsert: true};
+        document.Reviews.unshift(newFoodReview); // adds the new review object to the front of the reviews array.
+
+        // puts the updated dining hall doc in the review collection
+        const filter = { "DiningHall" : diningHall }; 
+        const options = { upsert: true };
         const updateDoc = {
             $set: {
                 Reviews: document.Reviews
             }
         };
         await server.reviews.updateOne(filter, updateDoc, options);
-        const infoDoc = await server.diningInfo.findOne({"name": diningHall});
-        await server.diningInfo.updateOne({"name": diningHall}, {$set:{numReviews : infoDoc.numReviews + 1}});
-        return JSON.stringify(await server.reviews.findOne({"DiningHall" : diningHall}));
-    }
-    catch (error) {
+
+        // update the number of reviews in the diningInfo
+        const infoDoc = await server.diningInfo.findOne( { "name": diningHall } );
+        await server.diningInfo.updateOne(
+            { "name": diningHall }, 
+            {
+                $set:
+                    { numReviews : infoDoc.numReviews + 1 }
+            });
+        const updatedInfoDoc = await server.reviews.findOne( { "DiningHall" : diningHall } )
+        return JSON.stringify(updatedInfoDoc);
+    } catch (error) {
         console.error(error);
     }
 }
 
 /**
- *  gets all the reviews for a dining hall and returns it to the front-end.
- * @param  {diningHall} reviews from all the diningHall
+ * Gets all the reviews for a particular dining hall and returns it to the front-end.
+ * @param  {string} diningHall - reviews from all the diningHall
+ * @return {Review[]} response - stringify version of the of the list of reviews.
  */
 async function getReview(diningHall) {
     try {
-        let result = await server.reviews.findOne({"DiningHall": diningHall}); // gets the document from the db
+        let result = await server.reviews.findOne( { "DiningHall": diningHall } ); // gets the document from the db
         let response = []
         for(let comment of result.Reviews){
-            let s = new Review(comment.review_id, new Date(comment.review_date).toDateString(), comment.reviewer_id, comment.overall, comment.description, comment.FoodQuality, 
-                            comment.CustomerService, comment.Atmosphere, comment.Healthiness, comment.SeatAvailability,comment.Taste);
+            const { review_id, review_date, reviewer_id, overall, description, FoodQuality, CustomerService, Atmosphere, Healthiness, SeatAvailability, Taste } = comment;
+            let s = new Review(review_id, new Date(review_date).toDateString(), reviewer_id, overall, description, FoodQuality, CustomerService, Atmosphere, Healthiness, SeatAvailability, Taste);
             response.push(s);
         }
-        return JSON.stringify(response); // return the stringified version of the of the list of reviews.
-    }
-    catch (error) {
+        return JSON.stringify(response); 
+    } catch (error) {
         console.error(error);
     }
 }
 
 /**
- *  update an existing food review for a dining hall and returns it to the front-end.
- * @param  {diningHallName} the name of the diningName, ex "worcester"
- * @param  {foodReview} the review of the food 
- * @param  {foodReviewID} the food review ID
+ * update an existing food review for a dining hall and returns it to the front-end.
+ * @param  {string} diningHall        - the name of the diningName, ex "Worcester"
+ * @param  {Review Object} foodReview - the review of the food 
+ * @param  {string} foodReviewID      - the food review ID
+ * @return {boolean}                  = whether the foodReviewID exists in db
  */
 
 async function updateReview(diningHall, foodReview, foodReviewID) {
     try {
 
-        let document = await server.reviews.findOne({"DiningHall" : diningHall}); // gets the document of the dining hall.
+        let document = await server.reviews.findOne( { "DiningHall" : diningHall } ); // gets the document of the dining hall.
 
         // loops through the reviews of the dining hall and tries to find the matching post id.
         for (let i = 0; i < document["Reviews"].length; i++) {
@@ -119,12 +111,13 @@ async function updateReview(diningHall, foodReview, foodReviewID) {
 
 /**
  *  delete an existing food review for a dining hall and returns it to the front-end.
- * @param  {diningHallName} the name of the diningName, ex "worcester"
- * @param  {foodReviewID} the food review ID
+ * @param  {string} diningHallName -  the name of the diningName, ex "worcester"
+ * @param  {string} foodReviewID   -  the food review ID
+ * @return {boolean}found          -  whether we found a review with the matching food review ID
  */
 async function deleteReview(diningHall, foodReviewID) {
 
-    let document = await server.reviews.findOne({"DiningHall": diningHall}); //gets the dining hall requested in the body of the delete request
+    let document = await server.reviews.findOne( { "DiningHall": diningHall } ); // gets the dining hall requested in the body of the delete request
     let found = false; // flag for loop
     let i = undefined; // place holder
 
@@ -144,20 +137,6 @@ async function deleteReview(diningHall, foodReviewID) {
     return found;
 }
 
-// async function init() { // Since everyone is running Pouch on locally, seting up an init for db initialization.
-//     try {
-//         for (let i = 0; i < diningReview.length; i++) {   // looping through each object in the object of diningReview that is imported.
-//             await reviewDB.put({            // PUT a document with the id of the dining hall and a reviews array from the diningReview object
-//                 _id: diningReview[i].DiningName,
-//                 reviews: diningReview[i].Reviews,
-//             })
-//         }
-//         return ("Successful Initialization");
-//     }
-//     catch (error) {
-//         console.error(error);
-//     }
-// }
 
 // exporting the function for use in other js files
 export {
