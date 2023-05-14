@@ -50,11 +50,15 @@ function renderGenerateCardView(diningHall) {
 async function renderCardListView() {
     const diningHallInfo     = await fetch("http://localhost:3000/diningInfo");
     const diningHallInfoJSON = await diningHallInfo.json();
-    for (let index = 0; index < diningHallInfoJSON.length; ++index) {
-        const diningHall = diningHallInfoJSON[index];
+    diningHallInfoJSON.forEach((diningHall) => {
         const card = renderGenerateCardView(diningHall);
         card.addEventListener("click", () => window.location=`/${diningHall.name}`);
-    }
+    });
+
+    // diningHallInfoJSON.forEach(element => {
+    //     console.log(element);
+    // });
+
 }
 
 
