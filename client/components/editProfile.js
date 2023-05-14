@@ -1,56 +1,31 @@
-const edit_name = document.getElementById('edit-name');
-const edit_user = document.getElementById('edit-user');
-const edit_email = document.getElementById('edit-email');
-const fullName = document.getElementById('name');
-const email = document.getElementById('email');
-const user = document.getElementById('user');
-const cancel = document.getElementById("cancel");
-const save = document.getElementById("save");
+// UI elements for editProfile
+// input fields to edit the names
+let edit_info  = ["edit-name", "edit-email", "edit-user"],
+info    = ["name", "email", "user"],
+buttons = ["cancel", "save"];
+
+edit_info = edit_info.map((element) => (document.getElementById(element)));
+info      = info.map((element) => (document.getElementById(element))); // before editing the info
+buttons   = buttons.map((elememt) => (document.getElementById(elememt)));
 
 document.getElementById('edit-info').addEventListener('click', () => {
-    fullName.setAttribute("style", "display:none;");
-    edit_name.setAttribute("type", "text");
-    edit_name.setAttribute("value", fullName.innerHTML);
-
-    email.setAttribute("style", "display:none;");
-    edit_email.setAttribute("type", "text");
-    edit_email.setAttribute("value", email.innerHTML);
-    user.setAttribute("style", "display:none;");
-    edit_user.setAttribute("type", "text");
-    edit_user.setAttribute("value", user.innerHTML);
-
-    cancel.setAttribute("style", "visibility:visible;")
-    save.setAttribute("style", "visibility:visible;")
+    info.forEach((element) => element.style.display = "none");
+    // bring user's info to the text input field
+    edit_info.forEach((element, index) => {  element.type  = "text"; element.value = info[index].innerHTML; } );
+    // make button visible if user wants to edit info
+    buttons.forEach((button) => button.style.visibility = "visible");
 });
 
-cancel.addEventListener('click', () => {
-    fullName.removeAttribute("style");
-    edit_name.setAttribute("type", "hidden");
-
-    email.removeAttribute("style");
-    edit_email.setAttribute("type", "hidden");
-
-    user.removeAttribute("style");
-    edit_user.setAttribute("type", "hidden");
-
-    cancel.setAttribute("style", "visibility:hidden;")
-    save.setAttribute("style", "visibility:hidden;")
+// cancel button
+buttons[0].addEventListener('click', () => {
+    info.map((element) => element.removeAttribute("style") );
+    edit_info.map((element) => element.type = "hidden");
+    buttons.map((element) => element.style.visibility = "hidden");
 });
 
-save.addEventListener('click', () => {
-    fullName.removeAttribute("style");
-    fullName.innerHTML = edit_name.value;
-    edit_name.setAttribute("type", "hidden");
-
-    email.removeAttribute("style");
-    email.innerHTML = edit_email.value;
-    edit_email.setAttribute("type", "hidden");
-
-    user.removeAttribute("style");
-    user.innerHTML = edit_user.value;
-    edit_user.setAttribute("type", "hidden");
-
-    cancel.setAttribute("style", "visibility:hidden;")
-    save.setAttribute("style", "visibility:hidden;")
+// save button 
+buttons[1].addEventListener('click', () => {
+    info.map((element, index) => { element.removeAttribute("style"); element.innerHTML = edit_info[index].value } );
+    edit_info.forEach((element) => element.type  = "hidden" );
+    buttons.forEach((button) => button.style.visibility = "hidden");
 });
-
