@@ -9,7 +9,7 @@ async function createUser(collection, body) {
             fullName: firstName + " " + lastName
         });
     } catch (error) {
-        console.log(error);
+        console.error(error);
     }
 }
 
@@ -18,7 +18,7 @@ async function findUser(collection, userName) {
         const user = await collection.findOne({ userName: userName });
         return user !== null;
     } catch (error) {
-        console.log(error);
+        console.error(error);
         return false;
     }
 }
@@ -29,7 +29,7 @@ async function validatePassword(collection, userName, password) {
         return user.password === password;
         
     } catch (error) {
-        console.log(error);
+        console.error(error);
         return false;
     }
 }
@@ -38,7 +38,7 @@ async function deleteUser(collection, userName) {
     try {
         await collection.deleteOne({ userName: userName });
     } catch (error) {
-        console.log(error);
+        console.error(error);
     }
 }
 
@@ -58,10 +58,9 @@ async function updateUser(collection, body) {
             { upsert: true } // insert the document if it is not found
         );
     } catch (error) {
-        console.log(error);
+        console.error(error);
     }
 }
-
 
 export {
     createUser,

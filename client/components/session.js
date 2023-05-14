@@ -4,7 +4,7 @@ const signup_btn = document.getElementById("signup-btn");
 
 // session variable to know whether the user is authenticated after logining
 // this session variable will be gone after the user closes the browser
-// isAuthenticated is either trur or false
+// isAuthenticated is either true or false
 const isAuthenticated = JSON.parse(sessionStorage.getItem("isAuthenticated"));
 
 // check user is authenticated
@@ -35,7 +35,7 @@ if (isAuthenticated) {
                     window.location.replace(request.url);
                 }
             }).catch(error => {
-                console.log(error);
-            })
+                console.error(error);
+            });
     }
 }
