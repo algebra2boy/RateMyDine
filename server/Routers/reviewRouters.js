@@ -29,8 +29,8 @@ reviewRouter.get("/info/:diningHall", async (req, res) => {
             "status": "failure"
         });
     } else {
-        const { name, address, phone, numReview, description, hours } = diningInfo;
-        const diningObj  = new DiningHall(name, address, phone, numReview, description, new Hours(...hours));
+        const { name, address, phone, numReview, description, mapURL, hours} = diningInfo;
+        const diningObj  = new DiningHall(name, address, phone, numReview, description, mapURL, new Hours(...hours));
         res.send(diningObj);
     }
 });
