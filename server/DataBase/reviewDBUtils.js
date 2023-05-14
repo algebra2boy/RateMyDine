@@ -34,7 +34,7 @@ async function createReview(diningHall, review) {
         let document = await server.reviews.findOne({"DiningHall": diningHall}); // gets the document with id matching the dining hall.
         // let review = JSON.parse(foodReview); // parses the document so the reviews can be accessed and updated with insertion of new review.1
         let average = computeOverall(review); // computes the average
-        let newFoodReview = {
+        let newFoodReview = { // create the review to go into the database
             review_id: document.Reviews[0] !== undefined ? document.Reviews[0]["review_id"] + 1 : 1,
             review_date: new Date(Date.now()).toISOString(),
             reviewer_id: "ABCDED",
@@ -73,7 +73,7 @@ async function getReview(diningHall) {
     try {
         let result = await server.reviews.findOne({"DiningHall": diningHall}); // gets the document from the db
         let response = []
-        for(let comment of result.Reviews){
+        for(let comment of result.Reviews){ //taking the reviews retreived from the database and puts them into a class definition that is used by the front-end
             let s = new Review(comment.review_id, new Date(comment.review_date).toDateString(), comment.reviewer_id, comment.overall, comment.description, comment.FoodQuality, 
                             comment.CustomerService, comment.Atmosphere, comment.Healthiness, comment.SeatAvailability,comment.Taste);
             response.push(s);
@@ -142,21 +142,6 @@ async function deleteReview(diningHall, foodReviewID) {
 
     return found;
 }
-
-// async function init() { // Since everyone is running Pouch on locally, seting up an init for db initialization.
-//     try {
-//         for (let i = 0; i < diningReview.length; i++) {   // looping through each object in the object of diningReview that is imported.
-//             await reviewDB.put({            // PUT a document with the id of the dining hall and a reviews array from the diningReview object
-//                 _id: diningReview[i].DiningName,
-//                 reviews: diningReview[i].Reviews,
-//             })
-//         }
-//         return ("Successful Initialization");
-//     }
-//     catch (error) {
-//         console.error(error);
-//     }
-// }
 
 // exporting the function for use in other js files
 export {
