@@ -20,10 +20,10 @@ async function loginFormSubmit(event) {
             if (request.redirected && request.url === "http://localhost:3000/") {
                 // save the user's state
                 sessionStorage.setItem("isAuthenticated", JSON.stringify(true));
+                window.location.replace(request.url);
             }
-            window.location.replace(request.url);
-        }).catch(error => {
-            console.log(error);
+        }).catch((error) => {
+            console.error(error);
         })
 }
 

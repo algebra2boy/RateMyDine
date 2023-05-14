@@ -11,8 +11,8 @@ const strategy = new LocalStrategy(async (userName, password, done) => {
         // cannot find the user 
         const user = await userDBUtils.findUser(server.users, userName);
         if (!user) {
-            console.log("invalid email");
-            return done(null, false, { message: 'Invalid email' });
+            console.log("invalid username");
+            return done(null, false, { message: 'Invalid username' });
         }
 
         // passoword is not correct
