@@ -31,18 +31,21 @@ buttons[1].addEventListener('click', () => {
 
 // below is where the profile page is being render
 async function renderProfile() {
-    const userName = window.location.href.split("/")[4];
+    const name = window.location.href.split("/")[4];
     try {
-        let userInfo   = await fetch(`http://localhost:3000/userinfo/${userName}`);
+        let userInfo   = await fetch(`http://localhost:3000/userinfo/${name}`);
         userInfo       = await userInfo.json();
-        console.log(userInfo);
+        
+        // deconstructing the values from the object
+        const { fullName, email, userName } = userInfo;
+        let infoList = [fullName, email, userName];
+
+        // dynamically change the user info 
+        info.forEach((element, index) => element.innerHTML = infoList[index]);
+        document.getElementById("profile-name").innerHTML = fullName;
     } catch (error) {
         console.error(error);
     }
-        
-    
 }
 
-
 await renderProfile();
-
