@@ -2,7 +2,7 @@ import express from "express";
 
 import * as dbUtils from "../DataBase/reviewDBUtils.js"; // helper for database CRUD
 import server from "../server.js";
-import { Hours, DiningHall } from "../MockData/classDefinitions.js";
+import { Hours, DiningHall, Review } from "../MockData/classDefinitions.js";
 
 const reviewRouter = express.Router();
 
@@ -46,12 +46,17 @@ reviewRouter.get("/review/:dininghall", async (req, res) => {
 
 // create a new food review for a particular dining hall
 reviewRouter.post("/review/:diningHall", async (req, res) => {
-    //grabs the body from the post requests
-    let diningHallReview = req.body.review; 
-    let diningHallName   = req.params.diningHall;
+    let diningHallReview = req.body; //grabs the body from the post requests
+    let diningHallName = req.params.diningHall;
+
+//     console.log(diningHallReview)
 
     let result = await dbUtils.createReview(diningHallName, diningHallReview);
-    res.send(result);
+    let rev_Date = new Date(result.review_date)
+    let revDate_arr = rev_Date.toDateString().split(" ");
+    let leObject = new Review(result.review_id, (revDate_arr[1]+" "+ rev_Date.getDate() + ", " + revDate_arr[3]) ,result.reviewer_id, result.overall, result.description, 
+                                result.FoodQuality, result.CustomerService, result.Atmosphere, result.Healthiness, result.SeatAvailability, result.Taste);
+    res.send(JSON.stringify(leObject));
 });
 
 // update an existing food review for a particular dining hall

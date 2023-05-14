@@ -17,10 +17,9 @@ function computeOverall(foodReview) {
  * @param {string} diningHall - the name of the dining hall that we want to insert a document into
  * @param {Review object} foodReview - the food review we wish to add to the dining hall  
  */
-async function createReview(diningHall, foodReview) {
+async function createReview(diningHall, review) {
     try {
         let document = await server.reviews.findOne( { "DiningHall": diningHall } ); // gets the document with id matching the dining hall.
-        let review   = JSON.parse(foodReview); // parses the document so the reviews can be accessed and updated with insertion of new review.
         let average  = computeOverall(review); // computes the average
         const { FoodQuality, CustomerService, Atmosphere, Healthiness, SeatAvailability, Taste, description } = review;
         let newFoodReview = {
@@ -41,7 +40,6 @@ async function createReview(diningHall, foodReview) {
             }
         };
         await server.reviews.updateOne(filter, updateDoc, options);
-
         // update the number of reviews in the diningInfo
         const infoDoc = await server.diningInfo.findOne( { "name": diningHall } );
         await server.diningInfo.updateOne(
@@ -136,8 +134,6 @@ async function deleteReview(diningHall, foodReviewID) {
 
     return found;
 }
-
-
 // exporting the function for use in other js files
 export {
     createReview,
