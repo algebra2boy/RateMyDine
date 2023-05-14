@@ -92,4 +92,18 @@ authRouter.get('/profile/:userName/',
     }
 );
 
+// router to return the information of a user including its fullname, email and username
+authRouter.get('/userinfo/:userName', async (req, res) => {
+    const userName = req.params.userName;
+    const userInfo = await server.users.findOne( {"userName": userName} );
+    if (userInfo) {
+        res.send(userInfo)
+    } else {
+        res.status(404).send({
+            message: `${userName} is not found`,
+            status: "failure",
+        });
+    }
+});
+
 export default authRouter;
