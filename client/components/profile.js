@@ -1,6 +1,6 @@
 // UI elements for editProfile
 // input fields to edit the names
-let edit_info  = ["edit-name", "edit-email", "edit-user"], info = ["name", "email", "user"], buttons = ["cancel", "save"];
+let edit_info  = ["edit-name", "edit-email"], info = ["name", "email"], buttons = ["cancel", "save"];
 
 edit_info = edit_info.map((element) => (document.getElementById(element)));
 info      = info.map((element) => (document.getElementById(element))); // before editing the info
@@ -42,6 +42,7 @@ async function renderProfile() {
 
         // dynamically change the user info 
         info.forEach((element, index) => element.innerHTML = infoList[index]);
+        document.getElementById("user").innerHTML = userName;
         document.getElementById("profile-name").innerHTML = fullName;
     } catch (error) {
         console.error(error);
