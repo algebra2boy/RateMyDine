@@ -121,6 +121,7 @@ function loadReviewButton(diningHall){
         event.preventDefault();
         console.log(inputElements.reduce((acc, e) => {acc[e.id] = e.value; return acc},{reviewer_id: 1236}))
         sendRequest();
+        location.reload();
     })
     //X button should close the pop-up by removing the class
     document.getElementById("xClose").addEventListener("click", () => {
