@@ -1,8 +1,10 @@
 import express from "express";
+import { validationResult } from "express-validator";
 import path from "path";
 import * as userDBUtils from "../../DataBase/userDBUtils.js";
 import server from "../../server.js";
 import passportAuth from "../authentication/passportAuth.js";
+import { ValidateSignupSchema } from "../../schema/authentication-schema.js";
 
 const authRouter = express.Router();
 const __dirname = path.resolve();
@@ -31,7 +33,17 @@ authRouter.get('/signup', (req, res) => {
 });
 
 // signup for submitting a form
-authRouter.post('/signup', async (req, res) => {
+authRouter.post('/signup', ValidateSignupSchema, async (req, res) => {
+
+    const errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+        return res.status(400).json({
+            errors  : errors.array(),
+            success : false
+        })
+    }
+
     const user = await userDBUtils.findUser(server.users, req.body.userName);
     if (user) {
         // making another account with the same email
