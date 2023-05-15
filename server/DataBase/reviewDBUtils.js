@@ -21,13 +21,13 @@ async function createReview(diningHall, review) {
     try {
         let document = await server.reviews.findOne( { "DiningHall": diningHall } ); // gets the document with id matching the dining hall.
         let average  = computeOverall(review); // computes the average
-        const { FoodQuality, CustomerService, Atmosphere, Healthiness, SeatAvailability, Taste, description } = review;
+        const { FoodQuality, CustomerService, Atmosphere, Healthiness, SeatAvailability, Taste, ReviewDescription } = review;
         let newFoodReview = {
             review_id: document.Reviews[0] !== undefined ? document.Reviews[0]["review_id"] + 1 : 1,
             review_date: new Date(Date.now()).toISOString(),
-            reviewer_id: "ABCDED"   , description     : description     ,   overall   : average   ,
-            FoodQuality: FoodQuality, CustomerService : CustomerService ,   Atmosphere: Atmosphere,
-            Healthiness: Healthiness, SeatAvailability: SeatAvailability,   Taste     : Taste
+            reviewer_id: "ABCDED"   , description     : ReviewDescription,   overall   : average   ,
+            FoodQuality: FoodQuality, CustomerService : CustomerService  ,   Atmosphere: Atmosphere,
+            Healthiness: Healthiness, SeatAvailability: SeatAvailability ,   Taste     : Taste
         };
         document.Reviews.unshift(newFoodReview); // adds the new review object to the front of the reviews array.
 
