@@ -140,7 +140,7 @@ function loadReviewButton(diningHall){
             headers: { "Content-Type": "application/json"},
             method: "POST",
             // this makes a object whose keys are the id, and values are the numbers if they are rating, string if it is description
-            body: JSON.stringify(inputElements.reduce((acc, e) => {acc[e.id] = e.value; return acc}, { reviewer_name: "mario" } ))
+            body: JSON.stringify(inputElements.reduce((acc, e) => {acc[e.id] = e.value; return acc}, { } ))
         }
         try {
             let response     = await fetch(`/review/${diningHall.name}`, options);
@@ -176,11 +176,10 @@ function loadReviewButton(diningHall){
     });
     document.getElementById("reviewForm").addEventListener("submit", (event) => {
         event.preventDefault();
-        console.log(inputElements.reduce((acc, e) => {acc[e.id] = e.value; return acc},{reviewer_name: "mario"}))
         sendRequest();
         // refresh the page after submitting a review
         location.reload();
-    })
+    });
     //X button should close the pop-up by removing the class
     document.getElementById("xClose").addEventListener("click", () => {
         popUp.classList.remove("popup-open");

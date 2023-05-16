@@ -16,8 +16,9 @@ function computeOverall(foodReview) {
  * Adds new review to the dining hall document in the database.
  * @param {string} diningHall - the name of the dining hall that we want to insert a document into
  * @param {Review object} foodReview - the food review we wish to add to the dining hall  
+ * @param {string} username - the username stored in the session, returned by the local strategy  
  */
-async function createReview(diningHall, review) {
+async function createReview(diningHall, review, username) {
     try {
         let document = await server.reviews.findOne( { "DiningHall": diningHall } ); // gets the document with id matching the dining hall.
         let overall  = computeOverall(review); // computes the average
@@ -28,7 +29,7 @@ async function createReview(diningHall, review) {
         let newFoodReview = {
             review_id: document.Reviews[0] !== undefined ? document.Reviews[0]["review_id"] + 1 : 1,
             review_date: new Date(Date.now()).toISOString(),
-            reviewer_name: "ABCDED"   , description     : ReviewDescription,   overall   : overall   ,
+            reviewer_name: username   , description     : ReviewDescription,   overall   : overall   ,
             FoodQuality  : FoodQuality, CustomerService : CustomerService  ,   Atmosphere: Atmosphere,
             Healthiness  : Healthiness, SeatAvailability: SeatAvailability ,   Taste     : Taste
         };
