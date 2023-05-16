@@ -51,6 +51,17 @@ async function loadPageInformation(){
         let comments   = await reviewsResponse.json();
 
         console.log(comments);
+
+        let authStat = sessionStorage.getItem("isAuthenticated");
+        authStat = JSON.parse(authStat);
+        console.log(authStat);
+        if(!authStat){
+            let revButton = document.getElementById("openPopup");
+            revButton.style.visibility = "hidden";
+            let header = document.getElementById("recent-header");
+            header.style.position = "absolute";
+            header.style.left="40%";
+        }
         
         loadUpperHalfText(diningHall);
 
