@@ -197,6 +197,7 @@ function fillComment(comment, commentData, diningHall){
     comment.getElementsByClassName('fraction')[0].innerHTML      = `${commentData.overall}/5 Stars`
     comment.getElementsByClassName('dining-name')[0].innerHTML   = diningHall;
     comment.getElementsByClassName('time')[0].innerHTML          = `Date published: ${commentData.review_date}`;
+    comment.getElementsByClassName('reviewID')[0].innerHTML      = `ID: ${commentData.review_ID}`;
 
     // Handle faces
     let changeFace = (face, rate) => {
