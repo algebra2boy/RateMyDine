@@ -140,11 +140,20 @@ function loadReviewButton(diningHall){
             headers: { "Content-Type": "application/json"},
             method: "POST",
             // this makes a object whose keys are the id, and values are the numbers if they are rating, string if it is description
-            body: JSON.stringify(inputElements.reduce((acc, e) => {acc[e.id] = e.value; return acc}, { reviewer_id: "1236" } ))
+            body: JSON.stringify(inputElements.reduce((acc, e) => {acc[e.id] = e.value; return acc}, { reviewer_name: "mario" } ))
         }
         try {
             let response     = await fetch(`/review/${diningHall.name}`, options);
             let reviews      = await response.json();
+            
+            // either does not pass the requirment or user is authenticated
+            if (response.status === 400) {
+                alert("user is not authenticated");
+                return;
+            } else if (response.status === 401) {
+                alert("Empty field for food ratings");
+                return;
+            }
             
             // load the most recent comment
             let recentCommentContainer = document.getElementById('recent-commment');
@@ -167,7 +176,7 @@ function loadReviewButton(diningHall){
     });
     document.getElementById("reviewForm").addEventListener("submit", (event) => {
         event.preventDefault();
-        console.log(inputElements.reduce((acc, e) => {acc[e.id] = e.value; return acc},{reviewer_id: 1236}))
+        console.log(inputElements.reduce((acc, e) => {acc[e.id] = e.value; return acc},{reviewer_name: "mario"}))
         sendRequest();
         // refresh the page after submitting a review
         location.reload();

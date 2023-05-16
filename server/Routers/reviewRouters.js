@@ -58,6 +58,7 @@ reviewRouter.post("/review/:diningHall", ValidateFoodReviewSchema,  async (req, 
             errors  : errors.array(),
             status  : "failure"  
         });
+        return;
     }
 
     // check if the user is authenticated
@@ -66,6 +67,7 @@ reviewRouter.post("/review/:diningHall", ValidateFoodReviewSchema,  async (req, 
             message: "user is not authorized to make a review",
             status : "failure"
         });
+        return;
     }
     
     let diningHallReview = req.body; //grabs the body from the post requests
