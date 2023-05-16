@@ -52,9 +52,7 @@ async function loadPageInformation(){
 
         console.log(comments);
 
-        let authStat = sessionStorage.getItem("isAuthenticated");
-        authStat = JSON.parse(authStat);
-        console.log(authStat);
+        let authStat = JSON.parse(sessionStorage.getItem("isAuthenticated"));
         if(!authStat){
             let revButton = document.getElementById("openPopup");
             revButton.style.visibility = "hidden";
