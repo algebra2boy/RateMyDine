@@ -121,10 +121,11 @@ authRouter.get('/userinfo/:userName', async (req, res) => {
 //router to update the information of a user's fullname and email using username
 authRouter.post('/userinfo/:userName', async (req, res) => {
     const userName = req.params.userName;
-    const userInfo = await server.users.findOne( {"userName": userName} );
+    const userInfo = await server.users.findOne( { "userName": userName } );
     if (userInfo) {
         const { fullName, email, userName } = req.body;
-        await server.users.updateOne({"userName": userName}, { $set: {
+        await server.users.updateOne( { "userName": userName }, 
+        { $set: {
             fullName: fullName,
             email: email
         }});

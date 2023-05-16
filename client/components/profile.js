@@ -41,8 +41,6 @@ async function renderProfile() {
     }
 }
 
-await renderProfile();
-
 //below is where the profile page is being updated
 async function updateProfile() {
     const name = window.location.href.split("/")[4];
@@ -53,8 +51,8 @@ async function updateProfile() {
     };
     try {
         await fetch(`http://localhost:3000/userinfo/${name}`, options);
-    } catch (err) {
-        console.log(err);
+    } catch (error) {
+        console.error(error);
     }
 }
 
@@ -65,3 +63,5 @@ buttons[1].addEventListener('click', async() => {
     buttons.forEach((button)    => button.style.visibility = "hidden");
     await updateProfile();
 });
+
+await renderProfile();
