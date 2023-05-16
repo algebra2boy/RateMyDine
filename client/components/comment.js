@@ -22,7 +22,7 @@ class comment extends HTMLElement {
             padding: 30px;
         ">
 
-            <div class="left-container" style="width: 450px;">
+            <div class="left-container" style="position: relative; width: 450px;">
 
                 <div class="row word">
                     <div class="column dining-name">Hampshire</div>
@@ -49,7 +49,7 @@ class comment extends HTMLElement {
                     maxime autem odit. Lorem ipsum dolor sit, amet consectetur adipisicing elit.</div>
                 </div>
 
-                <div class="row">
+                <div class="row" style="position: absolute; bottom: 0; width: 100%">
                     <div style="text-align:left; position: relative; bottom: 10%; left: 0;" class="column time">Date: 4/21/2023</div>
                     <div style="bottom: 10%; max-width:20%" class = "column reviewID">ID: 1111</div>
                 </div>
