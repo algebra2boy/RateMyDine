@@ -4,6 +4,9 @@ import * as dbUtils from "../DataBase/reviewDBUtils.js"; // helper for database 
 import server from "../server.js";
 import { Hours, DiningHall, Review } from "../MockData/classDefinitions.js";
 
+import { validationResult } from "express-validator";
+import { ValidateFoodReviewSchema } from "../schema/foodReviewCard-schema.js";
+
 const reviewRouter = express.Router();
 
 // retrieve dining hall info such as name and count of reviews
@@ -45,7 +48,18 @@ reviewRouter.get("/review/:dininghall", async (req, res) => {
 });
 
 // create a new food review for a particular dining hall
-reviewRouter.post("/review/:diningHall", async (req, res) => {
+reviewRouter.post("/review/:diningHall", ValidateFoodReviewSchema,  async (req, res) => {
+
+    // does not meet all the required
+    const errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+        return res.status(400).json({
+            errors  : errors.array(),
+            success : false
+        })
+    }
+
     let diningHallReview = req.body; //grabs the body from the post requests
     let diningHallName = req.params.diningHall;
 
