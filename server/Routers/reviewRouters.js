@@ -50,25 +50,31 @@ reviewRouter.get("/review/:dininghall", async (req, res) => {
 // create a new food review for a particular dining hall
 reviewRouter.post("/review/:diningHall", ValidateFoodReviewSchema,  async (req, res) => {
 
-    // does not meet all the required
+    // does not meet all the required (missing reviewer_name, food rating)
     const errors = validationResult(req);
 
     if (!errors.isEmpty()) {
-        return res.status(400).json({
+        res.status(400).json({
             errors  : errors.array(),
-            success : false
-        })
+            status  : "failure"  
+        });
     }
 
+    // check if the user is authenticated
+    if (!req.isAuthenticated()) {
+        res.status(401).json({
+            message: "user is not authorized to make a review",
+            status : "failure"
+        });
+    }
+    
     let diningHallReview = req.body; //grabs the body from the post requests
-    let diningHallName = req.params.diningHall;
+    let diningHallName   = req.params.diningHall;
 
-//     console.log(diningHallReview)
-
-    let result = await dbUtils.createReview(diningHallName, diningHallReview);
-    let rev_Date = new Date(result.review_date)
+    let result      = await dbUtils.createReview(diningHallName, diningHallReview);
+    let rev_Date    = new Date(result.review_date)
     let revDate_arr = rev_Date.toDateString().split(" ");
-    let leObject = new Review(result.review_id, (revDate_arr[1]+" "+ rev_Date.getDate() + ", " + revDate_arr[3]) ,result.reviewer_name, result.overall, result.description, 
+    let leObject    = new Review(result.review_id, (revDate_arr[1]+" "+ rev_Date.getDate() + ", " + revDate_arr[3]) ,result.reviewer_name, result.overall, result.description, 
                                 result.FoodQuality, result.CustomerService, result.Atmosphere, result.Healthiness, result.SeatAvailability, result.Taste);
     res.send(JSON.stringify(leObject));
 });
