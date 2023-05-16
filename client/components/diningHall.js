@@ -148,10 +148,10 @@ function loadReviewButton(diningHall){
             
             // either does not pass the requirment or user is authenticated
             if (response.status === 400) {
-                alert("user is not authenticated");
+                alert("Empty field for food ratings"); 
                 return;
             } else if (response.status === 401) {
-                alert("Empty field for food ratings");
+                alert("user is not authenticated");
                 return;
             }
             

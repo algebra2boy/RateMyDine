@@ -52,11 +52,14 @@ reviewRouter.post("/review/:diningHall", ValidateFoodReviewSchema,  async (req, 
 
     // does not meet all the required food rating
     const errors = validationResult(req);
-
+    console.log(errors);
     if (!errors.isEmpty()) {
         res.status(400).json( { errors: errors.array(), status: "failure" } );
         return;
-    } else if (!req.isAuthenticated()) { // user is not authenticated
+    } 
+
+    console.log(req.isAuthenticated());
+    if (!req.isAuthenticated()) { // user is not authenticated
         res.status(401).json( { message: "user is not authorized to make a review", status : "failure" } );
         return;
     }
@@ -66,9 +69,9 @@ reviewRouter.post("/review/:diningHall", ValidateFoodReviewSchema,  async (req, 
     let diningHallName   = req.params.diningHall;
 
     let result      = await dbUtils.createReview(diningHallName, diningHallReview, req.user);
-    let review_Date    = new Date(result.review_date)
+    let rev_Date    = new Date(result.review_date)
     let revDate_arr = rev_Date.toDateString().split(" ");
-    let leObject    = new Review(result.review_id, (revDate_arr[1]+" "+ review_Date.getDate() + ", " + revDate_arr[3]) ,result.reviewer_name, result.overall, result.description, 
+    let leObject    = new Review(result.review_id, (revDate_arr[1]+" "+ rev_Date.getDate() + ", " + revDate_arr[3]) ,result.reviewer_name, result.overall, result.description, 
                                 result.FoodQuality, result.CustomerService, result.Atmosphere, result.Healthiness, result.SeatAvailability, result.Taste);
     res.send(JSON.stringify(leObject));
 });
