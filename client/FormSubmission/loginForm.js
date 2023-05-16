@@ -6,7 +6,7 @@ const password = document.getElementById("password");
 // set up session storage
 sessionStorage.setItem("isAuthenticated", JSON.stringify(false));
 
-async function loginFormSubmit(event) {
+function loginFormSubmit(event) {
     // prevent it auto refreshes the screen
     event.preventDefault();
     // specifying the fetch option
@@ -15,7 +15,7 @@ async function loginFormSubmit(event) {
         method: "POST",
         body: JSON.stringify({ username: username.value, password: password.value })
     };
-    await fetch("http://localhost:3000/login", options)
+    fetch("http://localhost:3000/login", options)
         .then((request) => {
             if (request.redirected && request.url === "http://localhost:3000/") {
                 // save the user's state

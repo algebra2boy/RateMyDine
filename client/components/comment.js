@@ -50,7 +50,8 @@ class comment extends HTMLElement {
                 </div>
 
                 <div class="row">
-                    <div style="text-align:left; position: relative; bottom: 10%; left: 0;" class="column time" id="time">Date: 4/21/2023</div>
+                    <div style="text-align:left; position: relative; bottom: 10%; left: 0;" class="column time">Date: 4/21/2023</div>
+                    <div style="bottom: 10%; max-width:20%" class = "column reviewID">ID: 1111</div>
                 </div>
             </div>
             

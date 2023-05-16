@@ -12,14 +12,15 @@ login_btn.innerHTML = isAuthenticated  ? "Profile" : "Log in";
 signup_btn.innerHTML = isAuthenticated ? "Log out" : "Sign up";
 login_btn.href = isAuthenticated   ? "/profile" : "/login";
 signup_btn.href = isAuthenticated  ? "/logout" : "/signup";
+
 // destory session
 if (isAuthenticated) {
     signup_btn.addEventListener("click", destorySession);
 
-    async function destorySession(event) {
+    function destorySession(event) {
         event.preventDefault();
         const options = { headers: { "Content-Type": "application/json" }, method: "POST" };
-        await fetch("http://localhost:3000/logout", options)
+        fetch("http://localhost:3000/logout", options)
             .then((request) => {
                 if (request.redirected) {
                     sessionStorage.setItem("isAuthenticated", JSON.stringify(false));
