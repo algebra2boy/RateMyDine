@@ -21,14 +21,6 @@ buttons[0].addEventListener('click', () => {
     buttons.map((element)   => element.style.visibility = "hidden");
 });
 
-// save button 
-buttons[1].addEventListener('click', () => {
-    info.map((element, index)   => { element.removeAttribute("style"); element.innerHTML = edit_info[index].value } );
-    edit_info.forEach((element) => element.type  = "hidden" );
-    buttons.forEach((button)    => button.style.visibility = "hidden");
-});
-
-
 // below is where the profile page is being render
 async function renderProfile() {
     const name = window.location.href.split("/")[4];
@@ -50,3 +42,26 @@ async function renderProfile() {
 }
 
 await renderProfile();
+
+//below is where the profile page is being updated
+async function updateProfile() {
+    const name = window.location.href.split("/")[4];
+    const options = {
+        headers: { "Content-Type": "application/json" },
+        method: "POST",
+        body: JSON.stringify({ fullName: document.getElementById("edit-name").value, email: document.getElementById("edit-email").value, userName: name })
+    };
+    try {
+        await fetch(`http://localhost:3000/userinfo/${name}`, options);
+    } catch (err) {
+        console.log(err);
+    }
+}
+
+// save button 
+buttons[1].addEventListener('click', async() => {
+    info.map((element, index)   => { element.removeAttribute("style"); element.innerHTML = edit_info[index].value } );
+    edit_info.forEach((element) => element.type  = "hidden" );
+    buttons.forEach((button)    => button.style.visibility = "hidden");
+    await updateProfile();
+});
