@@ -138,4 +138,9 @@ authRouter.post('/userinfo/:userName', async (req, res) => {
     }
 });
 
+// check remote server is remote session is active 
+authRouter.get('/session', (req, res) => {
+ res.send(req.session);
+});
+
 export default authRouter;

@@ -29,8 +29,8 @@ class Server {
                 mongoUrl: this.dbURL,
                 ttl: 15 * 60, // 15 minutes. Default
                 autoRemove: 'native',
-                autoRemoveInterval: 10, // take care of removing expired sessions every 10 minutes,
-                dbName: "test"
+                autoRemoveInterval: 15, // take care of removing expired sessions every 15 minutes,
+                dbName: "Session"
             })
         }
 
