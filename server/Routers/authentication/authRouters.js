@@ -1,8 +1,10 @@
 import express from "express";
+import { validationResult } from "express-validator";
 import path from "path";
 import * as userDBUtils from "../../DataBase/userDBUtils.js";
 import server from "../../server.js";
 import passportAuth from "../authentication/passportAuth.js";
+import { ValidateSignupSchema } from "../../schema/authentication-schema.js";
 
 const authRouter = express.Router();
 const __dirname = path.resolve();
@@ -31,7 +33,17 @@ authRouter.get('/signup', (req, res) => {
 });
 
 // signup for submitting a form
-authRouter.post('/signup', async (req, res) => {
+authRouter.post('/signup', ValidateSignupSchema, async (req, res) => {
+
+    const errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+        return res.status(400).json({
+            errors  : errors.array(),
+            success : false
+        })
+    }
+
     const user = await userDBUtils.findUser(server.users, req.body.userName);
     if (user) {
         // making another account with the same email
@@ -97,6 +109,26 @@ authRouter.get('/userinfo/:userName', async (req, res) => {
     const userName = req.params.userName;
     const userInfo = await server.users.findOne( {"userName": userName} );
     if (userInfo) {
+        res.send(userInfo)
+    } else {
+        res.status(404).send({
+            message: `${userName} is not found`,
+            status: "failure",
+        });
+    }
+});
+
+//router to update the information of a user's fullname and email using username
+authRouter.post('/userinfo/:userName', async (req, res) => {
+    const userName = req.params.userName;
+    const userInfo = await server.users.findOne( { "userName": userName } );
+    if (userInfo) {
+        const { fullName, email, userName } = req.body;
+        await server.users.updateOne( { "userName": userName }, 
+        { $set: {
+            fullName: fullName,
+            email: email
+        }});
         res.send(userInfo)
     } else {
         res.status(404).send({

@@ -24,11 +24,11 @@ class DiningHall {
 }
 
 class Review {
-    constructor(reviewID, postTime, userID, overAllStars, description, foodQuality, customerService, atmosphere, healthiness, seatAvailability, taste) {
-        this.id = reviewID;
-        this.postTime = postTime;
-        this.userId = userID;
-        this.overall = overAllStars;
+    constructor(reviewID, review_date, reviewer_id, overall, description, foodQuality, customerService, atmosphere, healthiness, seatAvailability, taste) {
+        this.reviewID = reviewID;
+        this.review_date = review_date;
+        this.reviewer_id = reviewer_id;
+        this.overall = overall;
         this.description = description;
         this.foodQuality = foodQuality;
         this.customerService = customerService;

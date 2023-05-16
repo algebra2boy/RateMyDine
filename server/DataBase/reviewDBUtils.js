@@ -20,12 +20,12 @@ function computeOverall(foodReview) {
 async function createReview(diningHall, review) {
     try {
         let document = await server.reviews.findOne( { "DiningHall": diningHall } ); // gets the document with id matching the dining hall.
-        let average  = computeOverall(review); // computes the average
+        let overall  = computeOverall(review); // computes the average
         const { FoodQuality, CustomerService, Atmosphere, Healthiness, SeatAvailability, Taste, ReviewDescription } = review;
         let newFoodReview = {
             review_id: document.Reviews[0] !== undefined ? document.Reviews[0]["review_id"] + 1 : 1,
             review_date: new Date(Date.now()).toISOString(),
-            reviewer_id: "ABCDED"   , description     : ReviewDescription,   overall   : average   ,
+            reviewer_id: "ABCDED"   , description     : ReviewDescription,   overall   : overall   ,
             FoodQuality: FoodQuality, CustomerService : CustomerService  ,   Atmosphere: Atmosphere,
             Healthiness: Healthiness, SeatAvailability: SeatAvailability ,   Taste     : Taste
         };
@@ -45,8 +45,7 @@ async function createReview(diningHall, review) {
         await server.diningInfo.updateOne(
             { "name": diningHall }, 
             {
-                $set:
-                    { numReviews : infoDoc.numReviews + 1 }
+                $set: { numReviews : infoDoc.numReviews + 1 }
             });
         const updatedInfoDoc = await server.reviews.findOne( { "DiningHall" : diningHall } )
         return JSON.stringify(updatedInfoDoc);
