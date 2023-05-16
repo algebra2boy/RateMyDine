@@ -24,9 +24,9 @@
 an example of comment in line 33:
 [
     {
-      "id": 1248,
-      "postTime": "Sun May 14 2023",
-      "user_ID": "ABCDED",
+      "reviewID": 1248,
+      "review_date": "Sun May 14 2023",
+      "reviewer_id": "ABCDED",
       "description": "Food is not bad. Feel that finding seats can be difficult, have to make sure that you include additional time just to find seats.",
       "overall": 4,
       "FoodQuality": "4",
@@ -196,7 +196,7 @@ function fillComment(comment, commentData, diningHall){
     comment.getElementsByClassName("desc")[0].innerHTML          = commentData.description;
     comment.getElementsByClassName('fraction')[0].innerHTML      = `${commentData.overall}/5 Stars`
     comment.getElementsByClassName('dining-name')[0].innerHTML   = diningHall;
-    comment.getElementsByClassName('time')[0].innerHTML          = `Date published: ${commentData.postTime}`;
+    comment.getElementsByClassName('time')[0].innerHTML          = `Date published: ${commentData.review_date}`;
 
     // Handle faces
     let changeFace = (face, rate) => {
