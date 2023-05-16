@@ -21,6 +21,9 @@ async function createReview(diningHall, review) {
     try {
         let document = await server.reviews.findOne( { "DiningHall": diningHall } ); // gets the document with id matching the dining hall.
         let overall  = computeOverall(review); // computes the average
+        
+        //implement check for login here?
+
         const { FoodQuality, CustomerService, Atmosphere, Healthiness, SeatAvailability, Taste, ReviewDescription } = review;
         let newFoodReview = {
             review_id: document.Reviews[0] !== undefined ? document.Reviews[0]["review_id"] + 1 : 1,
@@ -41,7 +44,7 @@ async function createReview(diningHall, review) {
         };
         await server.reviews.updateOne(filter, updateDoc, options);
         // update the number of reviews in the diningInfo
-        const infoDoc = await server.diningInfo.findOne( { "name": diningHall } );
+        const infoDoc = await server.diningInfo.findOne( { "name": diningHall });
         await server.diningInfo.updateOne(
             { "name": diningHall }, 
             {
@@ -64,8 +67,8 @@ async function getReview(diningHall) {
         let result = await server.reviews.findOne( { "DiningHall": diningHall } ); // gets the document from the db
         let response = []
         for(let comment of result.Reviews){
-            const { review_id, review_date, reviewer_name, overall, description, FoodQuality, CustomerService, Atmosphere, Healthiness, SeatAvailability, Taste } = comment;
-            let s = new Review(review_id, new Date(review_date).toDateString(), reviewer_name, overall, description, FoodQuality, CustomerService, Atmosphere, Healthiness, SeatAvailability, Taste);
+            const { review_id, review_date, reviewer_id, overall, description, FoodQuality, CustomerService, Atmosphere, Healthiness, SeatAvailability, Taste } = comment;
+            let s = new Review(review_id, new Date(review_date).toDateString(), reviewer_id, overall, description, FoodQuality, CustomerService, Atmosphere, Healthiness, SeatAvailability, Taste);
             response.push(s);
         }
         return JSON.stringify(response); 
