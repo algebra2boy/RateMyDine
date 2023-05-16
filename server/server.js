@@ -21,8 +21,8 @@ class Server {
 
         this.sessionConfig = {
             secret: process.env.SECRETKEY || 'MYFRIENDISACAT',
-            resave: false, // don't create session until something stored
-            saveUninitialized: false, //don't save session if unmodified
+            resave: false, // determines whether the session should be saved even if unmodified.
+            saveUninitialized: false, // whether a new, uninitialized session should be saved to the store.
             // this stores the session in the database
             // documentation: https://github.com/jdesboeufs/connect-mongo#express-or-connect-integration
             store: MongoStore.create({

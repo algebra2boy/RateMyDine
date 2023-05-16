@@ -16,18 +16,22 @@ function computeOverall(foodReview) {
  * Adds new review to the dining hall document in the database.
  * @param {string} diningHall - the name of the dining hall that we want to insert a document into
  * @param {Review object} foodReview - the food review we wish to add to the dining hall  
+ * @param {string} username - the username stored in the session, returned by the local strategy  
  */
-async function createReview(diningHall, review) {
+async function createReview(diningHall, review, username) {
     try {
         let document = await server.reviews.findOne( { "DiningHall": diningHall } ); // gets the document with id matching the dining hall.
         let overall  = computeOverall(review); // computes the average
+        
+        //implement check for login here?
+
         const { FoodQuality, CustomerService, Atmosphere, Healthiness, SeatAvailability, Taste, ReviewDescription } = review;
         let newFoodReview = {
             review_id: document.Reviews[0] !== undefined ? document.Reviews[0]["review_id"] + 1 : 1,
             review_date: new Date(Date.now()).toISOString(),
-            reviewer_id: "ABCDED"   , description     : ReviewDescription,   overall   : overall   ,
-            FoodQuality: FoodQuality, CustomerService : CustomerService  ,   Atmosphere: Atmosphere,
-            Healthiness: Healthiness, SeatAvailability: SeatAvailability ,   Taste     : Taste
+            reviewer_name: username   , description     : ReviewDescription,   overall   : overall   ,
+            FoodQuality  : FoodQuality, CustomerService : CustomerService  ,   Atmosphere: Atmosphere,
+            Healthiness  : Healthiness, SeatAvailability: SeatAvailability ,   Taste     : Taste
         };
         document.Reviews.unshift(newFoodReview); // adds the new review object to the front of the reviews array.
 
@@ -41,13 +45,13 @@ async function createReview(diningHall, review) {
         };
         await server.reviews.updateOne(filter, updateDoc, options);
         // update the number of reviews in the diningInfo
-        const infoDoc = await server.diningInfo.findOne( { "name": diningHall } );
+        const infoDoc = await server.diningInfo.findOne( { "name": diningHall });
         await server.diningInfo.updateOne(
             { "name": diningHall }, 
             {
                 $set: { numReviews : infoDoc.numReviews + 1 }
             });
-        const updatedInfoDoc = await server.reviews.findOne( { "DiningHall" : diningHall } )
+        const updatedInfoDoc = await server.reviews.findOne( { "DiningHall" : diningHall } );
         return JSON.stringify(updatedInfoDoc);
     } catch (error) {
         console.error(error);

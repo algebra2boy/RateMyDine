@@ -140,11 +140,20 @@ function loadReviewButton(diningHall){
             headers: { "Content-Type": "application/json"},
             method: "POST",
             // this makes a object whose keys are the id, and values are the numbers if they are rating, string if it is description
-            body: JSON.stringify(inputElements.reduce((acc, e) => {acc[e.id] = e.value; return acc}, { reviewer_id: "1236" } ))
+            body: JSON.stringify(inputElements.reduce((acc, e) => {acc[e.id] = e.value; return acc}, { } ))
         }
         try {
             let response     = await fetch(`/review/${diningHall.name}`, options);
             let reviews      = await response.json();
+            
+            // either does not pass the requirment or user is authenticated
+            if (response.status === 400) {
+                alert("Empty field for food ratings"); 
+                return;
+            } else if (response.status === 401) {
+                alert("user is not authenticated");
+                return;
+            }
             
             // load the most recent comment
             let recentCommentContainer = document.getElementById('recent-commment');
@@ -167,11 +176,10 @@ function loadReviewButton(diningHall){
     });
     document.getElementById("reviewForm").addEventListener("submit", (event) => {
         event.preventDefault();
-        console.log(inputElements.reduce((acc, e) => {acc[e.id] = e.value; return acc},{reviewer_id: 1236}))
         sendRequest();
         // refresh the page after submitting a review
         location.reload();
-    })
+    });
     //X button should close the pop-up by removing the class
     document.getElementById("xClose").addEventListener("click", () => {
         popUp.classList.remove("popup-open");
@@ -197,6 +205,7 @@ function fillComment(comment, commentData, diningHall){
     comment.getElementsByClassName('fraction')[0].innerHTML      = `${commentData.overall}/5 Stars`
     comment.getElementsByClassName('dining-name')[0].innerHTML   = diningHall;
     comment.getElementsByClassName('time')[0].innerHTML          = `Date published: ${commentData.review_date}`;
+    comment.getElementsByClassName('reviewID')[0].innerHTML      = `ID: ${commentData.review_ID}`;
 
     // Handle faces
     let changeFace = (face, rate) => {

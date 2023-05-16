@@ -24,10 +24,10 @@ class DiningHall {
 }
 
 class Review {
-    constructor(reviewID, review_date, reviewer_id, overall, description, foodQuality, customerService, atmosphere, healthiness, seatAvailability, taste) {
-        this.reviewID = reviewID;
+    constructor(reviewID, review_date, reviewer_name, overall, description, foodQuality, customerService, atmosphere, healthiness, seatAvailability, taste) {
+        this.review_ID = reviewID;
         this.review_date = review_date;
-        this.reviewer_id = reviewer_id;
+        this.reviewer_name = reviewer_name;
         this.overall = overall;
         this.description = description;
         this.foodQuality = foodQuality;
