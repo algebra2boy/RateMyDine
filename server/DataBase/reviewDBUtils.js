@@ -69,7 +69,7 @@ async function getReview(diningHall) {
         let response = []
         for(let comment of result.Reviews){
             const { review_id, review_date, reviewer_id, overall, description, FoodQuality, CustomerService, Atmosphere, Healthiness, SeatAvailability, Taste } = comment;
-            let s = new Review(review_id, new Date(review_date).toDateString(), reviewer_id, overall, description, FoodQuality, CustomerService, Atmosphere, Healthiness, SeatAvailability, Taste);
+            let s = new Review(review_id, new Date(review_date).toDateString(), reviewer_id, overall, description, FoodQuality, CustomerService, Atmosphere, Healthiness, SeatAvailability, Taste, diningHall);
             response.push(s);
         }
         return JSON.stringify(response); 
@@ -137,10 +137,45 @@ async function deleteReview(diningHall, foodReviewID) {
 
     return found;
 }
+
+/**
+ * find all the reviewID that belongs to the user
+ * @param  {string}  username          -  name of the user
+ * @return {Review Object[]} Reviews   -  an array of reviews that match with username 
+ */
+async function findAllReviews(username) {
+    let reviewsArrayBelongToUSER = [];
+    let documents = await server.reviews.find({}).toArray();
+    // iterate through each dining hall
+    for (let i = 0; i < documents.length; ++i ) {
+        const diningHall = documents[i];
+        const reviewOfOneDiningHall = diningHall.Reviews;
+
+        // iterate through each reviews in a dining hall
+        for (let j = 0; j < reviewOfOneDiningHall.length; ++j) {
+            const review  = reviewOfOneDiningHall[j];
+            if (review["reviewer_name"] === username) {
+                
+                // deconstructing the review 
+                const { review_id, review_date, description, overall, FoodQuality, CustomerService, Atmosphere, Healthiness, SeatAvailability, Taste } = review;
+                let review_Date     = new Date(review_date)
+                let revDate_arr     = review_Date.toDateString().split(" ");
+                const reviewObject = new Review(review_id, (revDate_arr[1]+" "+ review_Date.getDate() + ", " + revDate_arr[3]) , username, overall, description, 
+                FoodQuality, CustomerService, Atmosphere, Healthiness, SeatAvailability, Taste, diningHall.DiningHall);
+                reviewsArrayBelongToUSER.push(reviewObject);
+            }
+        }
+
+    }
+    return reviewsArrayBelongToUSER;
+}
+
+
 // exporting the function for use in other js files
 export {
     createReview,
     getReview,
     updateReview,
     deleteReview,
+    findAllReviews
 }

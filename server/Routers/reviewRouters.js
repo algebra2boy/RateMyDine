@@ -72,7 +72,7 @@ reviewRouter.post("/review/:diningHall", ValidateFoodReviewSchema,  async (req, 
     let rev_Date    = new Date(result.review_date)
     let revDate_arr = rev_Date.toDateString().split(" ");
     let leObject    = new Review(result.review_id, (revDate_arr[1]+" "+ rev_Date.getDate() + ", " + revDate_arr[3]) ,result.reviewer_name, result.overall, result.description, 
-                                result.FoodQuality, result.CustomerService, result.Atmosphere, result.Healthiness, result.SeatAvailability, result.Taste);
+                                result.FoodQuality, result.CustomerService, result.Atmosphere, result.Healthiness, result.SeatAvailability, result.Taste, diningHallName);
     res.send(JSON.stringify(leObject));
 });
 
@@ -97,5 +97,13 @@ reviewRouter.delete("/review/:dininghall/:reviewID", async (req, res) => {
     let result = await dbUtils.deleteReview(diningHallName, foodReviewID);
     res.send(result);
 });
+
+// find all the reviewID that belongs to the user
+reviewRouter.get("/review/user/:username", async (req, res) => {
+
+    let username = req.params.username;
+    let result   = await dbUtils.findAllReviews(username);
+    res.send(result);
+}) 
 
 export default reviewRouter;
