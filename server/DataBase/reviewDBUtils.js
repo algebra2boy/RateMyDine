@@ -25,9 +25,9 @@ async function createReview(diningHall, review) {
         let newFoodReview = {
             review_id: document.Reviews[0] !== undefined ? document.Reviews[0]["review_id"] + 1 : 1,
             review_date: new Date(Date.now()).toISOString(),
-            reviewer_id: "ABCDED"   , description     : ReviewDescription,   overall   : overall   ,
-            FoodQuality: FoodQuality, CustomerService : CustomerService  ,   Atmosphere: Atmosphere,
-            Healthiness: Healthiness, SeatAvailability: SeatAvailability ,   Taste     : Taste
+            reviewer_name: "ABCDED"   , description     : ReviewDescription,   overall   : overall   ,
+            FoodQuality  : FoodQuality, CustomerService : CustomerService  ,   Atmosphere: Atmosphere,
+            Healthiness  : Healthiness, SeatAvailability: SeatAvailability ,   Taste     : Taste
         };
         document.Reviews.unshift(newFoodReview); // adds the new review object to the front of the reviews array.
 
@@ -64,8 +64,8 @@ async function getReview(diningHall) {
         let result = await server.reviews.findOne( { "DiningHall": diningHall } ); // gets the document from the db
         let response = []
         for(let comment of result.Reviews){
-            const { review_id, review_date, reviewer_id, overall, description, FoodQuality, CustomerService, Atmosphere, Healthiness, SeatAvailability, Taste } = comment;
-            let s = new Review(review_id, new Date(review_date).toDateString(), reviewer_id, overall, description, FoodQuality, CustomerService, Atmosphere, Healthiness, SeatAvailability, Taste);
+            const { review_id, review_date, reviewer_name, overall, description, FoodQuality, CustomerService, Atmosphere, Healthiness, SeatAvailability, Taste } = comment;
+            let s = new Review(review_id, new Date(review_date).toDateString(), reviewer_name, overall, description, FoodQuality, CustomerService, Atmosphere, Healthiness, SeatAvailability, Taste);
             response.push(s);
         }
         return JSON.stringify(response); 
