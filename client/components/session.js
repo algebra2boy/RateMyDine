@@ -30,7 +30,7 @@ function resetToDefault() {
 }
 
 // user is authenticated
-if (JSON.stringify(sessionStorage.getItem("isAuthenticated"))) {
+if (JSON.parse(sessionStorage.getItem("isAuthenticated"))) {
 
     signup_btn.addEventListener("click", destorySession);
 
