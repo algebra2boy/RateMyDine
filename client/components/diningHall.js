@@ -38,30 +38,27 @@ an example of comment in line 33:
     }
 ]
 */
+import  * as commentLoader from './commentLoader.js' ;
 
 async function loadPageInformation(){
     try {
-        const diningHallName = window.location.href.split("/")[3];
-        const [diningHallResponse, reviewsResponse] = await Promise.all([
-            fetch(`/info/${diningHallName}`),
-            fetch(`/review/${diningHallName}`)
-        ]);
+        const diningHallName        = window.location.href.split("/")[3];
+        const diningHallResponse    = await fetch(`/info/${diningHallName}`);
+        const reviewsResponse       = await fetch(`/review/${diningHallName}`);
 
         let diningHall = await diningHallResponse.json(); // this receives a DiningHall object
         let comments   = await reviewsResponse.json();
-
-        console.log(comments);
         
         loadUpperHalfText(diningHall);
 
         loadReviewButton(diningHall);
 
-        loadComments(comments[0], document.getElementById('recent-comment'), diningHall.name);
+        commentLoader.loadComments(comments[0], document.getElementById('recent-comment'), diningHall.name);
         
-        batchLoadComments(comments, document.getElementById('comment-section'), diningHall.name, 5);
+        commentLoader.batchLoadComments(comments, document.getElementById('comment-section'), diningHall.name, 5);
 
         document.getElementById('see-more').addEventListener('click', () => {
-            batchLoadComments(comments, document.getElementById('comment-section'), diningHall.name, 5);
+            commentLoader.batchLoadComments(comments, document.getElementById('comment-section'), diningHall.name, 5);
             if(comments.length === 0) {
                 document.getElementById('see-more').innerHTML = "";
             }
@@ -74,24 +71,6 @@ async function loadPageInformation(){
     }
 }
 
-// loads a specified amount of comments from the array of comments into the specified container and removes them from the comment list.
-// batchLoadComments(comments[]: Review Object, container: <HTML Object>, diningHallName: string, numComments: int) => void
-function batchLoadComments(comments, container, diningHallName, numComments){
-    let i = 0;
-    const numLoad = Math.min(comments.length, numComments);
-    while(i < numLoad){
-        loadComments(comments.shift(), container, diningHallName);
-        i++;
-    }
-}
-
-//Loads a comment from the array of comments into the specified container.
-//loadComments(comments: Review Object, container: <HTML Object>, diningHallName: string) => void
-export function loadComments(comment, container, diningHallName){
-    let commentComponent = document.createElement('comment-component');
-    container.appendChild(commentComponent);
-    fillComment(commentComponent, comment, diningHallName);
-}
 
 // loadUpperHalfText(diningHall: diningHall Object) => void
 function loadUpperHalfText(diningHall){
@@ -158,7 +137,7 @@ function loadReviewButton(diningHall){
             // load the most recent comment
             let recentCommentContainer = document.getElementById('recent-commment');
             recentCommentContainer.innerHTML = "";
-            loadComments(reviews, recentCommentContainer, diningHall.name);
+            commentLoader.loadComments(reviews, recentCommentContainer, diningHall.name);
         } catch (error){
             console.error(error);
         }
@@ -184,47 +163,6 @@ function loadReviewButton(diningHall){
     document.getElementById("xClose").addEventListener("click", () => {
         popUp.classList.remove("popup-open");
     });
-}
-
-// used to populate individual <comment-component>
-// fillComment(comment: <comment-component>, commentData: Review object, diningHall: DiningHall object) => void
-function fillComment(comment, commentData, diningHall){
-
-    // helper function to add the "active" class to each html element that is a star within spec of commentData
-    // fillStars(elem: HTML Element, field: string) => void
-    function fillStars(elem, field){
-        let stars = Array.from(elem.getElementsByClassName("fa-star"));
-        stars.length = commentData[field];
-        stars.forEach((x) => x.classList.add('active'));
-    }
-
-    // POPULATE LEFT CONTAINER EXCEPT OVERALL STARS
-
-    // Handle text
-    comment.getElementsByClassName("desc")[0].innerHTML          = commentData.description;
-    comment.getElementsByClassName('fraction')[0].innerHTML      = `${commentData.overall}/5 Stars`
-    comment.getElementsByClassName('dining-name')[0].innerHTML   = diningHall;
-    comment.getElementsByClassName('time')[0].innerHTML          = `Date published: ${commentData.review_date}`;
-    comment.getElementsByClassName('reviewID')[0].innerHTML      = `ID: ${commentData.review_ID}`;
-
-    // Handle faces
-    let changeFace = (face, rate) => {
-        comment.getElementsByClassName('face')[0].classList.add(face); 
-        comment.getElementsByClassName('rating')[0].innerHTML = rate;
-    };
-    
-    if (commentData.overall > 3){
-        changeFace('fa-smile', "GREAT!");
-    } else if (commentData.overall === 3){
-        changeFace('fa-meh', "Meh.");
-    } else {
-        changeFace('fa-frown', 'Horrible');
-    }
-
-    //POPULATE RIGHT CONTAINER (OR RATHER, STARS)
-    let x = ['overall', 'foodQuality', 'customerService', 'atmosphere', 'healthiness', 'seatAvailability', 'taste']
-    x.forEach((elem) => fillStars(comment.getElementsByClassName(elem)[0], elem));
-
 }
 
 //PAGE LISTENERS

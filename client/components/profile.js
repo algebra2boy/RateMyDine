@@ -1,4 +1,4 @@
-import { loadComments } from "../components/diningHall.js"
+import  *  as commentLoader from "../components/commentLoader.js";
 // UI elements for editProfile
 // input fields to edit the names
 let edit_info  = ["edit-name", "edit-email"], info = ["name", "email"], buttons = ["cancel", "save"];
@@ -67,18 +67,10 @@ async function renderProfileComments() {
             dropDownMenu.appendChild(newRevID);
         });
 
-        loadAllComments(comments, document.getElementById('comment-section'));
+        commentLoader.loadAllComments(comments, document.getElementById('comment-section'));
         
     } catch (error) {
         console.error(error);
-    }
-}
-
-function loadAllComments(comments, container){
-    let length = comments.length;
-    for (let i = 0; i < length; ++i) {
-        let comment = comments.shift();
-        loadComments(comment, container, comment.location);
     }
 }
 
