@@ -48,6 +48,15 @@ async function loadPageInformation(){
 
         let diningHall = await diningHallResponse.json(); // this receives a DiningHall object
         let comments   = await reviewsResponse.json();
+
+        let authStat = JSON.parse(sessionStorage.getItem("isAuthenticated"));
+        if(!authStat){
+            let revButton = document.getElementById("openPopup");
+            revButton.style.visibility = "hidden";
+            let header = document.getElementById("recent-header");
+            header.style.position = "absolute";
+            header.style.left="40%";
+        }
         
         loadUpperHalfText(diningHall);
 
