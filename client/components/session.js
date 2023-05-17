@@ -8,13 +8,13 @@ const signup_btn = document.getElementById("signup-btn");
 // isAuthenticated is either true or false
 
 // send a request to server to see if there is any active session
-const sessionResponse = await fetch("http://localhost:3000/session");
-const session         = await sessionResponse.json();
+fetch("http://localhost:3000/session").then((sessionResponse => sessionResponse.json())).then((session) => {
+    // remote session is active, therefore turn on the session even though browser is closed
+    if ("passport" in session) {
+        sessionStorage.setItem("isAuthenticated", JSON.stringify(true)); 
+    }
+});
 
-// remote session is active, therefore turn on the session even though browser is closed
-if ("passport" in session) {
-    sessionStorage.setItem("isAuthenticated", JSON.stringify(true)); 
-}
 
 // check user is authenticated
 const isAuthenticated   = JSON.parse(sessionStorage.getItem("isAuthenticated"));
