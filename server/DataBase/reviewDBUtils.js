@@ -69,7 +69,8 @@ async function getReview(diningHall) {
         let response = []
         for(let comment of result.Reviews){
             const { review_id, review_date, reviewer_id, overall, description, FoodQuality, CustomerService, Atmosphere, Healthiness, SeatAvailability, Taste } = comment;
-            let s = new Review(review_id, new Date(review_date).toDateString(), reviewer_id, overall, description, FoodQuality, CustomerService, Atmosphere, Healthiness, SeatAvailability, Taste, diningHall);
+            const revDate = createRevDate(review_date);
+            let s = new Review(review_id, revDate , reviewer_id, overall, description, FoodQuality, CustomerService, Atmosphere, Healthiness, SeatAvailability, Taste, diningHall);
             response.push(s);
         }
         return JSON.stringify(response); 
@@ -158,9 +159,8 @@ async function findAllReviews(username) {
                 
                 // deconstructing the review 
                 const { review_id, review_date, description, overall, FoodQuality, CustomerService, Atmosphere, Healthiness, SeatAvailability, Taste } = review;
-                let review_Date     = new Date(review_date)
-                let revDate_arr     = review_Date.toDateString().split(" ");
-                const reviewObject  = new Review(review_id, (revDate_arr[1]+" "+ review_Date.getDate() + ", " + revDate_arr[3]) , username, overall, description, 
+                const review_Date     = createRevDate(review_date);
+                const reviewObject  = new Review(review_id, review_Date , username, overall, description, 
                 FoodQuality, CustomerService, Atmosphere, Healthiness, SeatAvailability, Taste, diningHall.DiningHall);
                 reviewsArrayBelongToUSER.push(reviewObject);
             }
@@ -169,7 +169,11 @@ async function findAllReviews(username) {
     return JSON.stringify(reviewsArrayBelongToUSER);
 }
 
-
+function createRevDate(rev_date){
+    let review_Date     = new Date(rev_date)
+    let revDate_arr     = review_Date.toDateString().split(" ");
+    return (revDate_arr[1]+" "+ review_Date.getDate() + ", " + revDate_arr[3]);
+}
 // exporting the function for use in other js files
 export {
     createReview,
