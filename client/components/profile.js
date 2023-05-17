@@ -38,6 +38,7 @@ async function updateProfile() {
     };
     try {
         await fetch(`http://localhost:3000/userinfo/${name}`, options);
+        location.reload();
     } catch (error) {
         console.error(error);
     }
