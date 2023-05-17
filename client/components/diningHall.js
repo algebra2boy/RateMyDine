@@ -229,3 +229,4 @@ function fillComment(comment, commentData, diningHall){
 
 //PAGE LISTENERS
 await loadPageInformation();
+export { loadComments, fillComment };

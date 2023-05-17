@@ -1,3 +1,4 @@
+import { loadComments } from "../components/diningHall.js"
 // UI elements for editProfile
 // input fields to edit the names
 let edit_info  = ["edit-name", "edit-email"], info = ["name", "email"], buttons = ["cancel", "save"];
@@ -42,6 +43,27 @@ async function updateProfile() {
     }
 }
 
+// this is where the comments are being rendered 
+async function renderProfileComments() {
+    const username = window.location.href.split("/")[4];
+    try {
+        const comments_response = await fetch(`http://localhost:3000/review/user/${username}`);
+        const comments          = await comments_response.json();
+
+        loadAllComments(comments, document.getElementById('comment-section'));
+        
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+function loadAllComments(comments, container){
+    for (let i = 0; i < comments.length; ++i) {
+        let comment = comments.shift();
+        loadComments(comment, container, comment.location);
+    }
+}
+
 document.getElementById('edit-info').addEventListener('click', () => {
     info.forEach((element) => element.style.display = "none");
     // bring user's info to the text input field
@@ -69,3 +91,4 @@ buttons[1].addEventListener('click', async() => {
 });
 
 await renderProfile();
+await renderProfileComments();

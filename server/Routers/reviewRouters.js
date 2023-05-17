@@ -98,7 +98,7 @@ reviewRouter.delete("/review/:dininghall/:reviewID", async (req, res) => {
     res.send(result);
 });
 
-// find all the reviewID that belongs to the user
+// find all the review that belongs to the user
 reviewRouter.get("/review/user/:username", async (req, res) => {
 
     let username = req.params.username;

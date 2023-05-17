@@ -160,14 +160,13 @@ async function findAllReviews(username) {
                 const { review_id, review_date, description, overall, FoodQuality, CustomerService, Atmosphere, Healthiness, SeatAvailability, Taste } = review;
                 let review_Date     = new Date(review_date)
                 let revDate_arr     = review_Date.toDateString().split(" ");
-                const reviewObject = new Review(review_id, (revDate_arr[1]+" "+ review_Date.getDate() + ", " + revDate_arr[3]) , username, overall, description, 
+                const reviewObject  = new Review(review_id, (revDate_arr[1]+" "+ review_Date.getDate() + ", " + revDate_arr[3]) , username, overall, description, 
                 FoodQuality, CustomerService, Atmosphere, Healthiness, SeatAvailability, Taste, diningHall.DiningHall);
                 reviewsArrayBelongToUSER.push(reviewObject);
             }
         }
-
     }
-    return reviewsArrayBelongToUSER;
+    return JSON.stringify(reviewsArrayBelongToUSER);
 }
 
 
