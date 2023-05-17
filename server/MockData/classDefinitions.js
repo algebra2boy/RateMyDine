@@ -24,7 +24,7 @@ class DiningHall {
 }
 
 class Review {
-    constructor(reviewID, review_date, reviewer_name, overall, description, foodQuality, customerService, atmosphere, healthiness, seatAvailability, taste) {
+    constructor(reviewID, review_date, reviewer_name, overall, description, foodQuality, customerService, atmosphere, healthiness, seatAvailability, taste, location) {
         this.review_ID = reviewID;
         this.review_date = review_date;
         this.reviewer_name = reviewer_name;
@@ -36,6 +36,7 @@ class Review {
         this.healthiness = healthiness;
         this.seatAvailability = seatAvailability;
         this.taste = taste;
+        this.location = location;
     }
 }
 

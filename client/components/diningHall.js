@@ -96,7 +96,7 @@ function batchLoadComments(comments, container, diningHallName, numComments){
 
 //Loads a comment from the array of comments into the specified container.
 //loadComments(comments: Review Object, container: <HTML Object>, diningHallName: string) => void
-function loadComments(comment, container, diningHallName){
+export function loadComments(comment, container, diningHallName){
     let commentComponent = document.createElement('comment-component');
     container.appendChild(commentComponent);
     fillComment(commentComponent, comment, diningHallName);
