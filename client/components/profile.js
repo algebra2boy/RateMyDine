@@ -49,6 +49,24 @@ async function renderProfileComments() {
     try {
         const comments_response = await fetch(`http://localhost:3000/review/user/${username}`);
         const comments          = await comments_response.json();
+
+        const dropDownMenu = document.getElementById('dropDownMenu');
+        comments.forEach(c => {
+            let newRevID = document.createElement("button");
+            newRevID.classList.add('dropdown-item');
+            newRevID.setAttribute("id", c.review_ID);
+            newRevID.innerHTML = c.review_ID;
+            newRevID.addEventListener('click', async () => {
+                try {
+                    await fetch(`http://localhost:3000/review/${c.location}/${c.review_ID}`, { method: "DELETE" });
+                    location.reload();
+                } catch (err) {
+                    console.log(err);
+                }
+            });
+            dropDownMenu.appendChild(newRevID);
+        });
+
         loadAllComments(comments, document.getElementById('comment-section'));
         
     } catch (error) {
