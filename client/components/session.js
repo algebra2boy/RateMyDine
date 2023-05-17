@@ -14,20 +14,23 @@ fetch("http://localhost:3000/session")
     // remote session is active, therefore turn on the session even though browser is closed
         if ("passport" in session) {
             sessionStorage.setItem("isAuthenticated", JSON.stringify(true)); 
+            login_btn.innerHTML     = "Profile"
+            signup_btn.innerHTML    = "Log out"
+            login_btn.href          = "/profile";
+            signup_btn.href         = "/logout";
         }
 });
 
-
-// check user is authenticated
-const isAuthenticated   = JSON.parse(sessionStorage.getItem("isAuthenticated"));
-login_btn.innerHTML     = isAuthenticated ? "Profile" : "Log in";
-signup_btn.innerHTML    = isAuthenticated ? "Log out" : "Sign up";
-login_btn.href          = isAuthenticated ? "/profile": "/login";
-signup_btn.href         = isAuthenticated ? "/logout" : "/signup";
-
+// reset the button to the "log-in" state
+function resetToDefault() {
+    login_btn.innerHTML     = "Log in";
+    signup_btn.innerHTML    = "Sign up";
+    login_btn.href          = "/login";
+    signup_btn.href         = "/signup";
+}
 
 // user is authenticated
-if (isAuthenticated) {
+if (JSON.stringify(sessionStorage.getItem("isAuthenticated"))) {
 
     signup_btn.addEventListener("click", destorySession);
 
@@ -39,11 +42,7 @@ if (isAuthenticated) {
                 if (request.redirected) {
                     sessionStorage.setItem("isAuthenticated", JSON.stringify(false));
                     console.log("session has been destoryed remotely and on local");
-
-                    login_btn.innerHTML = "Log in";
-                    signup_btn.innerHTML = "Sign up";
-                    login_btn.href = "/login";
-                    signup_btn.href = "/signup";
+                    resetToDefault();
                     // deactivate click after switching back to "login" mode
                     signup_btn.removeEventListener('click', destorySession);
 
