@@ -27,7 +27,7 @@ class Server {
             // documentation: https://github.com/jdesboeufs/connect-mongo#express-or-connect-integration
             store: MongoStore.create({
                 mongoUrl: this.dbURL,
-                ttl: 15 * 60, // 15 minutes. Default
+                ttl: 15 * 60, // 15 minutes session. Default
                 autoRemove: 'native',
                 autoRemoveInterval: 15, // take care of removing expired sessions every 15 minutes,
                 dbName: "Session"

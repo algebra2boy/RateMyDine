@@ -1,6 +1,6 @@
 // loads a specified amount of comments from the array of comments into the specified container and removes them from the comment list.
 // batchLoadComments(comments[]: Review Object, container: <HTML Object>, diningHallName: string, numComments: int) => void
-function batchLoadComments(comments, container, diningHallName, numComments){
+function batchLoadComments(comments, container, diningHallName, numComments) {
     let i = 0;
     const numLoad = Math.min(comments.length, numComments);
     while(i < numLoad){
@@ -11,7 +11,7 @@ function batchLoadComments(comments, container, diningHallName, numComments){
 
 //Loads a comment from the array of comments into the specified container.
 //loadComments(comments: Review Object, container: <HTML Object>, diningHallName: string) => void
-function loadComments(comment, container, diningHallName){
+function loadComments(comment, container, diningHallName) {
     let commentComponent = document.createElement('comment-component');
     container.appendChild(commentComponent);
     fillComment(commentComponent, comment, diningHallName);
@@ -19,7 +19,7 @@ function loadComments(comment, container, diningHallName){
 
 //Loads all elements from the array of comments into the specified container.
 //loadAllComments(comments[]: Review Object, container: <HTML Object>) => void
-function loadAllComments(comments, container){
+function loadAllComments(comments, container) {
     let length = comments.length;
     for (let i = 0; i < length; ++i) {
         let comment = comments.shift();
@@ -29,11 +29,11 @@ function loadAllComments(comments, container){
 
 // used to populate individual <comment-component>
 // fillComment(comment: <comment-component>, commentData: Review object, diningHall: DiningHall object) => void
-function fillComment(comment, commentData, diningHall){
+function fillComment(comment, commentData, diningHall) {
 
     // helper function to add the "active" class to each html element that is a star within spec of commentData
     // fillStars(elem: HTML Element, field: string) => void
-    function fillStars(elem, field){
+    function fillStars(elem, field) {
         let stars = Array.from(elem.getElementsByClassName("fa-star"));
         stars.length = commentData[field];
         stars.forEach((x) => x.classList.add('active'));
@@ -63,9 +63,9 @@ function fillComment(comment, commentData, diningHall){
     }
 
     //POPULATE RIGHT CONTAINER (OR RATHER, STARS)
-    let x = ['overall', 'foodQuality', 'customerService', 'atmosphere', 'healthiness', 'seatAvailability', 'taste']
+    let x = ['overall', 'foodQuality', 'customerService', 'atmosphere', 'healthiness', 'seatAvailability', 'taste'];
     x.forEach((elem) => fillStars(comment.getElementsByClassName(elem)[0], elem));
 
 }
 
-export {loadComments, batchLoadComments, loadAllComments }
+export {loadComments, batchLoadComments, loadAllComments };

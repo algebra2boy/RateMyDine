@@ -23,8 +23,6 @@ async function createReview(diningHall, review, username) {
         let document = await server.reviews.findOne( { "DiningHall": diningHall } ); // gets the document with id matching the dining hall.
         let overall  = computeOverall(review); // computes the average
         
-        //implement check for login here?
-
         const { FoodQuality, CustomerService, Atmosphere, Healthiness, SeatAvailability, Taste, ReviewDescription } = review;
         let newFoodReview = {
             review_id: document.Reviews[0] !== undefined ? document.Reviews[0]["review_id"] + 1 : 1,
@@ -67,7 +65,7 @@ async function getReview(diningHall) {
     try {
         let result = await server.reviews.findOne( { "DiningHall": diningHall } ); // gets the document from the db
         let response = []
-        for(let comment of result.Reviews){
+        for(let comment of result.Reviews) {
             const { review_id, review_date, reviewer_id, overall, description, FoodQuality, CustomerService, Atmosphere, Healthiness, SeatAvailability, Taste } = comment;
             const revDate = createRevDate(review_date);
             let s = new Review(review_id, revDate , reviewer_id, overall, description, FoodQuality, CustomerService, Atmosphere, Healthiness, SeatAvailability, Taste, diningHall);
@@ -115,7 +113,7 @@ async function updateReview(diningHall, foodReview, foodReviewID) {
  *  delete an existing food review for a dining hall and returns it to the front-end.
  * @param  {string} diningHallName -  the name of the diningName, ex "worcester"
  * @param  {string} foodReviewID   -  the food review ID
- * @return {boolean}found          -  whether we found a review with the matching food review ID
+ * @return {boolean} found          -  whether we found a review with the matching food review ID
  */
 async function deleteReview(diningHall, foodReviewID) {
 
@@ -170,10 +168,11 @@ async function findAllReviews(username) {
 }
 
 function createRevDate(rev_date){
-    let review_Date     = new Date(rev_date)
+    let review_Date     = new Date(rev_date);
     let revDate_arr     = review_Date.toDateString().split(" ");
     return (revDate_arr[1]+" "+ review_Date.getDate() + ", " + revDate_arr[3]);
 }
+
 // exporting the function for use in other js files
 export {
     createReview,

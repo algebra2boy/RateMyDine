@@ -6,6 +6,7 @@ const password = document.getElementById("password");
 // set up session storage
 sessionStorage.setItem("isAuthenticated", JSON.stringify(false));
 
+// submit a form when the user tries to login
 function loginFormSubmit(event) {
     // prevent it auto refreshes the screen
     event.preventDefault();
