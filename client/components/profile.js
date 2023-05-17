@@ -49,7 +49,6 @@ async function renderProfileComments() {
     try {
         const comments_response = await fetch(`http://localhost:3000/review/user/${username}`);
         const comments          = await comments_response.json();
-
         loadAllComments(comments, document.getElementById('comment-section'));
         
     } catch (error) {
@@ -58,7 +57,8 @@ async function renderProfileComments() {
 }
 
 function loadAllComments(comments, container){
-    for (let i = 0; i < comments.length; ++i) {
+    let length = comments.length;
+    for (let i = 0; i < length; ++i) {
         let comment = comments.shift();
         loadComments(comment, container, comment.location);
     }
