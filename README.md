@@ -8,8 +8,6 @@ $ npm install
 $ npm run dev
 ```
 
-Append 4/25: you also need to run a fetch("/allReviews") one to construct the dining hall and comment database for it to display properly
-
 **Team Overview** </br>
 | <center>Name</center> | <center>GitHub Username</center> |
 | --- | --- |
