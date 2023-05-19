@@ -47,9 +47,10 @@ Website Logistics
     - Small section above comments featuring the most viewed photos, top rated comments, etc.
 - MongoDB back end: Stores login information, dining hall ratings, food ratings, comments, comment ratings, images, etc.
 
-Video Showcase
+[Video Showcase](https://youtu.be/wruJSZfq97k)
 
-[<img width="1352" alt="Screenshot 2023-05-19 at 6 48 42 PM" src="https://github.com/algebra2boy/RateMyDine/assets/103079472/38fa76bf-01d8-4755-97a3-9ba6830416ef">](https://youtu.be/wruJSZfq97k)
+<img src="https://github.com/algebra2boy/RateMyDine/assets/103079472/38fa76bf-01d8-4755-97a3-9ba6830416ef" width="50%">]
+
 
 
 
