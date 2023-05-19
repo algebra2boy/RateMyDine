@@ -1,6 +1,4 @@
-# Team 21 Project 
-
-## RateMyDine
+# RateMyDine (Team 21 Project)
 
 **How to run the website** </br>
 ```
@@ -19,7 +17,6 @@ $ npm run dev
 **Innovative Idea** </br>
 The platform is going to be similar to RateMyProfessor and Yelp, we will show star ratings than numerical rating and also accept half ratings. There will also be a multitude of rating criterias such as Food Quality, Customer Service, Location, and Price to calculate the Overall rating of the review. However, this platform will be for UMass Students and Faculty to post reviews of UMass Dining Hall food.
 
-**Data** </br>
 
 User Logistics
 - User login: stores user login info such as uuid, username, userRole, password, email
@@ -49,6 +46,12 @@ Website Logistics
     - Comment tiles with like/dislike buttons for other users to interact with
     - Small section above comments featuring the most viewed photos, top rated comments, etc.
 - MongoDB back end: Stores login information, dining hall ratings, food ratings, comments, comment ratings, images, etc.
+
+Video Showcase
+
+[<img width="1352" alt="Screenshot 2023-05-19 at 6 48 42 PM" src="https://github.com/algebra2boy/RateMyDine/assets/103079472/38fa76bf-01d8-4755-97a3-9ba6830416ef">](https://youtu.be/wruJSZfq97k)
+
+
 
 **License** </br>
 [MIT License] (https://opensource.org/license/mit/)
